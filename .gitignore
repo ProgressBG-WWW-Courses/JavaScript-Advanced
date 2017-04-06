@@ -1,7 +1,12 @@
 # all tmp/old files:
+tmp/**
 **/*.tmp
 **/*.old
 **/.tags*
 **/*fuse*
+**/log*
+
+node_modules/
+.sass-cache
 
 *.sublime-workspace

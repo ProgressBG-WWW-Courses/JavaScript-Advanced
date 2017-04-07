@@ -3,7 +3,8 @@ tmp/**
 **/*.old
 **/.tags*
 **/*fuse*
-**/log*
+**/*.log
+logs/**
 nohup*
 
 node_modules/

@@ -146,7 +146,7 @@ i.top{
       4px 4px #333,
       5px 5px #222;
   opacity: .7;
-  animation: 6s linear opacity; 
+  animation: 6s linear opacity;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
@@ -274,7 +274,7 @@ section.copyright>.license{
   margin: 9em 0 0 0;
 }
 .copyright>.license img, div.copyright>.author img{
-    height: 1em;    
+    height: 1em;
     vertical-align: middle;
     border: none;
     box-shadow: none;
@@ -286,8 +286,8 @@ section.copyright>.license{
 .reveal section iframe{
   display: block;
   margin: 1em 0 1em 0;
-  width: 80%;
-  height: 40vh;
+  width: 100%;
+  height: 60vh;
   /*height: auto;*/
 }
 .reveal section iframe.resultFrame{

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>objectConstructor</title>
+</head>
+<body>
+	<h1>Example of object creation by constructor function</h1>
+	<p><em>Cons</em>: methods declarations is done every time an object is created! Usless copies in memory!</p>
+</body>
+<script type="text/javascript">
+	var WineConstructor = function( colour, sugar, price){
+		this.colour = colour;
+		this.sugar = sugar;
+		this.price = price;
+		this.calcMinPrice = function(){
+			return this.price[0];
+		};
+	};
+
+	var EniraReserve =  new WineConstructor("Red","Dry", [22, 23.5, 25]);
+	var Traminer = new WineConstructor("White","Sweet", [18, 19.5, 21]);
+
+
+	console.log("EniraReserve:", EniraReserve);
+	console.log("Traminer:", Traminer);
+	console.log("Traminer MinPrice:", Traminer.calcMinPrice());
+</script>
+</html>

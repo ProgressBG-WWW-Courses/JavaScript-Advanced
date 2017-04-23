@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Classical OOP in JavaScript</title>
+    <title>Inheritance in JS</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>OOP in JavaScript</h1></section>
+<section><h1>Inheritance in JavaScript</h1></section>
 <section data-transition="zoom">
     <section>
         <div class="copyright">
@@ -74,137 +74,9 @@
     </section>
 </section>
 
+<section><h2></h2></section>
 
-<section><h2>OOP in a nutshell</h2>
-    <section><h3>Overview</h3>
-        <!-- TODO: new image -->
-        <img src="images/drinksOntology.png">
-    </section>
-    <section><h3>Pros</h3>
-        <dl class="fa">
-            <dt>Real-World Modelling</dt>
-            <dt>Support and Maintenance</dt>
-            <dt>Structured (code for big systems)</dt>
-        </dl>
-    </section>
-    <section><h3>Cons</h3>
-        <dl class="fa">
-            <dt>Overwhelmed code (for small systems)</dt>
-            <dt>Jailed to development processes, "best practises", frameworks.</dt>
-        </dl>
-    </section>
-    <section><h3>Class-based vs. Prototype-based OOP paradigms</h3>
-    <dl class="fa">
-        <dt>Class-based paradigm</dt>
-        <dd>Objects are instanses of <span class="note">classes</span></dd>
-        <dd>Classes inherit from <span class="note">classes</span></dd>
-        <dd>Classes are <span class="note">immutable</span></dd>
-        <dt>Prototype-based paradigm</dt>
-        <dd>Objects are instanses of <span class="note">objects</span></dd>
-        <dd>Objects inherit from <span class="note">objects</span></dd>
-        <dd>Objects are <span class="note">mutable</span></dd>
-    </dl>
-    </section>
-</section>
 
-<section><h2>OOP in JavaScript</h2>
-    <table>
-        <tr>
-            <th>Java</th>
-            <th>JavaScript</th>
-        </tr>
-        <tr>
-            <td>Classes</td>
-            <td>Functions</td>
-        </tr>
-        <tr>
-            <td>Constructors</td>
-            <td>Functions</td>
-        </tr>
-        <tr>
-            <td>Methods</td>
-            <td>Functions</td>
-        </tr>
-    </table>
-    <hr>
-    <p>Tables excerpt from Douglas Crockford's "<a href="http://www.crockford.com/javascript/inheritance.html">Classical Inheritance in JavaScript</a>"</p>
-</section>
-
-<section><h2>Object Creation in JavaSctipt</h2>
-    <section>
-        <dl class="fa">
-            <dt>Two main ways of object creation:</dt>
-            <dd>Object creation <span class="note">ex nihilo</span> ("from nothing") </dd>
-            <dd>Object creation by <span class="note">cloning</span> an existing object</dd>
-        </dl>
-    </section>
-    <section><h3>Object Literal</h3>
-        <pre><code rel="JS">
-            var apple = {
-                color: "red",
-                price: [23.5, 22, 25],
-
-                calcMinPrice: function(){
-                    return  Math.min( ...this.price ); // from ES6
-                },
-                calcMaxPrice: function(){
-                    return  Math.max( ...this.price ); // from ES6
-                }
-            }
-
-            console.log( "apple object", apple );
-            console.log( "apple min price", apple.calcMinPrice() );
-        </code></pre>
-    </section>
-    <section><h3>Object Literal: Pros&Cons</h3>
-        <dl class="fa">
-            <dt>Pros</dt>
-            <dd>Simple and clear syntax for one instance</dd>
-            <dt>Cons</dt>
-            <dd>To much "copy-paste" syntax for multitude instances</dd>
-        </dl>
-    </section>
-    <section><h3>Constructor Function</h3>
-        <pre><code rel="JS">
-            // the Constructor Function:
-            var AppleMaker = function( color, prices ){
-                console.log("I'm the AppleMaker!");
-                this.color = color;
-                this.prices = prices;
-
-                this.calcMinPrice = function(){
-                    return  Math.min( ...this.prices ); // from ES6
-                };
-                this.calcMaxPrice = function(){
-                    return  Math.max( ...this.prices ); // from ES6
-                };
-            }
-
-            // objects constructing:
-            var apple1 = new AppleMaker("red", [3.5, 2, 2.5]);
-            var appleN = new AppleMaker("green", [1.80, 2.10, 2.40]);
-
-            // objects usage:
-            console.log( "apple1 min price: ", apple1.calcMinPrice());
-        </code></pre>
-    </section>
-    <section><h3>Constructor Function</h3>
-    <dl class="fa">
-        <dt>Constructor function is a function which constructs objects</dt>
-        <dt>In JavaScript, any function can return a new object</dt>
-        <dt>Every function in JS can act as a Constructor function.</dt>
-    </dl>
-    </section>
-    <section><h3>Constructor Function: Pros&Cons</h3>
-        <dl class="fa">
-            <dt>Pros</dt>
-            <dd>Easy to create multiple instances.</dd>
-            <dt>Cons</dt>
-        </dl>
-    </section>
-    <section><h3>Factory</h3></section>
-    <section><h3>Prototype</h3></section>
-</section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
      <p>These slides are based on</p>

@@ -1,5 +1,3 @@
-labs/
-
 tmp/**
 **/*.tmp
 **/*.old

@@ -8,21 +8,50 @@
 
 </body>
 <script type="text/javascript">
-	var EniraReserve = {
-		colour:		"Red",
-		country:	"Bulgaria",
-		region:		"Western Thrace",
-		winery:		"Bessa Valley",
-		vintage:	2011,
-		size:		"0.75 l.",
-		alcohol:	13.80,
-		sugar:		"Dry",
-		price: 	 	[22, 23.5, 25],
+    var objectLiteralTest = function() {
+        var apple = {
+            color: "red",
+            prices: [23.5, 22, 25],
 
-		calcMinPrice: function(){},
-		calcMaxPrice: function(){},
-	}
+            calcMinPrice: function(){
+                return  Math.min( ...this.price ); // from ES6
+            },
+            calcMaxPrice: function(){
+                return  Math.max( ...this.price ); // from ES6
+            }
+        };
 
-	console.dir( EniraReserve );
+        console.log( "apple object", apple );
+        console.log( "apple min price", apple.calcMinPrice() );
+    };
+
+    var objectConstructorTest = function( ){
+        "use strict";
+        // the Constructor function:
+        console.log("THIS in objectConstructorTest: ", this);
+        var  AppleMaker= function( color, prices ){
+            console.log("THIS in AppleMaker: ", this);
+            // console.log("this.prices:", this.prices);
+            // this.color = color;
+            // this.prices = prices;
+
+            // this.calcMinPrice = function(){
+            //     return  Math.min( ...this.prices ); // from ES6
+            // };
+            // this.calcMaxPrice = function(){
+            //     return  Math.max( ...this.prices ); // from ES6
+            // };
+        }
+
+        // objects constructing:
+        var apple1 = new AppleMaker("red", [3.5, 2, 2.5]);
+        var appleN = AppleMaker("green", [1.80, 2.10, 2.40]);
+
+        // objects usage:
+        console.log( "apple1 min price: ", apple1.calcMinPrice());
+    }
+
+    objectConstructorTest();
+
 </script>
 </html>

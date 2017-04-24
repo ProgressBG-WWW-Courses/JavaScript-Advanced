@@ -21,8 +21,7 @@
 
 
 	function strictInvocation(){
-		// "use strict";
-
+		"use strict";
 		function foo(){ return this};
 		console.log( "this in strict function invocation:", foo() );
 	}
@@ -32,9 +31,15 @@
 			function bar(){
 				return this;
 			}
-			bar();
+			return bar();
 		};
 		console.log( "this in nestedFunction:", foo() );
+	}
+
+	function iife(){
+		(function(){
+			console.log("This in IIFE", this);
+		})();
 	}
 
 	function methodInvocation(){
@@ -47,25 +52,19 @@
 
 	function constructorInvocation(){
 		function Constructor(){
-			this.sayThis = function(){
-				console.log("This in const:", this)
-			};
 			return this;
 		};
 
 		var obj = new Constructor();
 
 		console.log("this in constructorInvocation():", obj );
-		console.dir( obj );
-		console.dir( obj.sayThis() );
 	}
 
 	invocation();
 	strictInvocation();
 	nestedFunction();
+	iife();
 	methodInvocation();
 	constructorInvocation();
-
-
 </script>
 </html>

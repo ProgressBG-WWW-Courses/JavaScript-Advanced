@@ -1,8 +1,9 @@
-@import	url('common.css');
  /*fonts*/
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web);
 @import url(https://fonts.googleapis.com/css?family=Glass+Antiqua);
 @import url(https://fonts.googleapis.com/css?family=Modern+Antiqua);
+/*other*/
+@import	url('common.css');
 
 body{
 	line-height: 1.2em;
@@ -97,7 +98,7 @@ main{
     width: 100%;
     margin: .3em 0;
     font-size: 1.1em;
-    /*font-weight: bold;*/
+    font-weight: normal;
     color: #333;
     line-height: 1.5em;
     letter-spacing: .1em;

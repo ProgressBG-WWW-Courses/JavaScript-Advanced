@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>functions</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var examples = {
+		'power': function(){
+			function power(base, exp){
+				var res = base;
+
+				for (var i = 1; i < exp; i++) {
+					res = res * base;
+				}
+
+				console.log("res:",res);
+			};
+			power(2,10);
+		},
+		'constr':function(){
+			var f = new Function(x,y, 'return ...');
+
+		},
+		'cond': function(){
+			userAge = 15;
+
+			if( userAge > 19 ){
+				function welcome(){
+					var x = function(){
+						console.log("x:", x);
+					};
+					console.log("adult");
+				}
+			}else if( userAge >13 && userAge<19){
+				function welcome(){
+					console.log("teen");
+				}
+			} else{
+				function welcome(){
+					console.log("child");
+				}
+			};
+
+			welcome();
+		},
+		'IIFE': function(){
+			(((function(x,y){
+				console.log("x+y:", x+y);;
+			})(2,3)));
+		},
+		'closure'
+	};
+
+	examples.IIFE();
+
+</script>
+</html>

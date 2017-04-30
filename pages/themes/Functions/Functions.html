@@ -216,8 +216,32 @@
 </section>
 
 <section><h2>Immediately-invoked function expressions (IIFE)</h2>
-    <section><h3>SubTitle</h3>
-
+    <section>
+        <h3><abbr>IIFE</abbr><dfn id="IIFE"><span>Immediately</span><span>Invoked</span><span>Function</span><span>Expression</span></dfn></h3>
+        <p>When a function will be used only once, we do not need to define it first. It's more efficient to invoke it as an anonymous function</p>
+    </section>
+    <section>
+        <pre><code rel="JS">
+            ( function(){} )();
+        </code></pre>
+        <dl class="fa">
+            <dt><code>function(){}</code> is an anonymous function declaration!</dt>
+            <dt><code>( function(){} )</code> is an anonymous function expression!</dt>
+            <dt>We can only invoke <span class="note">function expressions</span>.</dt>
+        </dl>
+    </section>
+    <section>
+        <pre><code rel="JS">
+            (function(x,y){
+                console.log( x+y );
+            })(2,3);
+        </code></pre>
+        <p>is the same as</p>
+        <pre><code rel="JS">
+            (function(x,y){
+                console.log( x+y );
+            }(2,3));
+        </code></pre>
     </section>
 </section>
 

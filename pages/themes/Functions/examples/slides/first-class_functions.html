@@ -61,17 +61,24 @@
 			}
 
 			setTimeout(greeting("iva"), 4000);
+		},
+		'IIFE':function(){
+			(function(x,y){
+				console.log( x+y );
+			})(2,3);
 		}
 	}
+	examples.IIFE();
 
-	var add;
-	if (0){
-        add = function (x,y){
-             x+y;
-        };
-    };
 
-    console.log("add:", add);
+	// var add;
+	// if (0){
+ //        add = function (x,y){
+ //             x+y;
+ //        };
+ //    };
+
+ //    console.log("add:", add);
 
 </script>
 </body>

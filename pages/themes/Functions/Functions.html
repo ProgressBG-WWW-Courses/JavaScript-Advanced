@@ -184,6 +184,9 @@
         <dt>Parsing</dt>
         <dd>Functions defined by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function constructor</a> are parsed each time the constructor is called.</dd>
         <dd>Functions defined by function expressions and function declarations are parsed only once.</dd>
+        <dt>Closure</dt>
+        <dd>Functions created by the Function constructor do not create closures.</dd>
+        <dd>Functions defined by function expressions and function declarations create closure to their creation context.</dd>
     </dl>
     </section>
     <section><h3>Conditional function definition</h3>
@@ -246,9 +249,7 @@
 </section>
 
 <section><h2>The <code>Function</code> object</h2>
-    <section><h3>SubTitle</h3>
 
-    </section>
 </section>
 
 <section><h2>The <code>Function prototype</code> object</h2>

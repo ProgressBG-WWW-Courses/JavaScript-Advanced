@@ -167,8 +167,7 @@
             console.log("add(2,3):", add(2,3)); // ReferenceError: add is not defined
         </code></pre>
         <dl class="fa">
-            <dt>a function name can be given in function expression.</dt>
-            <dt>but the function name is scoped to function body!</dt>
+            <dt>A function name can be given in function expression. But the function name is scoped to function body! Could be useful for debugging purposes.</dt>
         </dl>
     </section>
     <section><h3>Expression vs. declaration</h3>
@@ -250,33 +249,77 @@
 <section><h2>Scope</h2>
     <section>
         <dl class="fa">
-            <dt>The context in which values and expressions are "visible," or can be referenced</dt>
+            <dt>The context in which values and expressions are "visible," or can be referenced.</dt>
             <dt>Scopes can be layered in a hierarchy, so that child scopes have access to parent scopes, but not vice versa.</dt>
-            <dt>Each function in JavaScript creates its own scope!</dt>
+            <dt class="note">Each function in JavaScript creates its own scope!</dt>
         </dl>
     </section>
     <section>
         <img src="images/Scope1.png">
     </section>
+    <section>
+        <iframe  src="https://www.youtube.com/embed/hRJrp17WnOE?autoplay=0" frameborder="0" allowfullscreen></iframe>
+    </section>
 </section>
 
-<!-- <section><h2>Closures</h2>
-    <section><h3>SubTitle</h3>
+<section><h2>Closures</h2>
+    <section>
+        <dl class="fa">
+            <dt>Allows a function which is executed outside its lexical scope, to preserve the values of scoped variables</dt>
+        </dl>
+        <pre><code rel="JS">
+            function outer(){
+                var x = 5;
+                function inner(){
+                    console.log(x);
+                }
+
+                return inner;
+            }
+
+            var f = outer();
+            f(); // f can access the local x !
+        </code></pre>
 
     </section>
 </section>
 
 <section><h2>Recursion</h2>
     <section><h3>Factorial example</h3>
+        <pre><code rel="JS">
+            function factorial(num)
+            {
+                // If num is 0, its factorial is 1.
+                // Else, call the recursive procedure
+                if (num == 0) {
+                    return 1;
+                }else {
+                    return (num * factorial(num - 1));
+                }
+            }
 
+            factorial(3);
+        </code></pre>
     </section>
     <section><h3>Traversing the DOM</h3>
+        <pre><code rel="JS">
+            function traverseDOM(node) {
+                if (node.tagName === 'LI') {
+                    node.classList.add('red');
+                }
 
-    </section>
-    <section><h3>Recursion with expressions</h3>
+                node.childNodes.forEach(function(nestedNode) {
+                    traverseDOM(nestedNode);
+                });
+            }
 
+            traverseDOM(document.body);
+        </code></pre>
     </section>
-</section> -->
+    <!-- <section><h3>Recursion with expressions</h3>
+
+    </section> -->
+</section>
 
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">

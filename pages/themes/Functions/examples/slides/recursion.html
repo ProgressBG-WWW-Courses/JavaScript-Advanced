@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>recursion</title>
+    <style type="text/css">
+    	.red{
+    		background: red;
+    	}
+    </style>
+</head>
+<body>
+<ul>
+	<li>item 1</li>
+	<li>item 2</li>
+	<li>item 3</li>
+	<li>item 4</li>
+</ul>
+</body>
+<script type="text/javascript">
+
+
+
+	var examples = {
+		'factorial': function(){
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+			function factorial(num)
+			{
+			    // If num is 0, its factorial is 1.
+			    // Else, call the recursive procedure
+			    if (num == 0) {
+			        return 1;
+			    }else {
+			        return (num * factorial(num - 1));
+			    }
+			}
+
+			console.log( factorial(5) );
+
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		},'traverseDOM': function(){
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+			function traverseDOM(node) {
+				if (node.tagName === 'LI') {
+					node.classList.add('red');
+				}
+
+				node.childNodes.forEach(function(nestedNode) {
+					traverseDOM(nestedNode);
+				});
+			}
+
+			traverseDOM(document.body);
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		},
+	};
+
+	examples.factorial();
+
+</script>
+</html>

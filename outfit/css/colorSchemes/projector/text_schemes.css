@@ -10,6 +10,7 @@
    HTML: <abbr>DB</abbr><dfn id="DB"><span>Data</span><span>Base</span></dfn> */
 .reveal abbr{
     font-weight: bolder;
+    color: #ef9a9a;
 }
 .reveal abbr+dfn:before{
     content: " = ";
@@ -20,6 +21,7 @@
 }
 .reveal abbr+dfn>span:first-letter{
     font-weight: bolder;
+    color: #ef9a9a;
 }
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* names */

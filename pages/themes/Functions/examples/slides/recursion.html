@@ -19,27 +19,52 @@
 </body>
 <script type="text/javascript">
 
-
-
 	var examples = {
-		'factorial': function(){
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		'factorialRecursive': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			function factorial(num)
 			{
-			    // If num is 0, its factorial is 1.
-			    // Else, call the recursive procedure
-			    if (num == 0) {
+			    if (num == 1) {
 			        return 1;
 			    }else {
 			        return (num * factorial(num - 1));
 			    }
 			}
 
-			console.log( factorial(5) );
+			console.log( factorial(3) );
 
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-		},'traverseDOM': function(){
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'powerRecursive': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function power(base, exponent) {
+				if (exponent == 0)
+					return 1;
+				else
+					return base * power(base, exponent - 1);
+			}
+
+			console.log(power(2, 10));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'powerIterative': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function power(base, exponent) {
+				var power = 1;// the result
+
+				for (var i = 0; i < exponent; i++) {
+					power = base * power;
+				}
+
+				return power;
+			}
+
+			console.log(power(2, 10));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+
+		'traverseDOM': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			function traverseDOM(node) {
 				if (node.tagName === 'LI') {
 					node.classList.add('red');
@@ -51,11 +76,11 @@
 			}
 
 			traverseDOM(document.body);
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	};
 
-	examples.factorial();
+	examples.factorialRecursive();
 
 </script>
 </html>

@@ -256,6 +256,11 @@
     </section>
     <section>
         <img src="images/Scope1.png">
+        <dl class="fa">
+            <dt>Inner Scope can use the names in Outer Scope</dt>
+            <dt>Outer Scope <span class="note">can not</span> see the names defined in Inner Scope</dt>
+            <dt>If same name is defined in both Scopes, then the Inner Scope name <span class="note">shadows</span> the Outer Scope name</dt>
+        </dl>
     </section>
     <section>
         <iframe  src="https://www.youtube.com/embed/hRJrp17WnOE?autoplay=0" frameborder="0" allowfullscreen></iframe>
@@ -280,25 +285,158 @@
             var f = outer();
             f(); // f can access the local x !
         </code></pre>
+    </section>
+    <section><h3>Common problem: "closures in loops"</h3>
+        <pre><code rel="JS">
+            var cats = [];
 
+            for (var i = 0; i < 3; i++) {
+                cats[i] = function(){
+                    console.log(`Cat ${i} is ready!`);
+                }
+            }
+
+            cats[0](); //Cat 3 is ready!
+            cats[1](); //Cat 3 is ready!
+            cats[2](); //Cat 3 is ready!
+        </code></pre>
+
+        <p class="note">the value of 'i' in the cats[i] function body is determined when the function is invoked!</p>
+    </section>
+    <section><h3>"closures in loops" - IIFE solution</h3>
+        <pre><code rel="JS">
+            var cats = [];
+
+            for (var i = 0; i < 3; i++) {
+                (function(i){
+                    cats[i] = function(){
+                        console.log(`Cat ${i} is ready!`);
+                    }
+                })(i)
+            }
+
+            cats[0](); //Cat 0 is ready!
+            cats[1](); //Cat 1 is ready!
+            cats[2](); //Cat 2 is ready!
+        </code></pre>
+    </section>
+    <section><h3>"closures in loops" - Factory solution</h3>
+        <pre><code rel="JS">
+            var cats = [];
+
+            function catMaker(i){
+                return function(){
+                    console.log(`Cat ${i} is ready!`);
+                }
+            }
+
+            for (var i = 0; i < 3; i++) {
+                cats[i] = catMaker(i);
+            }
+
+            cats[0](); //Cat 0 is ready!
+            cats[1](); //Cat 1 is ready!
+            cats[2](); //Cat 2 is ready!
+        </code></pre>
+    </section>
+    <section><h3>"closures in loops - timeout Problem"</h3>
+        <pre><code rel="JS">
+            var colors = ["red", "green", "blue"];
+
+            for (var i = 0; i < colors.length; i++) {
+                setTimeout(function(){
+                    changeBG("box", colors[i]);
+                }, 1000)
+            }
+
+            function changeBG(id, color){
+                var node = document.getElementById(id);
+                node.style.background = color;
+            }
+        </code></pre>
+    </section>
+    <section><h3>"closures in loops - timeout IIFE fix"</h3>
+        <pre><code rel="JS">
+            var colors = ["red", "green", "blue"];
+
+            for (var i = 0; i < colors.length; i++) {
+                (function(i){
+                    setTimeout(function(){
+                        changeBG("box", colors[i]);
+                    }, 1000*i)
+                })(i);
+            }
+
+            function changeBG(id, color){
+                var node = document.getElementById(id);
+                node.style.background = color;
+            }
+        </code></pre>
+        <p class="note">setTimeout() is invoked immediately 3 times. The delay is for the inner function. If we pass same delay, they will be invoked simultaneously after the delay. So, we need to change the delay, as well, i.e. <code>i*1000</code></p>
+    </section>
+    <section><h3>"closures in loops - timeout separate call fix"</h3>
+        <pre><code rel="JS">
+            var colors = ["red", "green", "blue"];
+
+            for (var i = 0; i < colors.length; i++) {
+                doTimeout(i);
+            }
+
+            function doTimeout(i){
+                setTimeout(function(){
+                    changeBG("box", colors[i]);
+                }, i*1000)
+            }
+
+            function changeBG(id, color){
+                var node = document.getElementById(id);
+                node.style.background = color;
+            }
+        </code></pre>
+    </section>
+    <section><h3>Test it!</h3>
+        <iframe height='328' scrolling='no' title='Lab5: All Examples' src='https://codepen.io/ProgressWWWCourses/embed/JNydxy/?height=328&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/JNydxy/'>Lab5: All Examples</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
+        </iframe>
     </section>
 </section>
 
 <section><h2>Recursion</h2>
-    <section><h3>Factorial example</h3>
+    <section>
+        <dl class="fa">
+            <dt>A recursive function is a function which <span class="note">calls itself</span> (directly or indirectly)</dt>
+            <dt>Each call creates a separate function stack!</dt>
+            <dt>Recursion can be endless if we do not take care when it has to stop!</dt>
+        </dl>
+    </section>
+    <section>
+        <img src="images/Recursion.png">
+    </section>
+    <section><h3>Recursive Factorial Calculation</h3>
         <pre><code rel="JS">
-            function factorial(num)
+            function factorial(n)
             {
-                // If num is 0, its factorial is 1.
-                // Else, call the recursive procedure
-                if (num == 0) {
+                if (n == 1) {
+                    // f(1) = 1 => the END condition
                     return 1;
                 }else {
-                    return (num * factorial(num - 1));
+                    // f(n) = n * f(n-1)
+                    return (n * factorial(n - 1));
                 }
             }
 
             factorial(3);
+        </code></pre>
+    </section>
+    <section><h3>Recursive Power Calculation</h3>
+        <pre><code rel="JS">
+            function power(base, exponent) {
+                if (exponent == 0)
+                    return 1;
+                else
+                    return base * power(base, exponent - 1);
+            }
+
+            console.log(power(2, 10));
         </code></pre>
     </section>
     <section><h3>Traversing the DOM</h3>

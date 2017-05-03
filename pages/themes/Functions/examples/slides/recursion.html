@@ -32,7 +32,21 @@
 			}
 
 			console.log( factorial(3) );
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'factorialIterative': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function factorial(n){
+				var fact = 1;
 
+			    for (var i = n; i >= 1; i--) {
+			    	fact = fact*i;
+			    }
+
+			    return fact;
+			}
+
+			console.log( factorial(4) );
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'powerRecursive': function(){
@@ -62,6 +76,20 @@
 			console.log(power(2, 10));
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
+		'powertTestRecursive': function(){
+			function power(base, n){
+				if ( n == 1){
+					// power(base, 1) = 1;
+					return base;
+				}else{
+					// power(base,n) = base * power(base, n-1)
+					return base * power(base, n-1);
+				}
+			};
+
+			console.log("power(2,4):", power(2,4));;
+
+		},
 
 		'traverseDOM': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
@@ -80,7 +108,7 @@
 		},
 	};
 
-	examples.factorialRecursive();
+	examples.powertTestRecursive();
 
 </script>
 </html>

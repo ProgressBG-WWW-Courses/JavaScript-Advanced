@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>t4</title>
+    <style type="text/css">
+    	.status > span{
+    		border: 1px solid red;
+    	}
+    </style>
+
+</head>
+<body>
+</body>
+<script type="text/javascript">
+  // 2! = 2*1! // END
+
+  // n! = n*(n-1)!;
+
+  f(3);
+  function f(n){
+  	var res;
+  	if ( n >= 2){
+  		res = n*f(n-1);
+  	}else{
+  		return 1;
+  	}
+
+
+  	return res;
+  }
+
+
+</script>
+</html>

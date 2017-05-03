@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
+</head>
+<body>
+	<button onclick="next()">Next</button>
+	<button onclick="next()">Prev</button>
+	<img id="imgWrapper" src="">
+
+	<script type="text/javascript">
+	'use strict';
+	var images = [
+		"http://lorempixel.com/400/200/sports/1/",
+		"http://lorempixel.com/400/200/sports/2/",
+		"http://lorempixel.com/400/200/sports/3/"
+	];
+	var i = 0;
+
+	var imgSrcNode = document.getElementById("imgWrapper").getAttributeNode("src");
+	imgSrcNode.value = images[i];
+
+	function next(){
+		imgSrcNode.value = images[i++ % images.length];
+		console.log("i: ", i);
+	}
+
+
+	</script>
+</body>
+</html>

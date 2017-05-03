@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>recursion</title>
+    <style type="text/css">
+    	.red{
+    		background: red;
+    	}
+    </style>
+</head>
+<body>
+<ul>
+	<li>item 1</li>
+	<li>item 2</li>
+	<li>item 3</li>
+	<li>item 4</li>
+</ul>
+</body>
+<script type="text/javascript">
+
+	var examples = {
+		'factorialRecursive': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function factorial(num)
+			{
+			    if (num == 1) {
+			        return 1;
+			    }else {
+			        return (num * factorial(num - 1));
+			    }
+			}
+
+			console.log( factorial(3) );
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'powerRecursive': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function power(base, exponent) {
+				if (exponent == 0)
+					return 1;
+				else
+					return base * power(base, exponent - 1);
+			}
+
+			console.log(power(2, 10));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'powerIterative': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function power(base, exponent) {
+				var power = 1;// the result
+
+				for (var i = 0; i < exponent; i++) {
+					power = base * power;
+				}
+
+				return power;
+			}
+
+			console.log(power(2, 10));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+
+		'traverseDOM': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function traverseDOM(node) {
+				if (node.tagName === 'LI') {
+					node.classList.add('red');
+				}
+
+				node.childNodes.forEach(function(nestedNode) {
+					traverseDOM(nestedNode);
+				});
+			}
+
+			traverseDOM(document.body);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+	};
+
+	examples.factorialRecursive();
+
+</script>
+</html>

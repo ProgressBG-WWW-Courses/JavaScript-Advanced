@@ -73,6 +73,21 @@
 			cats[2](); //Cat 3 is ready!
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
+		'inLoopProblemSolutionLet': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var cats = [];
+
+			for (var i = 0; i < 3; i++) {
+				cats[i] = function(){
+					console.log(`Cat ${i} is ready!`);
+				}
+			}
+
+			cats[0](); //Cat 3 is ready!
+			cats[1](); //Cat 3 is ready!
+			cats[2](); //Cat 3 is ready!
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
 		'inLoopProblemSolutionIIFE': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			var cats = [];
@@ -83,7 +98,7 @@
 						console.log(`Cat ${i} is ready!`);
 						// note: the value of 'i' is determined when the function is invoked!
 					}
-				})(i)
+				})(i);
 			}
 
 			cats[0](); //Cat 0 is ready!
@@ -95,7 +110,7 @@
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			var cats = [];
 
-			function catMaker(i){
+			function makeCats(i){
 				return function(){
 					console.log(`Cat ${i} is ready!`);
 					// note: the value of 'i' is determined when the function is invoked!
@@ -103,8 +118,9 @@
 			}
 
 			for (var i = 0; i < 3; i++) {
-				cats[i] = catMaker(i);
+				cats[i] = makeCats(i)
 			}
+
 
 			cats[0](); //Cat 0 is ready!
 			cats[1](); //Cat 1 is ready!
@@ -135,7 +151,7 @@
 				(function(i){
 					setTimeout(function(){
 						changeBG("box", colors[i]);
-					}, 1000*i)
+					}, i*1000)
 				})(i);
 			}
 
@@ -171,6 +187,6 @@
 		},
 	};
 
-	examples.timeoutSeparateCall();
+	examples.inLoopProblemSolutionFactory();
 </script>
 </html>

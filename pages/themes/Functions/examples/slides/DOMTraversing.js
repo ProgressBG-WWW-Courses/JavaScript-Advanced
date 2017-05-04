@@ -1,5 +1,11 @@
-function sum(){
-	this.arguments = [2, 3]
-}
+function traverseDOM(node) {
+     if (node.className == 'red') {
+         node.style.color = "red";
+     }
 
-sum(2,3);
+     node.childNodes.forEach(function(nestedNode) {
+         traverseDOM(nestedNode);
+     });
+ }
+
+ traverseDOM(document.body);

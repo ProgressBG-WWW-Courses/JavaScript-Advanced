@@ -83,7 +83,7 @@
     </dl>
 </section>
 
-<section><h2>the This in Function context</h2>
+<section><h2>the This in <span class="note">function call</span> context</h2>
     <dl class="fa">
         <dt><code class="note">this</code> depends on <b>how</b> a function is invoked!</dt>
         <dt>different ways of function invocation:</dt>
@@ -125,19 +125,80 @@
             f();
             // undefined
         </code></pre>
-        <p>more on Strict Mode: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode</p>
+        <p>more on Strict Mode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">MDN JavaScript Reference</a></p>
     </section>
 </section>
 
+<section><h2>Invoke as a method</h2>
+   <section>
+        <p><code class="note">this = the object </code> the method is called on</p>
+        <pre><code rel="JS">
+            var obj = {
+                foo: function(){
+                    console.log(`this = ${this}`);
+                }
+            };
 
-<section><h2>Title</h2>
-   <section><h3>subtitle</h3>
-
+            obj.foo();
+            // this = [object Object]
+        </code></pre>
    </section>
 </section>
 
-<section><h2>Title</h2>
-   <section><h3>subtitle</h3>
+<section><h2>Invoke as a constructor</h2>
+   <section>
+        <p><code class="note">this = the object being constructed</code></p>
+        <pre><code rel="JS">
+            function Constructor(id){
+                this.id = id;
+                console.log(`this = ${this}`);
+                // this = [object Object]
+            };
+
+            var obj1 = new Constructor(1);
+        </code></pre>
+   </section>
+   <section>
+        <p>in method call this will be bound to the object, as well</p>
+        <pre><code rel="JS">
+            function Constructor(id){
+                this.id = id;
+                console.log(`this = ${this}`);
+                // this = [object Object]
+
+                this.sayHello = function(){
+                    console.log(`Oh, hello dear. I'm obj ${id}`);
+                    console.log(`this = ${this}`);
+                    // this = [object Object]
+                }
+            };
+
+            var obj1 = new Constructor(1);
+            obj1.sayHello();
+        </code></pre>
+   </section>
+</section>
+
+<section><h2>the Pitfall and That Solution</h2>
+    <section><h3>the problem</h3>
+        <iframe height='265' scrolling='no' title='the This Pitfall' src='//codepen.io/ProgressWWWCourses/embed/OmxEGw/?height=265&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/OmxEGw/'>the This Pitfall</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
+        </iframe>
+    </section>
+    <section><h3>the "that" solution</h3></section>
+</section>
+
+<section><h2>Invoke with apply()</h2>
+   <section>
+
+   </section>
+</section>
+<section><h2>Invoke with call()</h2>
+   <section>
+
+   </section>
+</section>
+<section><h2>Invoke through bind()</h2>
+   <section>
 
    </section>
 </section>

@@ -179,28 +179,83 @@
    </section>
 </section>
 
-<section><h2>the Pitfall and That Solution</h2>
+<section><h2>the "this" Pitfall and "that" Solution</h2>
     <section><h3>the problem</h3>
         <iframe height='265' scrolling='no' title='the This Pitfall' src='//codepen.io/ProgressWWWCourses/embed/OmxEGw/?height=265&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/OmxEGw/'>the This Pitfall</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
         </iframe>
     </section>
-    <section><h3>the "that" solution</h3></section>
+    <section><h3>the "that" solution</h3>
+        <iframe height='265' scrolling='no' title='the "that" solution to "this" Pitfall' src='https://codepen.io/ProgressWWWCourses/embed/oWpzrO/?height=265&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/oWpzrO/'>the "that" solution to "this" Pitfall</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
+        </iframe>
+    </section>
 </section>
 
 <section><h2>Invoke with apply()</h2>
    <section>
+        <pre><code rel="Syntax">
+            func.apply(thisArg, [argsArray])
+        </code></pre>
+        <dl class="fa">
+            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
+        </dl>
+        <pre><code rel="JS">
+            const maria = {name: "Maria", age:18};
+            function update(name, age){
+                this.name = name;
+                this.age = age;
+            }
 
+            console.log("maria before", maria);
+            update.call(maria, "Maria Ivanova", 23);
+            console.log("maria after", maria);
+        </code></pre>
    </section>
 </section>
 <section><h2>Invoke with call()</h2>
-   <section>
+    <section>
+        <pre><code rel="Syntax">
+            func.call(thisArg, arg1, arg2, ...)
+        </code></pre>
+        <dl class="fa">
+            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
+        </dl>
+        <pre><code rel="JS">
+            const maria = {name: "Maria", age:18};
+            function update(name, age){
+                this.name = name;
+                this.age = age;
+            }
 
-   </section>
+            mariaNewRecord = ["Maria Ivanova", 23];
+
+            console.log("maria before", maria);
+            update.apply(maria, mariaNewRecord );
+            console.log("maria after", maria);
+        </code></pre>
+    </section>
 </section>
 <section><h2>Invoke through bind()</h2>
-   <section>
+    <section>
+        <pre><code rel="Syntax">
+            func.bind(thisArg[, arg1[, arg2[, ...]]])
+        </code></pre>
+        <dl class="fa">
+            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
+        </dl>
+        <pre><code rel="JS">
+            const maria = {name: "Maria", age:18};
+            function update(name, age){
+                this.name = name;
+                this.age = age;
+            }
 
-   </section>
+            console.log("maria before", maria);
+            var updateMaria = update.bind(maria,"Maria Ivanova", 23);
+
+            updateMaria();
+            console.log("maria after", maria);
+        </code></pre>
+    </section>
 </section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">

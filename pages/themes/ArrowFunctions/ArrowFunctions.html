@@ -76,20 +76,48 @@
 
 
 <section><h2>Arrow notation</h2>
-    <dl class="fa">
-        <dt>ES6 introduces a new function declaration syntax called <span class="note">arrow notation</span></dt>
-        <dt>Synonyms:</dt>
-        <dd>Arrow functions</dd>
-        <dd>Fat arrow functions</dd>
-        <dt>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of curly braces you have to type</dt>
-    </dl>
+    <section>
+        <dl class="fa">
+            <dt>ES6 introduces a new function declaration syntax called <span class="note">arrow notation</span></dt>
+            <dt>Synonyms:</dt>
+            <dd>Arrow functions</dd>
+            <dd>Fat arrow functions</dd>
+            <dt>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of curly braces you have to type</dt>
+        </dl>
+    </section>
 </section>
 
 <section><h2>Arrow functions</h2>
-<dl class="fa">
-    <dt class="note">Arrow functions are always anonymous!</dt>
-</dl>
+    <section>
+        <pre><code rel="Basic Syntax">
+            (param1, param2, …, paramN) => { statements }
+        </code></pre>
+    </section>
+    <section>
+        <dl class="fa">
+            <dt>If the function takes a single argument, you can omit the parentheses</dt>
+        </dl>
+        <pre><code rel="Basic Syntax">
+            singleParam => { statements }
+        </code></pre>
+    </section>
+    <section>
+        <dl class="fa">
+            <dt>If the function body is a single expression, you can omit curly braces and the return statement</dt>
+        </dl>
+        <pre><code rel="Basic Syntax">
+            (param1, param2, …, paramN) => expression
+        </code></pre>
+    </section>
 </section>
+
+<section><h2>Notes</h2>
+    <dl class="fa">
+        <dt class="note">Arrow functions are always anonymous!</dt>
+        <dt>Arrow function syntax is best suited for non-method functions</dt>
+        <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
+    </dl>
+    </section>
 
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">

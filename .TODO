@@ -6,3 +6,7 @@ exmaple of non reliable this in addEventListener
 
 
 example of AddEventListener wwith argumented listener....
+
+
+example of calling a functions as a COnstructor no matter with or w/o new
+example of how the this.prop++ is modified in window...

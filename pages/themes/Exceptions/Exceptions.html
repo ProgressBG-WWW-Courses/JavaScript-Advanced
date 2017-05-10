@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>the "this" context</title>
+    <title>JavaScript Exceptions</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,7 +27,7 @@
 <body>
     <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
         <div class="top_links">
-            <a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+            <a class="home_link" href="/index.html#Exceptions" target="_top"><i class="fa fa-home"></i></a>
             <span class="help_link" href="#"><i class="fa fa-question"></i></span>
             <div class="help_text">
                 <div><span>N/Спейс</span><span>Next Slide</span></div>
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>the "this" context</h1></section>
+<section><h1>JavaScript Exceptions</h1></section>
 <section data-transition="zoom">
     <section>
         <div class="copyright">
@@ -74,189 +74,147 @@
     </section>
 </section>
 
-
-<section><h2>the "this" in global context (non-function context)</h2>
+<section><h2>Exception handling</h2>
     <dl class="fa">
-            <dt><code class="note">this ≅ global object</code></dt>
-            <dd>in Browsers: <code class="note">Window</code></dd>
-            <dd>in Node:<code class="note">global</code></dd>
+        <dt>We do not live in error-free world</dt>
+        <dt>Anticipate the possible errors in your code and deal with them in timely manner</dt>
+        <dt>Handle the exceptional circumstances</dt>
     </dl>
 </section>
 
-<section><h2>the "this" in <span class="note">function call</span> context</h2>
-    <dl class="fa">
-        <dt><code class="note">this</code> depends on <b>how</b> a function is invoked!</dt>
-        <dt>different ways of function invocation:</dt>
-        <dd>as a <strong>function</strong></dd>
-        <dd>as a <strong>method</strong></dd>
-        <dd>as a <strong>constructor</strong></dd>
-        <dd>with <span class="code">apply</span> or <span class="code">call</span> or <span class="code">bind</span> </dd>
-    </dl>
-</section>
-
-<section><h2>Invoke as a function</h2>
-    <section><h3>in non Strict Mode</h3>
+<section><h2>The Error Object</h2>
+    <section>
         <dl class="fa">
-            <dt><code class="note">this ≅ global object</code></dt>
-            <dd>in Browsers: <code class="note">Window</code></dd>
-            <dd>in Node:<code class="note">global</code></dd>
+            <dt>Instances of Error objects are thrown as exceptions when runtime errors occur</dt>
+            <dt>The Error objects may also serve as base objects for user‐defined exception classes.</dt>
         </dl>
-        <pre><code rel="JS">
-            function f(){
-                console.log( "this in function call:", this );
-            }
-
-            f();
-            // Window
+        <pre><code rel="Syntax">
+            new Error([message])
         </code></pre>
-    </section>
-    <section><h3>in Strict Mode</h3>
         <dl class="fa">
-            <dt><code class="note">this = undefined</code></dt>
-            <dd>in Browsers <code>global = Window</code></dd>
-            <dd>in Node <code>global = global</code></dd>
+            <dt><code class="note">message</code>: [optional] Human-readable description of the error</dt>
         </dl>
+    </section>
+    <section><h3>example</h3>
         <pre><code rel="JS">
             "use strict";
-            function f(){
-                console.log( "this in strict function call:", this );
+            function validateEmail(email) {
+                return email.match(/[\w.-]@\w+\.\w+/) ?
+                    email :
+                    new Error(`invalid email: ${email}`);
             }
 
-            f();
-            // undefined
-        </code></pre>
-        <p>more on Strict Mode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">MDN JavaScript Reference</a></p>
-    </section>
-</section>
+            var validEmail = validateEmail('name@domaincom');
 
-<section><h2>Invoke as a method</h2>
-   <section>
-        <p><code class="note">this = the object </code> the method is called on</p>
-        <pre><code rel="JS">
-            var obj = {
-                foo: function(){
-                    console.log(`this = ${this}`);
-                }
-            };
-
-            obj.foo();
-            // this = [object Object]
-        </code></pre>
-   </section>
-</section>
-
-<section><h2>Invoke as a constructor</h2>
-   <section>
-        <p><code class="note">this = the object being constructed</code></p>
-        <pre><code rel="JS">
-            function Constructor(id){
-                this.id = id;
-                console.log(`this = ${this}`);
-                // this = [object Object]
-            };
-
-            var obj1 = new Constructor(1);
-        </code></pre>
-   </section>
-   <section>
-        <p>in method call this will be bound to the object, as well</p>
-        <pre><code rel="JS">
-            function Constructor(id){
-                this.id = id;
-                console.log(`this = ${this}`);
-                // this = [object Object]
-
-                this.sayHello = function(){
-                    console.log(`Oh, hello dear. I'm obj ${id}`);
-                    console.log(`this = ${this}`);
-                    // this = [object Object]
-                }
-            };
-
-            var obj1 = new Constructor(1);
-            obj1.sayHello();
-        </code></pre>
-   </section>
-</section>
-
-<section><h2>the "this" Pitfall and "that" Solution</h2>
-    <section><h3>the problem</h3>
-        <iframe height='265' scrolling='no' title='the This Pitfall' src='//codepen.io/ProgressWWWCourses/embed/OmxEGw/?height=265&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/OmxEGw/'>the This Pitfall</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
-        </iframe>
-    </section>
-    <section><h3>the "that" solution</h3>
-        <iframe height='265' scrolling='no' title='the "that" solution to "this" Pitfall' src='https://codepen.io/ProgressWWWCourses/embed/oWpzrO/?height=265&theme-id=0&default-tab=js&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/ProgressWWWCourses/pen/oWpzrO/'>the "that" solution to "this" Pitfall</a> by Iva E. Popova (<a href='http://codepen.io/ProgressWWWCourses'>@ProgressWWWCourses</a>) on <a href='http://codepen.io'>CodePen</a>.
-        </iframe>
-    </section>
-</section>
-
-<section><h2>Invoke with apply()</h2>
-   <section>
-        <pre><code rel="Syntax">
-            func.apply(thisArg, [argsArray])
-        </code></pre>
-        <dl class="fa">
-            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
-        </dl>
-        <pre><code rel="JS">
-            const maria = {name: "Maria", age:18};
-            function update(name, age){
-                this.name = name;
-                this.age = age;
+            if(validEmail instanceof Error) {
+                console.error(`Error: ${validEmail.message}`);
+            } else {
+                console.log(`Valid email: ${validEmail}`);
             }
-
-            console.log("maria before", maria);
-            update.call(maria, "Maria Ivanova", 23);
-            console.log("maria after", maria);
         </code></pre>
-   </section>
+        <p class="note">This is not the preferred way of error-handling!</p>
+    </section>
+    <section><h3>Reference</h3>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Global Error object at MDN</a>
+    </section>
 </section>
-<section><h2>Invoke with call()</h2>
+
+<section><h2>Exception handling with <code>try-catch/finally</code> blocks</h2>
     <section>
-        <pre><code rel="Syntax">
-            func.call(thisArg, arg1, arg2, ...)
+        <dl class="fa">
+            <dt>If you do not want your program just to crash, but to handle possible errors gracefully:</dt>
+            <dd><code>try...catch</code></dd>
+            <dd><code>try...finally</code></dd>
+            <dd><code>try...catch...finally</code></dd>
+        </dl>
+
+    </section>
+    <section><h3><code>try...catch</code></h3>
+        <pre><code rel="JS">
+            "use strict";
+            try{
+                x = 2;
+                console.log(`x=${x}`);
+            }catch(err){
+                console.error(`Error: ${err.message}`);
+            }
         </code></pre>
         <dl class="fa">
-            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
+            <dt>if error occurs in <code>try</code> block, the execution is stopped and transferred to <code>catch</code> block</dt>
+            <dt>If there are no errors => the <code>catch</code> block is not executed</dt>
         </dl>
-        <pre><code rel="JS">
-            const maria = {name: "Maria", age:18};
-            function update(name, age){
-                this.name = name;
-                this.age = age;
-            }
-
-            mariaNewRecord = ["Maria Ivanova", 23];
-
-            console.log("maria before", maria);
-            update.apply(maria, mariaNewRecord );
-            console.log("maria after", maria);
-        </code></pre>
     </section>
-</section>
-<section><h2>Invoke through bind()</h2>
     <section>
-        <pre><code rel="Syntax">
-            func.bind(thisArg[, arg1[, arg2[, ...]]])
-        </code></pre>
-        <dl class="fa">
-            <dt>the <code class="note">this</code> value inside function <code>func</code> will be equal to the object passed by <code class="note">thisArg</code> argument</dt>
-        </dl>
         <pre><code rel="JS">
-            const maria = {name: "Maria", age:18};
-            function update(name, age){
-                this.name = name;
-                this.age = age;
+            try{
+                x + 2;
+            }catch(err){
+                console.error(`Error: ${err.message}`);
+                console.dir(err); // ok
             }
 
-            console.log("maria before", maria);
-            var updateMaria = update.bind(maria,"Maria Ivanova", 23);
+            console.dir(err); // ReferenceError: err is not defined
+        </code></pre>
+        <dl class="fa">
+            <dt><code>err</code> - an instance of Error object. It's local scoped to <code>catch</code> block</dt>
+        </dl>
+    </section>
+    <section><h3><code>try...catch</code> example</h3>
+        <pre><code rel="JS">
+            var email = 'namedomain.com';
+            try {
+                const validatedEmail = validateEmail(email);
+                if(validatedEmail instanceof Error) {
+                    console.error(`Anticipated: ${validatedEmail.message}`);
+                } else {
+                    console.log(`Valid email: ${validatedEmail}`);
+                }
+            } catch(err) {
+                console.error(`Unanticipated: ${err.message}`);
+            }
 
-            updateMaria();
-            console.log("maria after", maria);
+            function validateEmail(email) {
+                return email.match(/[\w.-]@\w+\.\w+/) ?
+                    email :
+                    new Error(`invalid email: ${email}`);
+            }
+        </code></pre>
+    </section>
+    <section><h3><code>the finally block</code></h3>
+        <dl class="fa">
+            <dt>The statements in <code>finally</code> block are executed after the try block and catch clause(s) execute</dt>
+            <dt><code>finally</code> block executes <span class="note">whether or not</span> an exception was thrown</dt>
+            <dt>It's the right place to clean resources used in try-catch</dt>
+        </dl>
+    </section>
+    <section><h3><code>the finally block</code></h3>
+        <pre><code rel="JS">
+            try{
+                console.log(`Try 1`);
+                x + 2;
+            }finally{
+                console.log("Finally 1");
+            }
+
+            console.log("But it's OK now");
         </code></pre>
     </section>
 </section>
+
+<section><h2>Throwing exceptions</h2>
+    <dl class="fa">
+        <dt>You can <code>“throw”</code> (or "raise") errors, as well</dt>
+        <pre><code rel="syntax">
+            throw expression;
+        </code></pre>
+        <dt>the statements after throw won't be executed</dt>
+    </dl>
+</section>
+
+<section><h2>Custom exceptions</h2>
+
+</section>
+
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
      <p>These slides are based on</p>

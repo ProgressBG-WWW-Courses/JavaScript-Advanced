@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>trycatch</title>
+</head>
+<body>
+	<label>email: <input type="email" name="email"></label>
+	<button>check</button>
+</body>
+<script type="text/javascript">
+	"use strict";
+
+	let emailNode = document.getElementsByName('email')[0];
+	let checkBtnNode = document.querySelector('button');
+
+	checkBtnNode.addEventListener('click', validateEmail );
+
+
+	function validateEmail(){
+		let email = emailNode.value;
+
+		console.log(`email: ${email}`);
+		email = +email;
+
+		try{
+			var match = email.match(/@/);
+		}catch(err){
+			console.log(`Not a string`);
+			console.log(err.message);
+			console.log(err.stack);
+			email.toString();
+		}
+
+
+		if ( match ){
+			console.log( 'The mail is valid')
+		}else{
+			console.log('The mail is INVALID');
+		}
+	}
+
+	// console.log(`World!`);
+
+</script>
+</html

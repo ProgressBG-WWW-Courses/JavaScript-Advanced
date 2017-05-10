@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Listener with params</title>
+</head>
+<body>
+<button id="useTool">Use tool</button>
+<script type="text/javascript">
+	// TODO: codepen update in closure theme
+	var tools = [
+		'брадва',
+		'пистолет',
+		'пушка',
+	];
+	var toolBtn = document.getElementById('useTool');
+
+	toolBtn.addEventListener('click', useToolMaker.bind(obj, tools[1]));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>arrowNotation</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	var obj = {
+		z: function(){
+			console.log(`this: ${this} at z`);
+		}(),
+		b : (name) => {
+			console.log(`Hello ${name} at b`);
+			console.log(`this: ${this}`);
+		},
+		a : function( name ){
+			console.log(`Hello ${name} at a`);
+			console.log(`this: ${this}`);
+		}
+	};
+
+
+	obj.b('Ada');
+	obj.a('Ada');
+
+
+
+
+
+</script>
+</html>

@@ -89,7 +89,7 @@
             <dt>The Error objects may also serve as base objects for user‐defined exception classes.</dt>
         </dl>
         <pre><code rel="Syntax">
-            new Error([message])
+            var myErr = new Error([message])
         </code></pre>
         <dl class="fa">
             <dt><code class="note">message</code>: [optional] Human-readable description of the error</dt>
@@ -144,7 +144,7 @@
             <dt>If there are no errors => the <code>catch</code> block is not executed</dt>
         </dl>
     </section>
-    <section>
+    <section><h3>watch the scope</h3>
         <pre><code rel="JS">
             try{
                 x + 2;
@@ -156,7 +156,7 @@
             console.dir(err); // ReferenceError: err is not defined
         </code></pre>
         <dl class="fa">
-            <dt><code>err</code> - an instance of Error object. It's local scoped to <code>catch</code> block</dt>
+            <dt><code>err</code> - an instance of Error object. It's <span class="note">local scoped</span> to <code>catch</code> block</dt>
         </dl>
     </section>
     <section><h3><code>try...catch</code> example</h3>
@@ -202,17 +202,171 @@
 </section>
 
 <section><h2>Throwing exceptions</h2>
-    <dl class="fa">
-        <dt>You can <code>“throw”</code> (or "raise") errors, as well</dt>
-        <pre><code rel="syntax">
-            throw expression;
+    <section>
+        <dl class="fa">
+            <dt>You can <code>“throw”</code> (or "raise") errors, as well</dt>
+            <pre><code rel="syntax">
+                throw expression;
+            </code></pre>
+            <pre><code rel="JS">
+                throw 'Error 1';
+                console.log("Post-throw action"); //never
+            </code></pre>
+            <dt>the statements after throw won't be executed</dt>
+        </dl>
+    </section>
+    <section><h3>example</h3>
+        <pre><code rel="JS">
+            function divide(x, y){
+                try{
+                    if( y === 0 ){
+                        throw("I would not divide by zero!");
+                    }else{
+                        return x/y;
+                    }
+                }catch(e){
+                    console.dir( e );
+                    return undefined;
+                }
+            }
+
+            var res = divide(5, 0);
+            console.log(`res: ${res}`);
         </code></pre>
-        <dt>the statements after throw won't be executed</dt>
-    </dl>
+    </section>
+    <section><h3>example</h3>
+        <pre><code rel="JS">
+            "use strict";
+            var testNode = document.getElementById("test");
+            function addClass(element, className){
+                try{
+                    if( className == undefined){
+                        throw("missing class name!")
+                    }
+                    element.className += " " + className;
+                }catch(e){
+                    console.log(e);
+                }
+            }
+
+            addClass(testNode, "box");
+            // note: This is just an example!
+            // Element.classList.add() is better to be used.
+        </code></pre>
+    </section>
+</section>
+
+<section><h2>Handling a specific error</h2>
+    <section><h3>Error types</h3>
+        <dl class="fa">
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError">EvalError</a></dt>
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError">RangeError</a></dt>
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError">ReferenceError</a></dt>
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError">SyntaxError</a></dt>
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></dt>
+            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError">URIError</a></dt>
+        </dl>
+    </section>
+    <section><h3>examples</h3>
+        <pre><code rel="JS">
+            try {
+                //something that throws an error
+            } catch (e){
+                if (e instanceof EvalError){
+                    //handle the EvalError
+                } else if (e instanceof RangeError){
+                    //handle the RangeError
+                } else if (e instanceof ReferenceError){
+                    //handle the ReferenceError
+                } else if (e instanceof SyntaxError){
+                    //handle the SyntaxError
+                } else if (e instanceof TypeError){
+                    //handle the TypeError
+                } else if (e instanceof URIError){
+                    //handle the URIError
+                } else{
+                    //handle all others
+                }
+            }
+        </code></pre>
+    </section>
 </section>
 
 <section><h2>Custom exceptions</h2>
+    <section><h3>ES5 way</h3>
+        <pre><code rel="JS">
+            function DivideByZero(message) {
+                this.name = "DivideByZero Error";
+                this.message = message || "Can not divide by negative value";
+                this.stack = Error().stack;
+            };
+            DivideByZero.prototype = new Error;
 
+            function divide(x, y){
+                try{
+                    if( y === 0 ){
+                        throw( new DivideByZero() );
+                    }else{
+                        return x/y;
+                    }
+                }catch(e){
+                    console.log( e.name );
+                    console.log( e.stack );
+                    return undefined; // or whatever we want
+                }
+            }
+
+            console.log( `5/0= ${divide(5, 0)}` );
+        </code></pre>
+    </section>
+    <section><h3>ES6 way</h3>
+        <pre><code rel="JS">
+            'use strict';
+
+            class DivideByZero extends Error {
+              constructor(msg) {
+                super(msg);
+                this.name = 'DivideByZero Error';
+              }
+            }
+
+            function divide(x, y){
+                try{
+                    if( y === 0 ){
+                        throw( new DivideByZero() );
+                    }else{
+                        return x/y;
+                    }
+                }catch(e){
+                    console.log( e.name );
+                    console.log( e.stack );
+                    return undefined; // or whatever we want
+                }
+            }
+
+            console.log( `5/0= ${divide(5, 0)}` );
+        </code></pre>
+    </section>
+</section>
+
+<section><h2>fine-tune logging with console methods</h2>
+    <p class="note">The implementation of these methods is browser dependent!</p>
+    <pre><code rel="JS">
+        console.info("Calling console.info");
+        console.log("Calling console.log");
+        console.warn("Calling console.warn");
+        console.error("Calling console.error");
+    </code></pre>
+    <p>More on <code>console</code> object at <a href="https://developer.mozilla.org/en/docs/Web/API/console">MDN: Console</a></p>
+</section>
+
+<section><h2>JavaScript error reporting online services</h2>
+<p>Server-side log management is convenient for production, where you do not want the errors/logs to appear on the client-side</p>
+<p>Lot's of error/log managment SaaS available, like</p>
+<dl class="fa">
+    <dt><a href="https://www.loggly.com/">loggly</a></dt>
+    <dt><a href="https://rollbar.com">rollbar</a></dt>
+</dl>
 </section>
 
 

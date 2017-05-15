@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ArrowFunctions</title>
+    <title>ES6 new featres</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Arrow Functions</h1></section>
+<section><h1>ES6 (ES2015) new features</h1></section>
 <section data-transition="zoom">
     <section>
         <div class="copyright">
@@ -74,9 +74,33 @@
     </section>
 </section>
 
+<section><h2>The let keyword</h2>
+    <pre><code rel="JS">
+        var i = 999;
 
-<section><h2>Arrow notation</h2>
-    <section>
+        if (1){
+            let i = 111;
+            console.log(`if block i=${i}`);
+        }
+        console.log(`main i=${i}`);
+
+        for (let i = 0; i < 3; i++) {
+            console.log(`for block i=${i}`);
+        }
+        console.log(`main i=${i}`);
+    </code></pre>
+</section>
+
+<section><h2>The const keyword</h2>
+    <pre><code rel="JS">
+        const pi = 3.14;
+        // ...
+        pi = 3.146; //TypeError: Assignment to constant variable
+    </code></pre>
+</section>
+
+<section><h2>The arrow function syntax </h2>
+    <section><h3>arrow functions???</h3>
         <dl class="fa">
             <dt>ES6 introduces a new function declaration syntax called <span class="note">arrow notation</span></dt>
             <dt>Synonyms:</dt>
@@ -85,40 +109,176 @@
             <dt>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of curly braces you have to type</dt>
         </dl>
     </section>
-</section>
+    <section><h3>Function expression vs arrow syntax:</h3>
+        <pre><code rel="JS">
+            const pi = 3.14;
 
-<section><h2>Arrow functions</h2>
-    <section>
+            // function expression:
+            let circleAreaExp = function(r){
+                return r*r*pi;
+            }
+
+            // arrow function:
+            let circleAreaArr = r=>r*r*pi;
+        </code></pre>
+    </section>
+    <section><h3>syntax - examples</h3>
         <pre><code rel="Basic Syntax">
             (param1, param2, …, paramN) => { statements }
         </code></pre>
+        <pre><code rel="JS">
+            let circleArea = (r)=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
     </section>
-    <section>
+    <section><h3>syntax - examples</h3>
         <dl class="fa">
             <dt>If the function takes a single argument, you can omit the parentheses</dt>
         </dl>
         <pre><code rel="Basic Syntax">
             singleParam => { statements }
         </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
     </section>
-    <section>
+    <section><h3>syntax - examples</h3>
         <dl class="fa">
             <dt>If the function body is a single expression, you can omit curly braces and the return statement</dt>
         </dl>
         <pre><code rel="Basic Syntax">
             (param1, param2, …, paramN) => expression
         </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>r*r*pi;
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
+    </section>
+    <section><h3>lexical "this"</h3>
+        <dl class="fa">
+            <dt>"this" value in arrow functions is <span class="note">lexically scoped</span> in contrast to standard functions, whose "this" value is dynamically scoped.<br>I.e the value of "this" in arrow functions is this same as the value of "this" in the enclosing scope.</dt>
+            <dt>"this" in arrow functions can not be changed with <code>call/apply or bind</code> methods!</dt>
+        </dl>
+    </section>
+    <section><h3>lexical "this" - example</h3>
+        <pre><code rel="JS">
+            lexicalThis = this;
+
+            var obj = {
+                'exp': function(){
+                    console.log(this === lexicalThis);
+                },
+                'arr': ()=>{console.log(this === lexicalThis)}
+            }
+
+
+            obj.exp(); // false
+            obj.arr(); // true
+        </code></pre>
+    </section>
+    <section><h3>lexical arguments</h3>
+        <dl class="fa">
+            <dt>the <code>arguments</code> object in arrow function is reference to the arguments object in the enclosing scope</dt>
+        </dl>
+        <pre><code rel="JS">
+            let logArgs = ()=>{
+                for (var i = 0; i < arguments.length; i++) {
+                    console.log(arguments[i]);
+                }
+                console.dir(arguments);
+            }
+
+            logArgs(1,2,3);
+        </code></pre>
+    </section>
+    <section><h3>loose binding</h3>
+        <pre><code rel="JS">
+            const f = x => (x % 2) === 0 ? x : 0;
+            console.log(f(6));
+        </code></pre>
+        <pre><code rel="JS">
+            let cb;
+
+            cb = cb || function() {}; // ok
+
+            cb = cb || () => {};
+            // SyntaxError: invalid arrow-function arguments
+
+            cb = cb || (() => {});    // ok
+        </code></pre>
+    </section>
+    <section><h3>Notes</h3>
+        <dl class="fa">
+            <dt class="note">Arrow functions are always anonymous!</dt>
+            <dt>Arrow function syntax is best suited for non-method functions</dt>
+            <dt>Perfect for callbacks</dt>
+            <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
+        </dl>
     </section>
 </section>
 
-<section><h2>Notes</h2>
-    <dl class="fa">
-        <dt class="note">Arrow functions are always anonymous!</dt>
-        <dt>Arrow function syntax is best suited for non-method functions</dt>
-        <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
-    </dl>
-    </section>
+<section><h2>Default parameter values</h2>
+    <section><h3>Before ES6</h3>
+        <pre><code rel="JS">
+            function f(x, y, z){
+                var x = x || 1;
+                var y = y || 2;
+                var z = z || 3;
 
+                console.log(x, y, z); //6,7,3
+            }
+            f(6, 7);
+        </code></pre>
+    </section>
+    <section><h3>After ES6</h3>
+        <pre><code rel="JS">
+            function f(x=1, y=2, z=3){
+                console.log(x, y, z); //6,7,3
+            }
+            f(6, 7);
+        </code></pre>
+    </section>
+</section>
+
+<section><h2>The spread operator</h2>
+    <pre><code rel="Syntax-Function call">
+        myFunction(...iterableObj);
+    </code></pre>
+    <pre><code rel="Syntax-Arrays">
+        [...iterableObj, 4, 5, 6];
+    </code></pre>
+    <dl class="fa">
+        <dt>Converts an iterable object into a list of values</dt>
+        <dt>Iterable objects are those which prototype implements an <code>@@iterator</code> method (<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Iteration_protocols">more on MDN...</a>) </dt>
+    </dl>
+</section>
+
+<section><h2>The rest parameter</h2>
+    <section>
+        <dl class="fa">
+            <dt>The last parameter of a function prefixed with " ... " is called as <span class="note">a rest parameter</span></dt>
+            <dt>replaces the <code>arguments</code> object</dt>
+            <dt>In contrast with <code>arguments</code> object, the <code>...rest</code> parameter is an array type</dt>
+        </dl>
+    </section>
+    <section>
+        <pre><code rel="JS">
+            function f(a, b, ...args){
+                console.log(args); //"3, 4, 5"
+            }
+
+            f(1, 2, 3, 4, 5);
+        </code></pre>
+    </section>
+</section>
+
+<section><h2>De-structuring assignments</h2></section>
+
+<section><h2>Enhanced object literals</h2></section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
      <p>These slides are based on</p>

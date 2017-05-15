@@ -75,7 +75,7 @@
 </section>
 
 
-<section><h2>Arrow notation</h2>
+<section><h2>The arrow function syntax </h2>
     <section>
         <dl class="fa">
             <dt>ES6 introduces a new function declaration syntax called <span class="note">arrow notation</span></dt>
@@ -85,12 +85,30 @@
             <dt>It is essentially syntactic sugar that reduces the number of times you have to type the word function , as well as the number of curly braces you have to type</dt>
         </dl>
     </section>
+    <section><h3>Function expression vs arrow syntax:</h3>
+        <pre><code rel="JS">
+            const pi = 3.14;
+
+            // function expression:
+            let circleAreaExp = function(r){
+                return r*r*pi;
+            }
+
+            // arrow function:
+            let circleAreaArr = r=>r*r*pi;
+        </code></pre>
+    </section>
 </section>
 
-<section><h2>Arrow functions</h2>
+<section><h2>Arrow function examples</h2>
     <section>
         <pre><code rel="Basic Syntax">
             (param1, param2, …, paramN) => { statements }
+        </code></pre>
+        <pre><code rel="JS">
+            let circleArea = (r)=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
         </code></pre>
     </section>
     <section>
@@ -100,6 +118,11 @@
         <pre><code rel="Basic Syntax">
             singleParam => { statements }
         </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>{return r*r*pi};
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
     </section>
     <section>
         <dl class="fa">
@@ -107,6 +130,70 @@
         </dl>
         <pre><code rel="Basic Syntax">
             (param1, param2, …, paramN) => expression
+        </code></pre>
+        <pre><code rel="JS">
+            let circleArea = r=>r*r*pi;
+
+            console.log(`circleArea(2) = ${circleArea(2)}`);
+        </code></pre>
+    </section>
+</section>
+
+<section><h2>Arrow functions idiosyncrasies</h2>
+    <section><h3>lexical "this"</h3>
+        <dl class="fa">
+            <dt>"this" value in arrow functions is <span class="note">lexically scoped</span> in contrast to standard functions, whose "this" value is dynamically scoped.<br>I.e the value of "this" in arrow functions is this same as the value of "this" in the enclosing scope.</dt>
+            <dt>"this" in arrow functions can not be changed with <code>call/apply or bind</code> methods!</dt>
+        </dl>
+    </section>
+
+    <section><h3>lexical "this" - example</h3>
+        <pre><code rel="JS">
+            lexicalThis = this;
+
+            var obj = {
+                'exp': function(){
+                    console.log(this === lexicalThis);
+                },
+                'arr': ()=>{console.log(this === lexicalThis)}
+            }
+
+
+            obj.exp(); // false
+            obj.arr(); // true
+        </code></pre>
+    </section>
+
+    <section><h3>lexical arguments</h3>
+        <dl class="fa">
+            <dt>the <code>arguments</code> object in arrow function is reference to the arguments object in the enclosing scope</dt>
+        </dl>
+        <pre><code rel="JS">
+            let logArgs = ()=>{
+                for (var i = 0; i < arguments.length; i++) {
+                    console.log(arguments[i]);
+                }
+                console.dir(arguments);
+            }
+
+            logArgs(1,2,3);
+        </code></pre>
+    </section>
+
+    <section><h3>loose binding</h3>
+        <pre><code rel="JS">
+            const f = x => (x % 2) === 0 ? x : 0;
+            console.log(f(6));
+        </code></pre>
+        <pre><code rel="JS">
+            let cb;
+
+            cb = cb || function() {}; // ok
+
+            cb = cb || () => {};
+            // SyntaxError: invalid arrow-function arguments
+
+            cb = cb || (() => {});    // ok
         </code></pre>
     </section>
 </section>
@@ -117,7 +204,7 @@
         <dt>Arrow function syntax is best suited for non-method functions</dt>
         <dt>Arrow functions cannot be used as constructors and will throw an error when used with new</dt>
     </dl>
-    </section>
+</section>
 
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">

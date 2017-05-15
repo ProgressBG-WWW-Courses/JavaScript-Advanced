@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>4 ways to invoke a function</title>
+    <title>arrowFunctions</title>
 </head>
 <body>
 
@@ -10,24 +10,74 @@
 	var examples = {
 		'basicSyntax1': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			const foo = function(name) { console.log(`Hello, ${name}!`) };
-			foo('Ada')
+			const pi = 3.14;
+			let circleAreaEsp = function(r){
+				return r*r*pi;
+			}
+			console.log(`circleArea(2) = ${circleAreaEsp(2)}`);
 
-			const bar = (name)=>{ console.log(`Howdy, ${name}!`) };
-			bar('Ada')
+			let circleAreaArr1 = (r)=>{return r*r*pi};
+			let circleAreaArr2 = r=>{return r*r*pi};
+			let circleAreaArr3 = r=>r*r*pi;
+			console.log(`circleArea(2) = ${circleAreaArr1(2)}`);
+			console.log(`circleArea(2) = ${circleAreaArr2(2)}`);
+			console.log(`circleArea(2) = ${circleAreaArr3(2)}`);
 
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
-		'example1': function(){
+		'thisValue': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			lexicalThis = this;
 
+			var obj = {
+				'exp': function(){
+					console.log(this === lexicalThis);
+				},
+				'arr': ()=>{console.log(this === lexicalThis)}
+			}
+
+
+			obj.exp(); // false
+			obj.arr(); // true
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'arguments': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			let logArgs = ()=>{
+				for (var i = 0; i < arguments.length; i++) {
+					console.log(arguments[i]);
+				}
+				console.dir(arguments);
+			}
+
+			logArgs(1,2,3)
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'swapArray': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var swapArr = (arr) => [arr[1], arr[0]];
+
+			console.log(swapArr([2,3]));
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'looseBinding': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			const even = x => (x % 2) === 0 ? x : 0;
+			console.log(even(6));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'filter': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			let filtered = [10, 22, 1, 5, 54, 3].filter( x=>x>10);
+			console.log(`filtered=${filtered}`);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 
 
 	}
 
-	examples.basicSyntax1();
+	examples.looseBinding();
 </script>
 </body>
 </html>

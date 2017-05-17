@@ -82,20 +82,22 @@
             <dd data-tooltip="/\breg(?:ular\s*)?exp?(?:ression)?\b/i">Regex, RegEx, RegExp</dd>
             <dt>RegEx is a <span class="note">string pattern</span>, which can match or not other stings</dt>
             <dt>You can think of it a as a kind of search mechanism.</dt>
-            <pre><code rel="JS">
-                var userEmail = "prefix@domain.com";
-
-                //the RegEx to find if the userEmail contains '@' symbol:
-                var re = /@/;
-
-                // do the test:
-                if ( re.test(userEmail) ){
-                    console.log(`Match`);
-                }else{
-                    console.log(`No match!`);
-                }
-            </code></pre>
         </dl>
+    </section>
+    <section>
+        <pre><code rel="JS">
+            var userEmail = "prefix@domain.com";
+
+            //the RegEx to find if the userEmail contains '@' symbol:
+            var re = /@/;
+
+            // do the test:
+            if ( re.test(userEmail) ){
+                console.log(`Match`);
+            }else{
+                console.log(`No match!`);
+            }
+        </code></pre>
     </section>
     <section><h3>the language</h3>
         <dl class="fa">

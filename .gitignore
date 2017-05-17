@@ -6,6 +6,7 @@ tmp/**
 **/*.log
 logs/**
 nohup*
+subl_*
 
 node_modules/
 .sass-cache

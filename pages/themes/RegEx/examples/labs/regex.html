@@ -10,12 +10,54 @@
 	var examples = {
 		'example1': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var text = `The concept are arose in the 1950s when the American are mathematician Stephen Cole Kleene formalized the description of a regular are language. The concept came into common use with Unix text-processing utilities. Today,[timeframe?] different syntaxes for writing regular expressions exist, one being the POSIX standard and another, widely used, being the Perl syntax.
 
+				Regular expressions are used in search engines, search and replace dialogs of word processors and text editors, in text processing utilities such as sed and AWK and in lexical analysis. Many programming languages provide regex capabilities, built-in, or via libraries.`;
+			var re = /\bare\b/g;
+
+			var newText = text.replace(re, 'XXXXXX');
+			console.log(newText);
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'split': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var url = `https://google.bg/s=?a=10`;
+			// TODO: SyntaxError: Invalid regular
+			new RegExp('https?://\w+\.bg/.*?\?[a-z]+=(.+)');
+
+			console.log(url);
+			console.log( url.match(re) );
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'modifiers': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			//TODO : multiline explain - THIS DOES not match
+			var str=`1. sjdfjdsfhdsjds_abc
+2. kjdfkfdjgkfdkaBc
+`;
+			var re=/^\d.+abc$/ig;
+
+			console.log(str);
+			console.log(`~~~~~~~~~~~~~~~~~~~~~~`);
+			console.log(str.match(re).toString());
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'test': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var str = `\\`;
+
+			// TODO: '\' and ther special characters in character sets:
+			var re = /[\\]+/;
+
+			console.log(str);
+			console.log(`~~~~~~~~~~~~~~~~`);
+			str.match(re).forEach(x=>console.log(x));
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	}
 
-	examples.constructRegex();
+	examples.test();
 </script>
 </body>
 </html>

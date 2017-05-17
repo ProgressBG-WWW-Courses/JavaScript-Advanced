@@ -12,6 +12,7 @@ window.onload = function(){
 }
 function init(){
     attachEvents();
+    setHours();
     calcTotalHours();
     calcTotalDays();
     calcSectionHours();
@@ -55,6 +56,20 @@ function attachEvents(){
             // alert("Clicked");
         });
     };
+}
+function setHours(){
+    // get sections:
+    var sections = document.querySelectorAll(".themes>article");
+
+    // insert <span class=hours> after each h3
+    for (let i = 0, len = sections.length; i < len ; i++) {
+        console.log(`section: ${sections[i]}`);
+        // create output node:
+        var outNode = document.createElement('span');
+        outNode.className = 'Hours';
+        sections[i].children[0].appendChild(outNode);
+    }
+
 }
 function calcSectionHours(){
     // get sections:

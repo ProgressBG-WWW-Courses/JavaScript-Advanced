@@ -415,6 +415,27 @@ section.copyright>.license{
   font-size: .8em;
 }
 
+/*custom tooltip:*/
+[data-tooltip]{
+  position: relative;
+}
+[data-tooltip]:hover:after{
+  position: absolute;
+  top: -50%; left: 0;
+  display: block;
+  content: attr(data-tooltip);
+
+  font-family: sans-serif;
+  font-size: 1em;
+  padding: .5em;
+  /*width: 10em;*/
+  /*height: 10em;*/
+  background-color: #FFFFEA;
+  box-shadow: 1px 10px 10px #777;
+  transition: 3s;
+}
+
+
 /*********************************************
  * PRINT
  *********************************************/

@@ -55,9 +55,35 @@
 			str.match(re).forEach(x=>console.log(x));
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
+		'example1Solution': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			let textCyrillic = `Едва ли е съвпадение, че никой език на Земята никога не е родил израза „красив като летище“`;
+			let textLatin = `It can hardly be a coincidence that no language on earth has ever produced the expression "As pretty as an airport.`;
+
+			// "Дума" за нас е последователност от поне 3 букви, оградена от гранични символи (\b). T.e. символи, който не са в множеството [A-Za-z0-9_]
+			var wordPattern = /\b[a-z]{3,}?\b/g;
+
+			console.log(`~~~matching textLatin~~~`);
+			if (textLatin.match(wordPattern)){
+				textLatin.match(wordPattern)
+					.forEach(word=>console.log(word));
+			}else{
+				console.log(`Sorry, no match!`);
+			}
+
+			console.log(`~~~matching textCyrillic~~~`);
+			if (textCyrillic.match(wordPattern)){
+				textCyrillic.match(wordPattern)
+					.forEach(word=>console.log(word));
+			}else{
+				console.log(`Sorry, no match! "Character classes" in JavaScript are defined only for ASCII symbols (i.e. latin alphabet)!!! `);
+			}
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
 	}
 
-	examples.test();
+	examples.example1Solution();
 </script>
 </body>
 </html>

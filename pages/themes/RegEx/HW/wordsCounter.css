@@ -3,20 +3,27 @@ html, body{
 	padding: 0;
 	height: 100%;
 }
+main{
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+}
 #wordsCounter{
-	float: left;
 	display: block;
-	width: 50%;
-	background: #FF9999;
+	width: 100%;
+	height: 40vh;
+	/*border: .1em solid #CC9999;*/
 	box-sizing: border-box;
 }
 #wordsCounter h2{
 	text-align: center;
+	height: 2em;
 }
 #wordsCounter  textarea{
 	width: 100%;
-	height: 10em;
-	/*border: 1px solid #5555FF;*/
+	height: 15em;
+	/*border: .1em solid #9999CC;*/
+	overflow: auto;
 	box-sizing: border-box;
 }
 .controls{
@@ -40,13 +47,48 @@ option:nth-of-type(1):disabled {
 
 /*results block:*/
 #results{
-	float: left;
-	width: 50%;
-	background:  #99FF99;
+	display: none;
+	width: 100%;
 	box-sizing: border-box;
 }
-#results:after{
-	display: block;
-	content: "";
-	clear: both;
+#results h2{
+	text-align: center;
+	height: 2em;
+}
+/*#results table{
+	padding: 0 0 0 1em;
+	width: 80%;
+	height: 20em;
+	overflow: auto;
+	margin: 0 auto;
+}*/
+#results .output{
+	border: .01em solid #995599;
+}
+/*rows:*/
+#results div.row{
+	width: 100%;
+	padding:  .5em 0;
+}
+#results div.row:nth-of-type(2n){
+	background: #CCC;
+}
+#results div.row:nth-of-type(2n+1){
+	background: #EEE;
+}
+#results .title{
+	font-weight: bold;
+	border-bottom: .1em dotted #999;
+}
+/*cells*/
+#results div.row div{
+	display: inline-block;
+	width: 50%;
+	padding: 0 0 0 .5em;
+	box-sizing: border-box;
+}
+#results div.row div:nth-of-type(1){
+}
+#results div.row div:nth-of-type(2){
+
 }

@@ -1,6 +1,14 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
 #wordsCounter{
+	float: left;
 	display: block;
-	width: 30em;
+	width: 50%;
+	background: #FF9999;
+	box-sizing: border-box;
 }
 #wordsCounter h2{
 	text-align: center;
@@ -13,7 +21,7 @@
 }
 .controls{
 	width: 100%;
-	margin: .5em 0 0 0;
+	margin: .5em 0 1em 0;
 	text-align: center;
 	height: 2em;
 }
@@ -28,4 +36,17 @@
 /*common classes*/
 option:nth-of-type(1):disabled {
     display: none;
+}
+
+/*results block:*/
+#results{
+	float: left;
+	width: 50%;
+	background:  #99FF99;
+	box-sizing: border-box;
+}
+#results:after{
+	display: block;
+	content: "";
+	clear: both;
 }

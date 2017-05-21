@@ -1,47 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>RegEx</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-    <!-- css & themes include -->
-    <link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
-    <!-- Printing and PDF exports -->
-    <script>
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
-    <!-- custom -->
-    <link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
-    <base target="_blank">
+	<meta charset="utf-8">
+	<title>RegEx</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- custom -->
+	<link rel="stylesheet" href="../../../outfit/css/reveal.js.css">
+	<base target="_blank">
 </head>
 <body>
-    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
-        <div class="top_links">
-            <a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
-            <span class="help_link" href="#"><i class="fa fa-question"></i></span>
-            <div class="help_text">
-                <div><span>N/Спейс</span><span>Next Slide</span></div>
-                <div><span>P</span><span>Previous Slide</span></div>
-                <div><span>O</span><span>Slides Overview</span></div>
-                <div><span>ctrl+left click</span><span>Zoom Element</span></div>
-            </div>
-        </div>
-        <div class="footer theme_switch">
-            <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
-            <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
-            <a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
-        </div>
-        <div class="slides">
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Спейс</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
 <!--
 ########################################################
 ##################### SLIDES START #####################
@@ -49,273 +49,281 @@
 -->
 <section><h1>Regular Expressions in JavaScript</h1></section>
 <section data-transition="zoom">
-    <section>
-        <div class="copyright">
-            <div class="note">
-                <p>Created for</p>
-            </div>
-            <div class="company">
-                <a href="http://progressbg.net/kurs-po-web-design/">
-                <img src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="copyright" data-transition="zoom" style="margin-top: -2em;">
-        <div class="note">
-            <p>Created by</p>
-        </div>
-        <div class="company">
-           <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
-        </div>
-        <!-- <div class="author">
-            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
-        </div> -->
-    </section>
+	<section>
+		<div class="copyright">
+			<div class="note">
+				<p>Created for</p>
+			</div>
+			<div class="company">
+				<a href="http://progressbg.net/kurs-po-web-design/">
+				<img src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+				</a>
+			</div>
+		</div>
+	</section>
+	<section class="copyright" data-transition="zoom" style="margin-top: -2em;">
+		<div class="note">
+			<p>Created by</p>
+		</div>
+		<div class="company">
+		   <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="ivapopova"><a class="LI-simple-link" href='https://bg.linkedin.com/in/ivapopova?trk=profile-badge'>Iva E. Popova</a></div>
+		</div>
+		<!-- <div class="author">
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div> -->
+	</section>
 </section>
 
 
 <section><h2>Regular Expressions basis</h2>
-    <section><h3>Intro</h3>
-        <dl class="fa">
-            <dt>Regular Expression synonyms:</dt>
-            <dd data-tooltip="/\breg(?:ular\s*)?exp?(?:ression)?\b/i">Regex, RegEx, RegExp</dd>
-            <dt>Regular Expression is a <span class="note">string pattern</span>, which can match or not other stings</dt>
-            <dt>You can think of it a as a kind of search mechanism.</dt>
-        </dl>
-    </section>
-    <section>
-        <pre><code rel="JS">
-            var userEmail = "prefix@domain.com";
+	<section><h3>Intro</h3>
+		<dl class="fa">
+			<dt>Regular Expression synonyms:</dt>
+			<dd data-tooltip="/\breg(?:ular\s*)?exp?(?:ression)?\b/i">Regex, RegEx, RegExp</dd>
+			<dt>Regular Expression is a <span class="note">string pattern</span>, which can match or not other stings</dt>
+			<dt>You can think of it a as a kind of search mechanism.</dt>
+		</dl>
+	</section>
+	<section>
+		<pre><code rel="JS">
+			var userEmail = "prefix@domain.com";
 
-            //the RegEx to find if the userEmail contains '@' symbol:
-            var re = /@/;
+			//the RegEx to find if the userEmail contains '@' symbol:
+			var re = /@/;
 
-            // do the test:
-            if ( re.test(userEmail) ){
-                console.log(`Match`);
-            }else{
-                console.log(`No match!`);
-            }
-        </code></pre>
-    </section>
-    <section><h3>the language</h3>
-        <dl class="fa">
-            <dt>You can think of Regular Expressions as a separate language, with its own rules and specs.</dt>
-            <dt>In fact, the Regular Expressions are comming from the <span class="note">regular language</span> defined by <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Kleene</a> in the early 1950s</dt>
-            <dt>Nowadays, almost all programming languages implents the concept of Regex.</dt>
-        </dl>
-    </section>
-    <section>
-        <dl class="fa">
-            <dt>A regex grammar includes 2 types of symbols:</dt>
-            <dd><span class="note">Regular symbols</span>: they are matched literally on the matching string</dd>
-            <dd><span class="note">Metacharacters</span>: they have special meaning and gives the power of regex</dd>
-        </dl>
-    </section>
+			// do the test:
+			if ( re.test(userEmail) ){
+				console.log(`Match`);
+			}else{
+				console.log(`No match!`);
+			}
+		</code></pre>
+	</section>
+	<section><h3>the language</h3>
+		<dl class="fa">
+			<dt>You can think of Regular Expressions as a separate language, with its own rules and specs.</dt>
+			<dt>In fact, the Regular Expressions are comming from the <span class="note">regular language</span> defined by <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Kleene</a> in the early 1950s</dt>
+			<dt>Nowadays, almost all programming languages implents the concept of Regex.</dt>
+		</dl>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>A regex grammar includes 2 types of symbols:</dt>
+			<dd><span class="note">Regular symbols</span>: they are matched literally on the matching string</dd>
+			<dd><span class="note">Metacharacters</span>: they have special meaning and gives the power of regex</dd>
+		</dl>
+	</section>
 </section>
 
 <section><h2>Create Regex in JavaScript</h2>
-    <section>
-        <dl class="fa">
-            <dt>Each Regular Expression is an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp object</a></dt>
-            <dt>2 ways to create regex:</dt>
-            <dd>With <span class="note">RegExp literal</span>:</dd>
-            <pre><code rel="JS">
-                var myName = /iva/gi;
-            </code></pre>
-            <dd>By <span class="note">RegExp Constructor</span>:</dd>
-            <pre><code rel="JS">
-                var myName = new RegExp('iva','gi');
-            </code></pre>
-        </dl>
-    </section>
-    <section><h3>RegExp literal</h3>
-        <dl class="fa">
-            <dt>Place the pattern between 2 slashes</dt>
-            <dt>Place the modifiers after the second slash</dt>
-        </dl>
-        <pre><code rel="JS">
-            var str = 'Maria, ivan, eli, zdravka, stoyan';
+	<section>
+		<dl class="fa">
+			<dt>Each Regular Expression is an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp object</a></dt>
+			<dt>2 ways to create regex:</dt>
+			<dd>With <span class="note">RegExp literal</span>:</dd>
+			<pre><code rel="JS">
+				var myName = /iva/gi;
+			</code></pre>
+			<dd>By <span class="note">RegExp Constructor</span>:</dd>
+			<pre><code rel="JS">
+				var myName = new RegExp('iva','gi');
+			</code></pre>
+		</dl>
+	</section>
+	<section><h3>RegExp literal</h3>
+		<dl class="fa">
+			<dt>Place the pattern between 2 slashes</dt>
+			<dt>Place the modifiers after the second slash</dt>
+		</dl>
+		<pre><code rel="JS">
+			var str = 'Maria, ivan, eli, zdravka, stoyan';
 
-            // match the first word which ends on 'a':
-            var re1 = /\b\w+a\b/;
+			// match the first word which ends on 'a':
+			var re1 = /\b\w+a\b/;
 
-            // match all words which end on 'a':
-            var re2 = /\b\w+a\b/g;
+			// match all words which end on 'a':
+			var re2 = /\b\w+a\b/g;
 
-            console.log( str.match(re1).toString() ); // Maria
-            console.log( str.match(re2).toString() ); // Maria,zdravka
-        </code></pre>
-        <p>Compiles at <b>evaluation</b> time</p>
-        <p class="note">Use literal notation when the regular expression will remain constant</p>
-    </section>
-    <section><h3>RegExp Constructor</h3>
-        <pre><code rel="JS">
-            var str = 'Maria, ivan, eli, zdravka, stoyan';
+			console.log( str.match(re1).toString() ); // Maria
+			console.log( str.match(re2).toString() ); // Maria,zdravka
+		</code></pre>
+	</section>
+	<section><h3>RegExp Constructor</h3>
+		<pre><code rel="JS">
+			var str = 'Maria, ivan, eli, zdravka, stoyan';
 
-            // match the first word which ends on 'a':
-            var re1 = new RegExp('\\b\\w+a\\b');
+			// match the first word which ends on 'a':
+			var re1 = new RegExp('\\b\\w+a\\b');
 
-            // match all words which end on 'a':
-            var re2 = new RegExp('\\b\\w+a\\b', 'g');
+			// match all words which end on 'a':
+			var re2 = new RegExp('\\b\\w+a\\b', 'g');
 
-            console.log( str.match(re1).toString() ); // Maria
-            console.log( str.match(re2).toString() ); // Maria,zdravka
-        </code></pre>
-        <p>Compiles at <b>runtime</b></p>
-        <p class="note"> Use the constructor function when you know the regular expression pattern will be changing, or you don't know the pattern and are getting it from another source, such as user input</p>
-    </section>
-    <section><h3>Regex in a loop</h3>
-        <pre><code rel="JS">
-            var words = ["ябълка", "ария", "ягода", "ясен"];
+			console.log( str.match(re1).toString() ); // Maria
+			console.log( str.match(re2).toString() ); // Maria,zdravka
+		</code></pre>
+		<p class="note">As the Regex is given as string, we have to escape the backslash as in '\b', '\d' etc.</p>
+	</section>
+	<section><h3>RegEx Literal vs Constructor</h3>
+		<dl class="fa">
+		    	<dt>Literal:</dt>
+		    	<dd>Compiles only once - when <b>evaluated</b>.</dd>
+			<dd class="note">Use literal notation when you know the regular expression in advance.</dd>
+			<dt>Constructor</dt>
+			<dd>Compiles dynamically,  i.e. <b>each time the regex obj is used</b>.</dd>
+			<dd class="note"> Use the constructor function when you know the regular expression pattern will be changing, or you don't know the pattern in advance and will receive it from variable.</dd>
+		</dl>
+	</section>
+	<section><h3>Array of Regex</h3></section>
+	<section><h3>Regex in a loop</h3>
+		<pre><code rel="JS">
+			var words = ["ябълка", "ария", "ягода", "ясен"];
 
-            // by RegExp literals:
-            var re1 = /^я.*а$/i;
+			// by RegExp literals:
+			var re1 = /^я.*а$/i;
 
-            // by RegExp Constructor
-            var re2 = new RegExp('^а.*я$','i');
+			// by RegExp Constructor
+			var re2 = new RegExp('^а.*я$','i');
 
-            words.forEach(word=>{
-                // re1 is compiled only once:
-                let re1Matched = word.match(re1);
-                re1Matched && console.log('re1: ' + re1Matched);
+			words.forEach(word=>{
+				// re1 is compiled only once:
+				let re1Matched = word.match(re1);
+				re1Matched && console.log('re1: ' + re1Matched);
 
-                // re2 is re-compiled in each iteration:
-                let re2Matched = word.match(re2);
-                re2Matched && console.log('re2: ' + re2Matched);
-            });
-        </code></pre>
-    </section>
+				// re2 is re-compiled in each iteration:
+				let re2Matched = word.match(re2);
+				re2Matched && console.log('re2: ' + re2Matched);
+			});
+		</code></pre>
+	</section>
 </section>
 
 <section><h2>Use Regex in JavaScript</h2>
-    <section><h3>by <code>String</code> object methods</h3>
-        <dl class="fa">
-            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></dt>
-            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></dt>
-            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search">search()</a></dt>
-            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></dt>
-        </dl>
-    </section>
-    <section><h3>by <code>RegExp</code> object methods</h3>
-        <dl class="fa">
-            <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec">exec()</a></dt><dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test">test()</a></dt>
-        </dl>
-    </section>
+	<section><h3>by <code>String</code> object methods</h3>
+		<dl class="fa">
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search">search()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></dt>
+		</dl>
+	</section>
+	<section><h3>by <code>RegExp</code> object methods</h3>
+		<dl class="fa">
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec">exec()</a></dt><dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test">test()</a></dt>
+		</dl>
+	</section>
 </section>
 
 
 <section><h2>Regex Syntax</h2>
-    <section><h3>Special Characters</h3>
-        <p>Next characters has special meaning in Regex:</p>
-        <code class="note">^ $ \ . * + ? ( ) [ ] { } |</code>
-        <p>They can be combined with ordinary characters to change their meaning too</p>
-    </section>
-    <section><h3>Modifiers</h3>
-        <table class="w3-table-all notranslate">
-            <tr>
-              <th>Modifier</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td><a href="jsref_regexp_i.asp">i</a></td>
-              <td>case-<b>i</b>nsensitive matching</td>
-            </tr>
-            <tr>
-              <td><a href="jsref_regexp_g.asp">g</a></td>
-              <td><b>g</b>lobal match (find all matches rather than stopping after the first match)</td>
-            </tr>
-            <tr>
-              <td><a href="jsref_regexp_m.asp">m</a></td>
-              <td><b>m</b>ultiline matching</td>
-            </tr>
-            </tbody></table>
-    </section>
-    <section><h3>Quantifiers</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#quantifiers">Quantifiers</a>
-    </section>
-    <section><h3>Character classes</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">Character classes</a>
-    </section>
-    <section><h3>Character Sets</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-sets">Character Sets</a>
-    </section>
-    <section><h3>Boundaries</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#boundaries">Boundaries</a>
-    </section>
-    <section><h3>Alternation</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#alternation">Alternation</a>
-    </section>
-    <section><h3>Grouping and back references</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#grouping-back-references">Grouping and back references</a>
-    </section>
-    <section><h3>Assertions</h3>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions">Assertions</a>
-    </section>
+	<section><h3>Special Characters</h3>
+		<p>Next characters has special meaning in Regex:</p>
+		<code class="note">^ $ \ . * + ? ( ) [ ] { } |</code>
+		<p>They can be combined with ordinary characters to change their meaning too</p>
+	</section>
+	<section><h3>Modifiers</h3>
+		<table class="w3-table-all notranslate">
+			<tr>
+			  <th>Modifier</th>
+			  <th>Description</th>
+			</tr>
+			<tr>
+			  <td><a href="jsref_regexp_i.asp">i</a></td>
+			  <td>case-<b>i</b>nsensitive matching</td>
+			</tr>
+			<tr>
+			  <td><a href="jsref_regexp_g.asp">g</a></td>
+			  <td><b>g</b>lobal match (find all matches rather than stopping after the first match)</td>
+			</tr>
+			<tr>
+			  <td><a href="jsref_regexp_m.asp">m</a></td>
+			  <td><b>m</b>ultiline matching</td>
+			</tr>
+			</tbody></table>
+	</section>
+	<section><h3>Quantifiers</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#quantifiers">Quantifiers</a>
+	</section>
+	<section><h3>Character classes</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-classes">Character classes</a>
+	</section>
+	<section><h3>Character Sets</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#character-sets">Character Sets</a>
+	</section>
+	<section><h3>Boundaries</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#boundaries">Boundaries</a>
+	</section>
+	<section><h3>Alternation</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#alternation">Alternation</a>
+	</section>
+	<section><h3>Grouping and back references</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#grouping-back-references">Grouping and back references</a>
+	</section>
+	<section><h3>Assertions</h3>
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions">Assertions</a>
+	</section>
 </section>
 
 <section><h2>Appendix</h2>
-    <section><h3>Useful Resources</h3>
-        <dl class="fa">
-            <dt><a href="http://www.regexpal.com">Regex Pal</a> <span>javascript/PCRE regex tester with clean interface and useful tooltips</span></dt>
-            <dt><a href="https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines">Comparison of regular expression engines</a></dt>
-            <dt><a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript RegExp Reference</a> on <span>w3schools</span></dt>
-        </dl>
-    </section>
+	<section><h3>Useful Resources</h3>
+		<dl class="fa">
+			<dt><a href="http://www.regexpal.com">Regex Pal</a> <span>javascript/PCRE regex tester with clean interface and useful tooltips</span></dt>
+			<dt><a href="https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines">Comparison of regular expression engines</a></dt>
+			<dt><a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript RegExp Reference</a> on <span>w3schools</span></dt>
+		</dl>
+	</section>
 </section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
-     <p>These slides are based on</p>
-     <p>customised version of </p>
-     <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
-     <p>framework</p>
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
 </section>
 <!--
 ########################################################
 ##################### SLIDES END   #####################
 ########################################################
 -->
-        </div>
-    </div>
-    <!-- Custom processing -->
-    <script src="../../../outfit/js/slides.js"></script>
-    <!-- external scripts -->
-    <script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
-    <script src="../../../lib/reveal.js/js/reveal.js"></script>
-    <!-- init reveal -->
-    <script>
-        // Full list of configuration options available at:
-        // https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            slideNumber: 'c/t',
-            keyboard: true,
-            history: true,
-            center: true,
-            width: '100%',
-            height: '100%',
-            // slide transition
-            transition: 'concave', // none/fade/slide/convex/concave/zoom
-            // Factor of the display size that should remain empty around the content
-            margin: 0.1,
-            // shift+maous click to zoom in/out element
-            zoomKey: 'ctrl',
-            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-            // transition: Reveal.getQueryHash().transition || 'default'
-            // Optional reveal.js plugins
-            dependencies: [
-                { src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                { src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                { src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
-                { src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
-            ]
-        });
-    </script>
-    <!-- linkedin badge -->
-    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+		</div>
+	</div>
+	<!-- Custom processing -->
+	<script src="../../../outfit/js/slides.js"></script>
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	<!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: '100%',
+			height: '100%',
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+	<!-- linkedin badge -->
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 </body>
 </html>

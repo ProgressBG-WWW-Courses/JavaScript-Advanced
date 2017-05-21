@@ -1,0 +1,42 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>4 ways to invoke a function</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+var examples = {
+	'replace': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		function styleHyphenFormat(propertyName) {
+			function upperToHyphenLower(match, offset, string) {
+				console.log(`match: ${match}`);
+				console.log(`offset: ${offset}`);
+				console.log(`string: ${string}`);
+				return (offset ? '-' : '') + match.toLowerCase();
+			}
+			return propertyName.replace(/[A-Z]/g, upperToHyphenLower);
+		}
+
+		console.log(styleHyphenFormat('borderTop'));
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'test': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var str = `It is a well known fact that those people who most want to rule people are, ipso facto, those least suited to do it. To summarize the summary: anyone who is capable of getting themselves made President should on no account be allowed to do the job;`
+		var re = /\b[\w]{9}\b/g;
+
+		var matchRes = str.match(re);
+		console.dir(matchRes);
+		console.dir(re);
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+
+
+}
+
+	examples.test();
+	</script>
+	</body>
+	</html>

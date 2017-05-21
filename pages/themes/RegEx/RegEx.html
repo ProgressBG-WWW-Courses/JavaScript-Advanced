@@ -74,7 +74,6 @@
 	</section>
 </section>
 
-
 <section><h2>Regular Expressions basis</h2>
 	<section><h3>Intro</h3>
 		<dl class="fa">
@@ -161,7 +160,7 @@
 			console.log( str.match(re1).toString() ); // Maria
 			console.log( str.match(re2).toString() ); // Maria,zdravka
 		</code></pre>
-		<p class="note">As the Regex is given as string, we have to escape the backslash as in '\b', '\d' etc.</p>
+		<p class="note">As the Regex is given as string, we have to escape the backslash. I.e:  <code>\b</code> => <code>\\b</code></p>
 	</section>
 	<section><h3>RegEx Literal vs Constructor</h3>
 		<dl class="fa">
@@ -170,55 +169,72 @@
 			<dd class="note">Use literal notation when you know the regular expression in advance.</dd>
 			<dt>Constructor</dt>
 			<dd>Compiles dynamically,  i.e. <b>each time the regex obj is used</b>.</dd>
-			<dd class="note"> Use the constructor function when you know the regular expression pattern will be changing, or you don't know the pattern in advance and will receive it from variable.</dd>
+			<dd class="note"> Use the constructor function when you don't know the pattern in advance and will receive it from variable.</dd>
 		</dl>
 	</section>
-	<section><h3>Array of Regex</h3></section>
 	<section><h3>Regex in a loop</h3>
 		<pre><code rel="JS">
 			var words = ["ябълка", "ария", "ягода", "ясен"];
 
-			// by RegExp literals:
+			// Match string starting with 'я' and ending with 'а':
+			//  RegExp literals:
 			var re1 = /^я.*а$/i;
-
-			// by RegExp Constructor
-			var re2 = new RegExp('^а.*я$','i');
-
 			words.forEach(word=>{
-				// re1 is compiled only once:
+				// re1 is compiled only once !!!:
 				let re1Matched = word.match(re1);
 				re1Matched && console.log('re1: ' + re1Matched);
+			});
 
+			// RegExp Constructor
+			var re2 = new RegExp('^я.*а$','i');
+			words.forEach(word=>{
 				// re2 is re-compiled in each iteration:
 				let re2Matched = word.match(re2);
 				re2Matched && console.log('re2: ' + re2Matched);
-			});
+			})
+		</code></pre>
+	</section>
+	<section><h3>Array of RegExp</h3>
+		<pre><code rel="JS">
+			var keywordsRe = [/var/g, /let/g, /const/g ];
+			var str = `
+				var x = 5;
+				var y = 10;
+			 	const pi = 3.14;
+			 	for (let i = 0; i< x; i++) console.log(i);
+			 `;
+
+			keywordsRe.forEach( (re)=>{
+				console.log(str.match(re).toString());
+			})
+		</code></pre>
+	</section>
+	<section><h3>Regex in variable</h3>
+		<pre><code rel="JS">
+			var keywords  = ['var', 'let', 'const'];
+			var str = `
+				var x = 5;
+				var y = 10;
+			 	const pi = 3.14;
+			 	for (let i = 0; i< x; i++) console.log(i);
+			 `;
+
+			keywords.forEach((word)=>{
+				// we can convert string to regex
+				//only by RegExp Constructor:
+				var re = new RegExp(word, 'g');
+				console.log(str.match(re).toString());
+			})
 		</code></pre>
 	</section>
 </section>
-
-<section><h2>Use Regex in JavaScript</h2>
-	<section><h3>by <code>String</code> object methods</h3>
-		<dl class="fa">
-			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></dt>
-			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></dt>
-			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search">search()</a></dt>
-			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></dt>
-		</dl>
-	</section>
-	<section><h3>by <code>RegExp</code> object methods</h3>
-		<dl class="fa">
-			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec">exec()</a></dt><dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test">test()</a></dt>
-		</dl>
-	</section>
-</section>
-
 
 <section><h2>Regex Syntax</h2>
 	<section><h3>Special Characters</h3>
 		<p>Next characters has special meaning in Regex:</p>
 		<code class="note">^ $ \ . * + ? ( ) [ ] { } |</code>
 		<p>They can be combined with ordinary characters to change their meaning too</p>
+		<p>If we want to match <b>literally</b> a special character we have to escape it with backslash <code>'\'</code></p>
 	</section>
 	<section><h3>Modifiers</h3>
 		<table class="w3-table-all notranslate">
@@ -263,6 +279,38 @@
 	</section>
 </section>
 
+<section><h2>Use Regex in JavaScript</h2>
+	<section><h3>by <code>String</code> object methods</h3>
+		<dl class="fa">
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search">search()</a></dt>
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></dt>
+		</dl>
+	</section>
+	<section><h3>The match() String method</h3>
+		<pre><code rel="Syntax">
+			str.match(regexp)
+		</code></pre>
+		<dl class="fa">
+		    <dt>Argument:</dt>
+		    <dd>A RegExp object, or a string which will be converted to RegExp pbject</dd>
+		    <dt>Return value:</dt>
+
+		</dl>
+	</section>
+	<section><h3>The replace() String method</h3></section>
+	<section><h3>The search() String method</h3></section>
+	<section><h3>The split() String method</h3></section>
+	<section><h3>by <code>RegExp</code> object methods</h3>
+		<dl class="fa">
+			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec">exec()</a></dt><dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test">test()</a></dt>
+		</dl>
+	</section>
+</section>
+
+
+
 <section><h2>Appendix</h2>
 	<section><h3>Useful Resources</h3>
 		<dl class="fa">
@@ -302,7 +350,7 @@
 			keyboard: true,
 			history: true,
 			center: true,
-			width: '100%',
+			// width: '100%',
 			height: '100%',
 			// slide transition
 			transition: 'concave', // none/fade/slide/convex/concave/zoom

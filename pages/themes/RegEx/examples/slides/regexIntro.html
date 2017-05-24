@@ -9,17 +9,80 @@
 var examples = {
 	'intro': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var userEmail = "prefix@domain.com";
+		var strings = [
+			'alabala',
+			' alabala',
+			'Astronomy',
+			'the apple'
+		];
+		var re = /^a/;
 
-		//the RegEx to find if the userEmail contains '@' symbol:
-		var re = /@/;
+		strings.forEach((str)=>
+			re.test(str) ?
+				console.log(str+' -> match!') :
+				console.log(str+'  -> NO match!')
+		)
 
-		// do the test:
-		if ( re.test(userEmail) ){
-			console.log(`Match`);
-		}else{
-			console.log(`No match!`);
-		}
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'modifiers': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var matched,
+		        str = `alAbAla`;
+
+		matched = str.match(/a/);
+		console.log(`matched: ${matched}`); // matched: a (the first one)
+
+		matched = str.match(/a/g); //matched: a,a
+		console.log(`matched: ${matched}`);
+
+		matched = str.match(/a/gi); //matched: a,A,A,a
+		console.log(`matched: ${matched}`);
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'quantifiers': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		matched = "ala aa bala".match(/a.?a/g);
+		console.log(`matched: ${matched}`);
+		// matched: ala,aa,ala
+
+		matched = "ala aa bala".match(/a.{3,5}a/g);
+		console.log(`matched: ${matched}`);
+		// matched: ala aa
+
+		matched = "ala aa bala".match(/a.{3,}a/g);
+		console.log(`matched: ${matched}`);
+		// matched: ala aa bala
+
+		matched = "ala aa bala".match(/a.{3,}?a/g);
+		console.log(`matched: ${matched}`);
+		// matched: ala a,a bala
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'quantifiersGreedy': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var matched,
+		        str = `ala bala`;
+
+		matched = str.match(/a.*?a/);
+		console.log(`matched: ${matched}`); //matched: ala bala
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'characterSets': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		matched = "asteroid".match(/[aeiouy]/g);
+		console.log(`matched: ${matched}`);
+		// matched: a,e,o,i
+
+		matched = "asteroid".match(/[aeiouy]+/g);
+		console.log(`matched: ${matched}`);
+		// matched: a,e,oi
+
+		// note: there is literal space in the regexp.Its no good to do that - wil see how to describe spaces later.
+		matched = "+359 12345678".match(/\+[0-9]{2,3} [0-9]{8}/g);
+		console.log(`matched: ${matched}`);
+		// matched: +359 12345678
+
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'constructRegex': function(){
@@ -138,7 +201,7 @@ var examples = {
 	}
 }
 
-	examples.variableRegEx();
+	examples.characterSets();
 	</script>
 	</body>
 	</html>

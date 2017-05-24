@@ -2,7 +2,31 @@ function themeSwitcher(themeName){
     alert("themeSwitcher ON");
     document.getElementById('theme').setAttribute('href',' /lib/reveal.js/css/theme/'+themeName+'.css');
 }
-function  PrettyPreCode(){
+function PrettyPreCode(){
+    var codeNodes = document.querySelectorAll('pre>code');
+
+    for (var i = 0; i < codeNodes.length; i++)
+    {
+        var content = codeNodes[i].innerHTML,
+                contentNew = "";
+
+        var lines = content.split('\n');
+
+        if ( !lines[1] ) continue;
+
+        // get the first  indent
+        var indent = lines[1].match(/^\s+/);
+        var replacer = new RegExp('^'+indent[0]);
+
+        lines.forEach((line)=>{
+            contentNew += line.replace( replacer, ' ') + "\n" ;
+        })
+
+        codeNodes[i].innerHTML = contentNew;
+        codeNodes[i].style.overflow="auto";
+    }
+}
+function  PrettyPreCodeOld(){
     var codeNodes = document.querySelectorAll('pre>code');
 
     for (var i = 0; i < codeNodes.length; i++)
@@ -16,7 +40,7 @@ function  PrettyPreCode(){
         if ( !lines[1] ){
             continue;
         }
-        var tab_index = lines[1].search(/\S/);
+        var tab_index = lines[1].search(/[\S]/);
         // console.log("tab_index", tab_index);
 
         var contentNew = '';

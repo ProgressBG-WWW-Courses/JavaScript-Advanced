@@ -2,7 +2,7 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>4 ways to invoke a function</title>
+		<title>Slides:RegEx</title>
 	</head>
 	<body>
 		<script type="text/javascript">
@@ -22,7 +22,6 @@ var examples = {
 				console.log(str+' -> match!') :
 				console.log(str+'  -> NO match!')
 		)
-
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'modifiers': function(){
@@ -78,11 +77,122 @@ var examples = {
 		console.log(`matched: ${matched}`);
 		// matched: a,e,oi
 
-		// note: there is literal space in the regexp.Its no good to do that - wil see how to describe spaces later.
-		matched = "+359 12345678".match(/\+[0-9]{2,3} [0-9]{8}/g);
+		// match bg mobile phone numbers
+		matched = "+359888123456".match(/\+3598[7-9][0-9]{7}/g);
 		console.log(`matched: ${matched}`);
-		// matched: +359 12345678
+		// matched: +359888123456
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'characterClasses': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		// match bg mobile phone numbers
+		matched = "+359888123456".match(/\+3598[7-9]\d{7}/g);
+		console.log(`matched: ${matched}`);
+		// matched: +359888123456
 
+		var re = /[a-z]\w+/;
+		var strings = [
+			'petrov42',
+			'42petrov',
+			'ivan_pterov',
+		]
+		strings.forEach(str=>console.log(`${str.match(re)} matched in ${str}:`));
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'boundaries': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var re = /\b/g;
+		var strings = [
+			'',    // no match
+			'a', // between start of string and 'a', between and of string and 'a'
+			'@',
+			'aa',
+			'a!',
+			'a,a',
+		]
+		strings.forEach(str=>{
+			var res = str.match(re);
+			res && console.log(`${res.length} matches in '${str}':`)
+		});
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'boundaries2': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var re = /\b[\w-]+\b/gi;
+		var strings = [
+			'one two three four, five, six. Seven!',
+			'one-two,three!',
+		]
+		strings.forEach(str=>{
+			var res = str.match(re);
+			res && console.log(`${res.length} matches in '${str}'`)
+		});
+		// 7 matches in 'one two three four, five, six. Seven!'
+		// 2 matches in 'one-two,three!'
+
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'alternation': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var re = /\b(straw|rasp)?berries/;
+		var strings = [
+			'Icecream with strawberries',
+			'Icecream with blueberries',
+			'Icecream with raspberries',
+			'Icecream with berries',
+		]
+		strings.forEach(str=>{
+			var res = str.match(re);
+			res ? console.log(`'${str}' matched!`) :
+				console.log(`'${str}' did NOT matched!`)
+		});
+		// 'Icecream with strawberries' matched!
+		// 'Icecream with blueberries' did NOT matched!
+		// 'Icecream with raspberries' matched!
+		// 'Icecream with berries' matched!
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'grouping': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var re = /\b(?:straw|rasp)?berries/;
+		var strings = [
+			'Icecream with strawberries',
+			'Icecream with blueberries',
+			'Icecream with raspberries',
+			'Icecream with strawraspberries',
+			'Icecream with berries',
+		]
+		strings.forEach(str=> str.match(re) ?
+			console.log(`'${str}': YES`) : console.log(`'${str}': NO`)
+		);
+		// 'Icecream with strawberries': YES
+		// 'Icecream with blueberries': NO
+		// 'Icecream with raspberries': YES
+		// 'Icecream with strawraspberries': NO
+		// 'Icecream with berries': YES
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'grouping3': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var regexes = [
+			/\bstraw|rasp{1}berries/,
+			/\b(?:straw|rasp){1}berries/,
+		];
+		var strings = [
+			'Icecream with strawberries? Yes!',
+			'Icecream with straw? No!',
+		];
+
+		regexes.forEach(re=>
+			strings.forEach(str=>
+				str.match(re) ?
+				console.log(`${str} YES! YES!`) : console.log(`${str} NO! NO!`)
+			)
+		);
+		// Icecream with strawberries? Yes! YES! YES!
+		// Icecream with straw? No! YES! YES!
+		// Icecream with strawberries? Yes! YES! YES!
+		// Icecream with straw? No! NO! NO!
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'constructRegex': function(){
@@ -201,7 +311,7 @@ var examples = {
 	}
 }
 
-	examples.characterSets();
+	examples.grouping3();
 	</script>
 	</body>
 	</html>

@@ -1,28 +1,26 @@
 function themeSwitcher(themeName){
     alert("themeSwitcher ON");
-    document.getElementById('theme').setAttribute('href',' /lib/reveal.js/css/theme/'+themeName+'.css');
+    document.getElementById('theme').setAttribute('href','/ProgressBG-Front-End-Dev/lib/reveal.js/css/theme/'+themeName+'.css');
 }
-function PrettyPreCode(){
+function  PrettyPreCode(){
     var codeNodes = document.querySelectorAll('pre>code');
 
     for (var i = 0; i < codeNodes.length; i++)
     {
-        var content = codeNodes[i].innerHTML,
-                contentNew = "";
+        var content = codeNodes[i].innerHTML;
 
-        var lines = content.split('\n');
+        // get indent
+        var indent =  content.match(/^\n*(\s*)/)[1];
 
-        if ( !lines[1] ) continue;
+        // remove indent from all lines
+        var indentRE = new RegExp("^" + indent, "gm");
+        content = content.replace(indentRE, "");
 
-        // get the first  indent
-        var indent = lines[1].match(/^\s+/);
-        var replacer = new RegExp('^'+indent[0]);
+        // clean empty lines on start/end
+        content = content.replace(/^\s*/,"");
+        content = content.replace(/\s*$/, "");
 
-        lines.forEach((line)=>{
-            contentNew += line.replace( replacer, ' ') + "\n" ;
-        })
-
-        codeNodes[i].innerHTML = contentNew;
+        codeNodes[i].innerHTML = content;
         codeNodes[i].style.overflow="auto";
     }
 }
@@ -40,7 +38,7 @@ function  PrettyPreCodeOld(){
         if ( !lines[1] ){
             continue;
         }
-        var tab_index = lines[1].search(/[\S]/);
+        var tab_index = lines[1].search(/\S/);
         // console.log("tab_index", tab_index);
 
         var contentNew = '';
@@ -54,14 +52,5 @@ function  PrettyPreCodeOld(){
     }
 }
 
-// attach target="_blank" to all external links:
-function extLinksToBlank(){
-    var extLinks = document.querySelectorAll("a[href^=http]");
-
-    for (var i = 0, len=extLinks.length; i < len ; i++) {
-        extLinks[i].setAttribute("target", "_blank");
-    }
-}
 PrettyPreCode();
-extLinksToBlank();
 

@@ -2,11 +2,23 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>4 ways to invoke a function</title>
+		<title>RegExStringMethods</title>
 	</head>
 	<body>
 		<script type="text/javascript">
 var examples = {
+	'match': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var str = 'userName@domain.tld';
+
+		// var resultSimple = str.match(//);
+		// console.dir(resultSimple);
+
+		var resultGlobal = str.match(/a(.*?)a/g);
+		console.dir(resultGlobal);
+		console.log(typeof resultGlobal);
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
 	'replace': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		function styleHyphenFormat(propertyName) {
@@ -32,11 +44,9 @@ var examples = {
 		console.dir(re);
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
+};
 
-
-}
-
-	examples.test();
+	examples.match();
 	</script>
 	</body>
 	</html>

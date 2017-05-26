@@ -129,70 +129,66 @@ var examples = {
 		});
 		// 7 matches in 'one two three four, five, six. Seven!'
 		// 2 matches in 'one-two,three!'
-
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'alternation': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		var re = /\b(straw|rasp)?berries/;
 		var strings = [
-			'Icecream with strawberries',
-			'Icecream with blueberries',
-			'Icecream with raspberries',
-			'Icecream with berries',
+			'Icecream with strawberries? Yes!',
+			'Icecream with blueberries? No!',
+			'Icecream with raspberries? Yes!',
+			'Icecream with berries? Yes!',
 		]
-		strings.forEach(str=>{
-			var res = str.match(re);
-			res ? console.log(`'${str}' matched!`) :
-				console.log(`'${str}' did NOT matched!`)
-		});
-		// 'Icecream with strawberries' matched!
-		// 'Icecream with blueberries' did NOT matched!
-		// 'Icecream with raspberries' matched!
-		// 'Icecream with berries' matched!
+
+		strings.forEach(str=> str.match(re) ?
+			console.log(`${str} YES! YES!`) : console.log(`${str} NO! NO!`)
+		)
+		// Icecream with strawberries? Yes! YES! YES!
+		// Icecream with blueberries? No! NO! NO!
+		// Icecream with raspberries? Yes! YES! YES!
+		// Icecream with berries? Yes! YES! YES!
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'grouping': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		var re = /\b(?:straw|rasp)?berries/;
 		var strings = [
-			'Icecream with strawberries',
-			'Icecream with blueberries',
-			'Icecream with raspberries',
-			'Icecream with strawraspberries',
-			'Icecream with berries',
-		]
-		strings.forEach(str=> str.match(re) ?
-			console.log(`'${str}': YES`) : console.log(`'${str}': NO`)
+			'Icecream with strawberries?',
+			'Icecream with blueberries?',
+			'Icecream with raspberries?',
+			'Icecream with strawraspberries?',
+			'Icecream with berries?',
+		];
+		strings.forEach(str=>str.match(re) ?
+			console.log(`${str} YES!`) : console.log(`${str} NO!`)
 		);
-		// 'Icecream with strawberries': YES
-		// 'Icecream with blueberries': NO
-		// 'Icecream with raspberries': YES
-		// 'Icecream with strawraspberries': NO
-		// 'Icecream with berries': YES
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
-	'grouping3': function(){
+	'groupingVSnogrouping': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		var regexes = [
 			/\bstraw|rasp{1}berries/,
 			/\b(?:straw|rasp){1}berries/,
 		];
 		var strings = [
-			'Icecream with strawberries? Yes!',
-			'Icecream with straw? No!',
+			'Icecream with strawberries?',
+			'Icecream with straw?',
 		];
 
-		regexes.forEach(re=>
-			strings.forEach(str=>
-				str.match(re) ?
-				console.log(`${str} YES! YES!`) : console.log(`${str} NO! NO!`)
+		regexes.forEach(re=>{
+			console.log(`\nMatched with: ${re}`);
+			strings.forEach(str=>str.match(re) ?
+				console.log(`${str} YES!`) : console.log(`${str} NO!`)
 			)
-		);
-		// Icecream with strawberries? Yes! YES! YES!
-		// Icecream with straw? No! YES! YES!
-		// Icecream with strawberries? Yes! YES! YES!
-		// Icecream with straw? No! NO! NO!
+		});
+		//  Matched with: /\bstraw|rasp{1}berries/
+		//  Icecream with strawberries? YES!
+		//  Icecream with straw? YES!
+
+		// Matched with: /\b(?:straw|rasp){1}berries/
+		// Icecream with strawberries? YES!
+		// Icecream with straw? NO!
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'constructRegex': function(){
@@ -266,52 +262,46 @@ var examples = {
 		})
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
-	'variableRegEx':function(){
-	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var keywords  = ['var', 'let', 'const'];
-		var str = `
-			var x = 5;
-			var y = 10;
-		 	const pi = 3.14;
-		 	for (let i = 0; i< x; i++) console.log(i);
-		 `;
-
-		keywords.forEach((word)=>{
-			// we can convert string to regex only by RegExp Constructor:
-			var re = new RegExp(word, 'g');
-			console.log(str.match(re).toString());
-		})
-
-	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
-	},
 	'arrayOfRegExp': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var keywordsRe = [/var/g, /let/g, /const/g ];
+		var commentsREs = [/\/\/.*/gm, /\/\*[^]+?\*\//g];
+		var str = `
+			// single line comment 1
+			var x = 5;
+			// single line comment 2
+			var y = 10;
+			/*this is multiline
+			comment in JS */
+			const pi = 3.14;
+			for (let i = 0; i< x; i++) console.log(i);
+		`;
+		commentsREs.forEach( re=>{
+			var matched = str.match(re);
+			matched && matched.forEach(m=>
+				console.log(m.toString())
+			);
+		});
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+	'RegExInVariable':function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var searchStr  = 'var';
 		var str = `
 			var x = 5;
 			var y = 10;
 		 	const pi = 3.14;
 		 	for (let i = 0; i< x; i++) console.log(i);
 		 `;
-		// console.dir(keywordsRe);
-		keywordsRe.forEach( (re)=>{
-			console.log(str.match(re).toString());
-		})
-	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
-	},
-	'stripTags': function(){
-	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var re = /<(?:[^>=]|='[^']*'|="[^"]*"|=[^'"][^\s>]*)*>/g
-	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
-	},
-	'email': function(){
-	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var email = /[\w.%+-]+@[\w.]+\.[a-z]{2,3}$/i;
-	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
-	}
-}
 
-	examples.grouping3();
+		// we can convert string to regex only byRegExp Constructor
+		var re = new RegExp(searchStr, 'gi');
+		str.match(re).forEach(m=>console.log(m));
+
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
+};
+
+	examples.RegExInVariable();
 	</script>
 	</body>
 	</html>

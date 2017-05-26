@@ -84,7 +84,7 @@
 		</dl>
 	</section>
 	<section>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var userEmail = "prefix@domain.com";
 
 			//the RegEx to find if the userEmail contains '@' symbol:
@@ -113,7 +113,7 @@
 		</dl>
 	</section>
 	<section>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var strings = [
 				'alabala',
 				' alabala',
@@ -153,7 +153,7 @@
 		</table>
 	</section>
 	<section><h3>Modifiers/Flags example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var matched, str = `alAbAla`;
 
 			matched = str.match(/a/); // no flags
@@ -177,7 +177,7 @@
 		<dl class="fa">
 		    <dt>The square brackets are used to define a character set. Like: <code><b>[</b>abc<b>]</b></code>.</dt>
 		    <dt>Symbols inside brackets are the elements of set.</dt>
-		    <dt>The hyphen (<code>-</code>) has special meaning inside the character class - it defines a range.</dt>
+		    <dt>The hyphen (<code>-</code>), when it is between 2 symbols, has special meaning inside the character class  - it defines a range. Like: <code>[0-9]</code>. If it is in the end, it is considered as a hyphen.</dt>
 		    <dt>The character set itself match only one symbol - one which is defined in set.</dt>
 		</dl>
 	</section>
@@ -190,7 +190,7 @@
 		</table>
 	</section>
 	<section><h3>Character Sets examples</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			// match single vocals
 			matched = "asteroid".match(/[aeiouy]/g);
 			console.log(`matched: ${matched}`);
@@ -226,7 +226,7 @@
 		</table>
 	</section>
 	<section><h3>Character classes example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			// match bg mobile phone numbers
 			matched = "+359888123456".match(/\+3598[7-9]\d{7}/g);
 			console.log(`matched: ${matched}`);
@@ -234,7 +234,7 @@
 		</code></pre>
 	</section>
 	<section><h3>Character classes example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var re = /[a-z]\w+/;
 			var strings = [
 				'petrov42',
@@ -266,7 +266,7 @@
 	<section><h3>Quantifiers (greedy and non-greedy match)</h3>
 		<dl class="fa">
 		    	<dt>The quantifiers are <span class="note">greedy</span>, meaning they will match the maximum part of the string they can:</dt>
-		    	<pre><code rel="JS">
+		    	<pre><code rel="JS" class="js">
 				var matched, str = `ala bala`;
 
 				matched = str.match(/a.*a/);
@@ -277,7 +277,7 @@
 	<section><h3>Quantifiers (greedy and non-greedy match)</h3>
 		<dl class="fa">
 			<dt>We can make them <span class="note">non-greedy</span>, if we suffixed them with '<code class="note">?</code>'</dt>
-			<pre><code rel="JS">
+			<pre><code rel="JS" class="js">
 				var matched, str = `ala bala`;
 
 				matched = str.match(/a.*?a/);
@@ -286,7 +286,7 @@
 		</dl>
 	</section>
 	<section><h3>Quantifiers example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			matched = "ala aa bala".match(/a.?a/g);
 			console.log(`matched: ${matched}`);
 			// matched: ala,aa,ala
@@ -323,7 +323,7 @@
 		</table>
 	</section>
 	<section><h3>Anchors and Boundaries example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var re = /\b/g;
 			var strings = [
 				'',
@@ -345,7 +345,7 @@
 		</code></pre>
 	</section>
 	<section><h3>Anchors and Boundaries example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var re = /^a\w+\a$/g;
 			var strings = [
 				'ana',
@@ -359,12 +359,12 @@
 		</code></pre>
 	</section>
 	<section><h3>Anchors and Boundaries example</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var re = /\b[\w-]+\b/gi;
 			var strings = [
 				'one two three four, five, six. Seven!',
 				'one-two,three!',
-			]
+			];
 			strings.forEach(str=>{
 				var res = str.match(re);
 				res && console.log(`${res.length} matches in '${str}'`)
@@ -376,6 +376,7 @@
 	<section><h3>More on 	Anchors and Boundaries</h3>
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#boundaries">Boundaries</a>
 	</section>
+
 	<section><h3>Alternation</h3>
 		<dl class="fa">
 			<dt>With alternation we can match one <span class="note">or</span> another regexp!</dt>
@@ -386,29 +387,29 @@
 		</table>
 	</section>
 	<section><h3>Alternation example</h3>
-		<pre><code rel="JS">
-			// note this is not example of good practice for grouping regex - why? => check next slides
+		<pre><code rel="JS" class="js">
+			// NB: this is not example of good practice for grouping regex. Why? => check next slides
 			var re = /\b(straw|rasp)?berries/;
 			var strings = [
-				'Icecream with strawberries',
-				'Icecream with blueberries',
-				'Icecream with raspberries',
-				'Icecream with berries',
+				'Icecream with strawberries? Yes!',
+				'Icecream with blueberries? No!',
+				'Icecream with raspberries? Yes!',
+				'Icecream with berries? Yes!',
 			]
-			strings.forEach(str=>{
-				var res = str.match(re);
-				res ? console.log(`'${str}' matched!`) :
-					console.log(`'${str}' did NOT matched!`)
-			});
-			// 'Icecream with strawberries' matched!
-			// 'Icecream with blueberries' did NOT matched!
-			// 'Icecream with raspberries' matched!
-			// 'Icecream with berries' matched!
+
+			strings.forEach(str=> str.match(re) ?
+				console.log(`${str} YES! YES!`) : console.log(`${str} NO! NO!`)
+			)
+			// Icecream with strawberries? Yes! YES! YES!
+			// Icecream with blueberries? No! NO! NO!
+			// Icecream with raspberries? Yes! YES! YES!
+			// Icecream with berries? Yes! YES! YES!
 		</code></pre>
 	</section>
 	<section><h3>More on Alternation</h3>
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#alternation">Alternation</a>
 	</section>
+
 	<section><h3>Grouping and back references</h3>
 		<dl class="fa" style="font-size: .8em">
 			<dt>Brackets: <span class="note">(</span> and <span class="note">)</span>, play a dual role in regex!</dt>
@@ -422,63 +423,70 @@
 	</section>
 	<section><h3>Grouping regexes example</h3>
 		<pre><code rel="JS" style="font-size: .8em;">
-			// no capture => fast processing!
 			var re = /\b(?:straw|rasp)?berries/;
 			var strings = [
-				'Icecream with strawberries',
-				'Icecream with blueberries',
-				'Icecream with raspberries',
-				'Icecream with strawraspberries',
-				'Icecream with berries',
-			]
+				'Icecream with strawberries?',
+				'Icecream with blueberries?',
+				'Icecream with raspberries?',
+				'Icecream with strawraspberries?',
+				'Icecream with berries?',
+			];
 			strings.forEach(str=>str.match(re) ?
-				console.log(`'${str}': YES`) : console.log(`'${str}': NO`)
+				console.log(`${str} YES!`) : console.log(`${str} NO!`)
 			);
-			// 'Icecream with strawberries': YES
-			// 'Icecream with blueberries': NO
-			// 'Icecream with raspberries': YES
-			// 'Icecream with strawraspberries': NO
-			// 'Icecream with berries': YES
+			// Icecream with strawberries? YES!
+			// Icecream with blueberries? NO!
+			// Icecream with raspberries? YES!
+			// Icecream with strawraspberries? NO!
+			// Icecream with berries? YES!
 		</code></pre>
 	</section>
 	<section><h3>Grouping regexes: to group or not to group?</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var regexes = [
 				/\bstraw|rasp{1}berries/,
 				/\b(?:straw|rasp){1}berries/,
 			];
 			var strings = [
-				'Icecream with strawberries? Yes!',
-				'Icecream with straw? No!',
+				'Icecream with strawberries?',
+				'Icecream with straw?',
 			];
 
-			// Icecream with strawberries? Yes! YES! YES!
-			// Icecream with straw? No! YES! YES!
-			// Icecream with strawberries? Yes! YES! YES!
-			// Icecream with straw? No! NO! NO!
+			regexes.forEach(re=>{
+				console.log(`\nMatched with: ${re}`);
+				strings.forEach(str=>str.match(re) ?
+					console.log(`${str} YES!`) : console.log(`${str} NO!`)
+				)
+			});
+			//  Matched with: /\bstraw|rasp{1}berries/
+			//  Icecream with strawberries? YES!
+			//  Icecream with straw? YES!
+
+			// Matched with: /\b(?:straw|rasp){1}berries/
+			// Icecream with strawberries? YES!
+			// Icecream with straw? NO!
 		</code></pre>
 	</section>
 	<section><h3>More on Grouping and back references</h3>
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#grouping-back-references">Grouping and back references</a>
 	</section>
 	<section><h3>Assertions</h3>
-		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions">Assertions</a>
-
+		<p class="advanced"><i class="fa fa-graduation-cap"></i><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions">Assertions on MDN</a></p>
 	</section>
 </section>
 
 <section><h2>Create Regex in JavaScript</h2>
-	<section>
+	<section><h3>How to create the RegExp object</h3>
 		<dl class="fa">
 			<dt>Each Regular Expression is an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp object</a></dt>
-			<dt>2 ways to create regex:</dt>
-			<dd>With <span class="note">RegExp literal</span>:</dd>
-			<pre><code rel="JS">
-				var myName = /iva/gi;
+			<dt>2 ways to create a RegExp object:</dt>
+			<dd>By <span class="note">RegExp literal</span>:</dd>
+			<pre><code rel="JS" class="js">
+				var myNameRE = /iva/gi;
 			</code></pre>
 			<dd>By <span class="note">RegExp Constructor</span>:</dd>
-			<pre><code rel="JS">
-				var myName = new RegExp('iva','gi');
+			<pre><code rel="JS" class="js">
+				var myNameRE = new RegExp('iva','gi');
 			</code></pre>
 		</dl>
 	</section>
@@ -487,7 +495,7 @@
 			<dt>Place the pattern between 2 slashes</dt>
 			<dt>Place the modifiers after the second slash</dt>
 		</dl>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var str = 'Maria, ivan, eli, zdravka, stoyan';
 
 			// match the first word which ends on 'a':
@@ -501,7 +509,7 @@
 		</code></pre>
 	</section>
 	<section><h3>RegExp Constructor</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var str = 'Maria, ivan, eli, zdravka, stoyan';
 
 			// match the first word which ends on 'a':
@@ -526,7 +534,7 @@
 		</dl>
 	</section>
 	<section><h3>Regex in a loop</h3>
-		<pre><code rel="JS">
+		<pre><code rel="JS" class="js">
 			var words = ["ябълка", "ария", "ягода", "ясен"];
 
 			// Match string starting with 'я' and ending with 'а':
@@ -548,42 +556,47 @@
 		</code></pre>
 	</section>
 	<section><h3>Array of RegExp</h3>
-		<pre><code rel="JS">
-			var keywordsRe = [/var/g, /let/g, /const/g ];
+		<pre><code rel="JS" class="js">
+			var commentsREs = [/\/\/.*/gm, /\/\*[^]+?\*\//g];
 			var str = `
+				// single line comment 1
 				var x = 5;
+				// single line comment 2
 				var y = 10;
-			 	const pi = 3.14;
-			 	for (let i = 0; i< x; i++) console.log(i);
-			 `;
-
-			keywordsRe.forEach( (re)=>{
-				console.log(str.match(re).toString());
-			})
+				/*this is multiline
+				comment in JS */
+				const pi = 3.14;
+				for (let i = 0; i< x; i++) console.log(i);
+			`;
+			commentsREs.forEach( re=>{
+				var matched = str.match(re);
+				matched && matched.forEach(m=>
+					console.log(m.toString())
+				);
+			});
 		</code></pre>
 	</section>
 	<section><h3>Regex in variable</h3>
-		<pre><code rel="JS">
-			var keywords  = ['var', 'let', 'const'];
+		<pre><code rel="JS" class="js">
+			var searchStr  = 'var';
 			var str = `
 				var x = 5;
 				var y = 10;
-			 	const pi = 3.14;
-			 	for (let i = 0; i< x; i++) console.log(i);
-			 `;
+				const pi = 3.14;
+				for (let i = 0; i< x; i++) console.log(i);
+			`;
 
-			keywords.forEach((word)=>{
-				// we can convert string to regex
-				//only by RegExp Constructor:
-				var re = new RegExp(word, 'g');
-				console.log(str.match(re).toString());
-			})
+			// we can convert string to regex only byRegExp Constructor
+			var re = new RegExp(searchStr, 'gi');
+			str.match(re).forEach(m=>console.log(m));
+			//var
+			//var
 		</code></pre>
 	</section>
 </section>
 
-<section><h2>Use Regex in JavaScript</h2>
-	<section><h3>by <code>String</code> object methods</h3>
+<section><h2>Use Regex in <code>String</code> object methods</h2>
+	<section>
 		<dl class="fa">
 			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">match()</a></dt>
 			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">replace()</a></dt>
@@ -591,15 +604,43 @@
 			<dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">split()</a></dt>
 		</dl>
 	</section>
-	<section><h3>The match() String method</h3>
+	<section><h3>The match() String method: syntax</h3>
 		<pre><code rel="Syntax">
 			str.match(regexp)
 		</code></pre>
 		<dl class="fa">
 		    <dt>Argument:</dt>
 		    <dd>A RegExp object, or a string which will be converted to RegExp pbject</dd>
-		    <dt>Return value:</dt>
 		</dl>
+	</section>
+	<section><h3>The match() String method: Return value</h3>
+		<dl class="fa">
+		    <dt>If no match is found, the method returns <code class="note">null</code>.</dt>
+		    <dt>Without <code>g</code> modifier, <code>match()</code> returns an Array like object with next properties</dt>
+		    <table style="font-size: .9em">
+		    	<tr><th>Property/index</th><th>Description</th></tr>
+		    	<tr><td><code class="note">[0]</code></td><td>The part of the string that mathched the Regex</td></tr>
+		    	<tr><td><code class="note">[1]..[n]</code></td><td>The captured groups matches, if any</td></tr>
+		    	<tr><td><code class="note">index</code></td><td>The string index, where the match starts. Strings indexes are 0-based!</td></tr>
+		    	<tr><td><code class="note">input</code></td><td>The original string</td></tr>
+		    </table>
+		</dl>
+	</section>
+	<section><h3>The match() String method: Return value</h3>
+		<dl class="fa">
+			<dt>When <code>g</code> modifier is present, the result is an Array like object, containing all matched substrings.</dt>
+		</dl>
+	</section>
+	<section><h3>The match() String method</h3>
+		<pre><code rel="JS" class="js">
+			var str = 'abracadabra';
+
+			var resultSimple = str.match(/r/);
+			console.dir(resultSimple);
+
+			var resultGlobal = str.match(/r/g);
+			console.dir(resultGlobal);
+		</code></pre>
 	</section>
 	<section><h3>The replace() String method</h3></section>
 	<section><h3>The search() String method</h3></section>
@@ -618,7 +659,7 @@
 	<section><h3>Useful Resources</h3>
 		<dl class="fa">
 			<dt><a href="http://www.regexpal.com">Regex Pal</a> <span>javascript/PCRE regex tester with clean interface and useful tooltips</span></dt>
-			<dt><a href="https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines">Comparison of regular expression engines</a></dt>
+			<dt><a href="https://www.youtube.com/watch?v=EkluES9Rvak&list=PL-BwA4EWrxLCZ73--QvjEd1IOkJsfTa05&index=1">YouTube: Best of Fluent 2012: /Reg(exp){2}lained/: Demystifying Regular Expressions</a></dt>
 			<dt><a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript RegExp Reference</a> on <span>w3schools</span></dt>
 		</dl>
 	</section>

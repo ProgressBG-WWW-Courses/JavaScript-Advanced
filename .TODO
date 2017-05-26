@@ -10,3 +10,6 @@ example of AddEventListener wwith argumented listener....
 
 example of calling a functions as a COnstructor no matter with or w/o new
 example of how the this.prop++ is modified in window...
+
+
+Update slides.js -> reindenting code blocks

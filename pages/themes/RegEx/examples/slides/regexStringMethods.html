@@ -19,7 +19,7 @@ var examples = {
 		console.log(typeof resultGlobal);
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
-	'replace': function(){
+	'replaceSimple': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		function styleHyphenFormat(propertyName) {
 			function upperToHyphenLower(match, offset, string) {
@@ -34,6 +34,19 @@ var examples = {
 		console.log(styleHyphenFormat('borderTop'));
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
+	'replaceRegExpObj': function(){
+	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+		var str = `The RegExp constructor creates a regular expression object for matching text with a pattern.
+			For an introduction to regular expressions, read the Regular Expressions chapter in the JavaScript Guide
+			here are 2 ways to create a RegExp object: a literal notation and a constructor. To indicate strings, the parameters to the literal notation do not use quotation marks while the parameters to the constructor function do use quotation marks. So the following expressions create the same regular expression:
+		`;
+		var reStr  =  'reg(?:ular)?\\s+exp?(?:ression)?';
+		var re = new RegExp('('+reStr+')', 'gi');
+		var newStr = str.replace(re,'<b>$1</b>');
+		console.log(`newStr: ${newStr}`);
+
+	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+	},
 	'test': function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		var str = `It is a well known fact that those people who most want to rule people are, ipso facto, those least suited to do it. To summarize the summary: anyone who is capable of getting themselves made President should on no account be allowed to do the job;`
@@ -46,7 +59,7 @@ var examples = {
 	},
 };
 
-	examples.match();
+	examples.replaceRegExpObj();
 	</script>
 	</body>
 	</html>

@@ -169,11 +169,14 @@ var examples = {
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		var regexes = [
 			/\bstraw|rasp{1}berries/,
-			/\b(?:straw|rasp){1}berries/,
+			/(?:\bstraw)|(?:rasp{1}berries)/, //the same as above!!!
+			/\b(?:straw|rasp){1}berries/,   // different!!!
 		];
 		var strings = [
 			'Icecream with strawberries?',
+			'Icecream with raspberries?',
 			'Icecream with straw?',
+			'Icecream with whateverraspberries?',
 		];
 
 		regexes.forEach(re=>{
@@ -182,13 +185,23 @@ var examples = {
 				console.log(`${str} YES!`) : console.log(`${str} NO!`)
 			)
 		});
-		//  Matched with: /\bstraw|rasp{1}berries/
-		//  Icecream with strawberries? YES!
-		//  Icecream with straw? YES!
+		// Matched with: /\bstraw|rasp{1}berries/
+		// Icecream with strawberries? YES!
+		// Icecream with raspberries? YES!
+		// Icecream with straw? YES!
+		// Icecream with whateverraspberries? YES!
+
+		// Matched with: /(?:\bstraw)|(?:rasp{1}berries)/
+		// Icecream with strawberries? YES!
+		// Icecream with raspberries? YES!
+		// Icecream with straw? YES!
+		// Icecream with whateverraspberries? YES!
 
 		// Matched with: /\b(?:straw|rasp){1}berries/
 		// Icecream with strawberries? YES!
+		// Icecream with raspberries? YES!
 		// Icecream with straw? NO!
+		// Icecream with whateverraspberries? NO!
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 	'constructRegex': function(){
@@ -285,18 +298,21 @@ var examples = {
 	},
 	'RegExInVariable':function(){
 	//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-		var searchStr  = 'var';
-		var str = `
-			var x = 5;
-			var y = 10;
-		 	const pi = 3.14;
-		 	for (let i = 0; i< x; i++) console.log(i);
-		 `;
+		var str = `The RegExp constructor creates a regular expression object for matching text with a pattern.
+			For an introduction to regular expressions, read the Regular Expressions chapter in the JavaScript Guide`;
+		// this regexp can be user input or coming form elsewhare,
+		// but it's just a string:
+		var searchTerm  =  'reg(?:ular)?\\s*exp?(?:ression)?';
 
 		// we can convert string to regex only byRegExp Constructor
-		var re = new RegExp(searchStr, 'gi');
-		str.match(re).forEach(m=>console.log(m));
+		var re = new RegExp('('+searchTerm+')', 'gi');
+		// console.dir(re);
 
+		str.match(re).forEach(m=>console.log(m));
+		// RegExp
+		// regular expression
+		// regular expression
+		// Regular Expression
 	//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 	},
 };

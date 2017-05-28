@@ -419,6 +419,7 @@
 			<dd><code><b>/(r1)r2/</b></code> => match <code><b>r1r2</b></code> and capture the part of the string that matched <code><b>r1</b></code></dd>
 			<dt>If you just want to <span class="note">group regexes, without capturing the match</span>, you should explicitly state that by: </dt>
 			<dd><code>(<span class="note">?:</span>r1|r2)</code> => match <code><b>r1</b></code> or <code><b>r2</b></code> but <span class="note"><b>do not capture</b></span> the match</dd>
+			<dt class="note">NB! Capturing is slow and memory consuming! If you need the parenthesis just for grouping- always use the <b>?:</b> prefix.</dt class="note">
 		</dl>
 	</section>
 	<section><h3>Grouping regexes example</h3>
@@ -442,14 +443,18 @@
 		</code></pre>
 	</section>
 	<section><h3>Grouping regexes: to group or not to group?</h3>
-		<pre><code rel="JS" class="js">
+		<pre><code rel="JS" class="js" style="min-height: 30em;">
 			var regexes = [
-				/\bstraw|rasp{1}berries/,
-				/\b(?:straw|rasp){1}berries/,
+				// task: match only 'strawberries' or 'raspberries':
+				/\bstraw|rasp{1}berries/,         // not what we want
+				/(?:\bstraw)|(?:rasp{1}berries)/, // the same as above!!!
+				/\b(?:straw|rasp){1}berries/,     // That's it!
 			];
 			var strings = [
 				'Icecream with strawberries?',
+				'Icecream with raspberries?',
 				'Icecream with straw?',
+				'Icecream with whateverraspberries?',
 			];
 
 			regexes.forEach(re=>{
@@ -458,19 +463,30 @@
 					console.log(`${str} YES!`) : console.log(`${str} NO!`)
 				)
 			});
-			//  Matched with: /\bstraw|rasp{1}berries/
-			//  Icecream with strawberries? YES!
-			//  Icecream with straw? YES!
+			// Matched with: /\bstraw|rasp{1}berries/
+			// Icecream with strawberries? YES!
+			// Icecream with raspberries? YES!
+			// Icecream with straw? YES!
+			// Icecream with whateverraspberries? YES!
+
+			// Matched with: /(?:\bstraw)|(?:rasp{1}berries)/
+			// Icecream with strawberries? YES!
+			// Icecream with raspberries? YES!
+			// Icecream with straw? YES!
+			// Icecream with whateverraspberries? YES!
 
 			// Matched with: /\b(?:straw|rasp){1}berries/
 			// Icecream with strawberries? YES!
+			// Icecream with raspberries? YES!
 			// Icecream with straw? NO!
+			// Icecream with whateverraspberries? NO!
 		</code></pre>
 	</section>
 	<section><h3>More on Grouping and back references</h3>
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#grouping-back-references">Grouping and back references</a>
 	</section>
 	<section><h3>Assertions</h3>
+		<p>Gives the possibility to match a regex only if it is followed or not by something. I.e. we can make lookahead!</p>
 		<p class="advanced"><i class="fa fa-graduation-cap"></i><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#assertions">Assertions on MDN</a></p>
 	</section>
 </section>
@@ -578,19 +594,22 @@
 	</section>
 	<section><h3>Regex in variable</h3>
 		<pre><code rel="JS" class="js">
-			var searchStr  = 'var';
-			var str = `
-				var x = 5;
-				var y = 10;
-				const pi = 3.14;
-				for (let i = 0; i< x; i++) console.log(i);
-			`;
+			var str = `The RegExp constructor creates a regular expression object for matching text with a pattern.
+			For an introduction to regular expressions, read the Regular Expressions chapter in the JavaScript Guide`;
+
+			// next regexp can be user input or coming form elsewhare,
+			// but it's just a string:
+			var searchTerm  =  'reg(?:ular)?\\s*exp?(?:ression)?';
 
 			// we can convert string to regex only byRegExp Constructor
-			var re = new RegExp(searchStr, 'gi');
+			var re = new RegExp('('+searchTerm+')', 'gi');
+			// console.dir(re);
+
 			str.match(re).forEach(m=>console.log(m));
-			//var
-			//var
+			// RegExp
+			// regular expression
+			// regular expression
+			// Regular Expression
 		</code></pre>
 	</section>
 </section>

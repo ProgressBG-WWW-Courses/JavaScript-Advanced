@@ -33,7 +33,7 @@
 <body>
 	<section id="search-in-text">
 		<label>Search in<textarea placeholder="paste your text here..."></textarea></label>
-		<label>Search for <input type="text" placeholder="type search term here..."></label>
+		<label>Search for <input class="re" type="text" placeholder="type search term here..."></label>
 		<button>Search</button>
 	</section>
 	<script type="text/javascript">
@@ -41,24 +41,39 @@
 			this.node = document.querySelector(sel);
 		};
 		Node.prototype.content = function(){
-			console.log(`Get content of ${this}`);
-			console.log(`content: ${this.node.value}`);
-			return this.node.value;
-		}
+			if(arguments[0]){
+				console.log(`Setter!`);
+				this.node.innerHTML =  arguments[0];
+			}else{
+				console.log(`Getter!`);
+				return this.node.value;
+			}
+		};
 		Node.prototype.addEvent = function(name, action){
 			this.node.addEventListener(name, action);
-		}
+		};
 
 		var searchInText = new Node('#search-in-text textarea');
-		var searchForText = new Node("#search-in-text input");
+		var searchForText = new Node("input.re");
 		var btn = new Node("#search-in-text button");
-		console.dir(searchInText);
-		btn.addEvent('click', highlightSearch(searchInText.content(), searchForText.content()));
+		// console.dir(searchInText);
 
-		function highlightSearch(inputStream, searchTerm){
-			return function(){
+		btn.addEvent('click', highlightSearch(searchInText, searchForText));
+
+		function highlightSearch(searchInText, searchForText){
+			return function( ){
+				console.clear();
 				console.log(`highlightSearchTerms.html() started!`);
-				console.log(`inputStream: ${inputStream}`);
+				var inputStream = searchInText.content();
+				var searchTerm = searchForText.content();
+				searchTerm=searchTerm.replace('\\','\\\\');
+				var searchRe = new RegExp('('+searchTerm+')', 'gi');
+				console.dir(searchRe);
+				// console.log(`inputStream: ${inputStream}`);
+				// console.log(`searchTerm: ${searchTerm}`);
+				inputStream.replace(searchRe,'<b>$1</b>');
+				searchInText.content(inputStream);
+				console.log(`inputStream new: ${inputStream}`);
 			}
 		}
 	</script>

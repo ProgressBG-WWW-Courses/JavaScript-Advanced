@@ -307,43 +307,7 @@ section.copyright>.license{
   height: 60vh;
   /*height: auto;*/
 }
-.reveal pre{
-  font-size: .6em;
-  line-height: 1;
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
-.reveal pre code{
-  font-family: monospace;
-  font-weight: 100;
-  font-size: 0.8em;
-  padding-left: 0;
-  padding-right: 0;
-  line-height: 1.3em;
-}
-.reveal pre code.tabs3 .xml{
-  display: block;
-  margin-left: -5.25em;
-  /* background: red; */
-}
-.reveal pre code.tabs4 .xml{
-  display: block;
-  margin-left: -7em;
-  /* background: red; */
-}
-.tabs5, .reveal pre code.tabs5 .xml{
-  display: block;
-  margin-left: -9.5em;
-  /* background: red; */
-}
-.reveal pre code.tabs6 .xml{
-  display: block;
-  margin-left: -12em;
-  /* background: red; */
-}
+
 /*********************************************
  * OTHER
  *********************************************/

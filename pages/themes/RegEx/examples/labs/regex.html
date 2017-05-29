@@ -22,7 +22,8 @@
 			console.log(mail.match(re).toString());
 		})
 
-
+			var newText = text.replace(re, 'XXXXXX');
+			console.log(newText);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'split': function(){
@@ -39,8 +40,8 @@
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			//TODO : multiline explain - THIS DOES not match
 			var str=`1. sjdfjdsfhdsjds_abc
-2. kjdfkfdjgkfdkaBc
-`;
+			2. kjdfkfdjgkfdkaBc
+			`;
 			var re=/^\d.+abc$/ig;
 
 			console.log(str);
@@ -83,12 +84,60 @@
 			}else{
 				console.log(`Sorry, no match! "Character classes" in JavaScript are defined only for ASCII symbols (i.e. latin alphabet)!!! `);
 			}
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'matchDates': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var dates = [
+				// 'dd.mm.yyyyy'
+				'01.01.1900',   // yes
+				'00.01.1900',   // no
+				'20.01.1900',  // no
+				'12.01.1900',  // yes
+				'12.13.1900',  // no
+				'3',  // yes
+			]
 
+			dates.forEach(date=>{
+				console.log(`date: ${date}`);
+				var re = /^(?:0[1-9]|1[0-9]|[1-9])\.(?:0[1-9]|1[0-2]|[1-9])\.\d{4}$/;
+				var res = date.match(re);
+				res && console.log(res);
+
+
+			})
+			// console.log(str);
+			// console.log(`~~~~~~~~~~~~~~~~`);
+			// str.match(re).forEach(x=>console.log(x));
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'matchStrings': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var strings = [
+				`'He says \'hi\'!'`, //ok
+				`'He says \'hi\"!'`, //no
+				`'He says \"hi\"!'`, //ok
+				`'He says \\hi!'`, //ok
+				`'Hi "mom'`, //yes
+				`'Hi \\"mom'`, //no
+			];
+			var re = /^(['"]).*?(?=\\)['"\\]\1$/;
+
+			strings.forEach(string=>{
+				console.log(`string: ${string}`);
+				var res = string.match(re);
+				res && console.log(res);
+
+
+			})
+			// console.log(str);
+			// console.log(`~~~~~~~~~~~~~~~~`);
+			// str.match(re).forEach(x=>console.log(x));
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	}
 
-	examples.matchWord();
+	examples.matchStrings();
 </script>
 </body>
 </html>

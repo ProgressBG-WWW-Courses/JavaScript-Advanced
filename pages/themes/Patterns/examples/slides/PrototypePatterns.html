@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype Pattern</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var examples = {
+		'prototypeInheritance': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var ObjContrucotr = function(name){
+				console.log(`ObjContrucotr activated`);
+				this.name = name;
+			}
+
+			var obj1 = new ObjContrucotr('obj1');
+
+			console.dir(ObjContrucotr);
+			console.dir(obj1);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+
+	}
+
+	examples.prototypeInheritance();
+</script>
+</body>
+</html>

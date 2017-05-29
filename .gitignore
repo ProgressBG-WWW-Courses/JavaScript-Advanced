@@ -8,6 +8,9 @@ logs/**
 nohup*
 subl_*
 
+# all hidden files
+.*
+
 node_modules/
 .sass-cache
 

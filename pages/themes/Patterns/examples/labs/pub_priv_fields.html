@@ -165,20 +165,30 @@
 		},
 		'example1': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var
-			var Person = function(){
-				this.name = 'Iva';
+			var ObjContrucotr = function(name){
+				return {
+					name:name
+				};
 			}
-			var person1  =new Person;
-			Person.prototype.age = 100;
+			ObjContrucotr.prototype.sayName = function(){
+				console.log(`I'm ${this.name}`);
+			}
 
-			console.log(`age: ${person.age}`);
+			var obj1 =  ObjContrucotr('obj1');
+			console.dir(obj1);
+			console.dir(ObjContrucotr);
+			console.log(obj1.toString());
+			obj1.sayName();
+
+
+
+
 
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	}
 
-	examples.privileged();
+	examples.example1();
 </script>
 </body>
 </html>

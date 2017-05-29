@@ -37,9 +37,9 @@
 		<h2>Пример</h2>
 		<div class="codeBlocks">
 			<h3>1. Broken HTML code</h3>
+			re = /^\n*(\s+)/
 			<pre><code>
-
-				&lt;ul&gt;
+&lt;ul&gt;
 					&lt;li&gt;This is entity-escaped and works fine&lt;/li&gt;
 					<li>This is left as is code</li>
 				&lt;/ul&gt;
@@ -83,6 +83,7 @@
 <script type="text/javascript" >
 	function removeIndentByRegExp(inputStr, indentStr){
  		var indentRE = new RegExp( '^'+indentStr, 'gm');
+
  		// console.dir(indentRE);
  		var newStr = inputStr.replace(indentRE, '' );
 		return newStr;

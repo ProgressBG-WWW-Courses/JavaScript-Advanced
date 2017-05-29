@@ -8,23 +8,22 @@
 
 <script type="text/javascript">
 	var examples = {
-		'prototypeInheritance': function(){
+		'objLiteral': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var ObjContrucotr = function(name){
-				console.log(`ObjContrucotr activated`);
-				this.name = name;
+			var event = {
+				name: 'Mariinsky Theatre Orchestra with Gergiev',
+				date: '22.05.2017',
+				time: '19.30',
+				place: 'Bulgaria Hall',
 			}
 
-			var obj1 = new ObjContrucotr('obj1');
-
-			console.dir(ObjContrucotr);
-			console.dir(obj1);
+			console.log(`Event name: ${event.name}`);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 
 	}
 
-	examples.prototypeInheritance();
+	examples.privileged();
 </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>4 ways to invoke a function</title>
+    <title>Pub/Privite/Priviledged Members</title>
 </head>
 <body>
 
@@ -23,108 +23,90 @@
 		'publicMembers': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			var Event = function(name, date, time) {
+				// public data
 				this.name 	= name;
 				this.date 	= date;
 				this.time 	= time;
 			}
-			var event1 = new Event(
-								'Mariinsky Theatre Orchestra with Gergiev',
-								'22.05.2017',
-								'19.30'
-							) ;
-			console.log(`Event name: ${event1.name}`);
-			console.log(`Events count: ${Event.prototype.count}`);
-
+			// public shared methods
 			Event.prototype.setReminder = function(minutesBefore) {
-				// alert('Reminder set for '+  minutesBefore +' minutes before start!');
+				alert('Reminder set for '+  minutesBefore +' minutes before start!');
 			};
 
+			var event1 = new Event(
+				'Mariinsky Theatre Orchestra with Gergiev',
+				'22.05.2017',
+				'19.30'
+			) ;
+
 			event1.setReminder(60);
-		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
-		},
-		'shared': function(){
-		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var Event = function(id) {
-				// public
-				this.id = this.count();
-				console.log(`Object ${this.counter} was created!`);
-			}
-
-			// shared
-			Event.prototype.counter = 0;
-			Event.prototype.count = ()=> ++Event.prototype.counter;
-
-			var event1 = new Event(1) ;
-			var event2 = new Event(1) ;
-			var event3 = new Event(1) ;
-			console.log(event3.id);
-
+			 // yep, event.setReminder() is public!
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'private': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var Event = function(id) {
+			var Event = function(name) {
 				// private data
-				var createdOn = new Date();
-				//private method
-				var dateToString = function(date, sep){
-					var mm = date.getMonth() + 1; // getMonth() is zero-based
-					var dd = date.getDate();
+				var name = name;
 
-					return [
-					        (dd>9 ? '' : '0') + dd,
-					        (mm>9 ? '' : '0') + mm,
-					        date.getFullYear(),
-					].join(sep);
+				// private method
+				var sayName = function(){
+					console.log(`Event name: ${name}`);
 				}
-				var timeToString = function(date, sep){
-					 var seconds = date.getSeconds();
-					 seconds = seconds>9? seconds : '0'+seconds;
-					return date.getHours()+sep+date.getMinutes()+sep+seconds;
-				}
-				console.log(`Onject created on date: ${dateToString(createdOn, '.')}`);
-				console.log(`Onject created on time: ${timeToString(createdOn, ':')}`);
+
 			}
-			var event1 = new Event();
+
+			var event1 = new Event('event1');
+			console.log(`event1.name: ${event1.name}`);
+			// event1.name: undefined
+			event1.sayName();
+			// Uncaught TypeError: event1.sayName is not a function
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'privileged': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var Event = function(id) {
-				//private members
-				var dateToString = function(date, sep){
-					var mm = date.getMonth() + 1; // getMonth() is zero-based
-					var dd = date.getDate();
+			var Event = function(name) {
+				// private data
+				var name = name;
 
-					return [
-					        (dd>9 ? '' : '0') + dd,
-					        (mm>9 ? '' : '0') + mm,
-					        date.getFullYear(),
-					].join(sep);
+				// public method
+				this.sayName = function(){
+					console.log(`Event name: ${name}`);
 				}
-				var timeToString = function(date, sep){
-					 var seconds = date.getSeconds();
-					 seconds = seconds>9? seconds : '0'+seconds;
-					return date.getHours()+sep+date.getMinutes()+sep+seconds;
-				}
-				var createdDateTime = new Date();
 
-				//privileged members
-				this.createdDate = function(){
-					return dateToString(createdDateTime, '.');
-				};
-				this.createdTime = function(){
-					return timeToString(createdDateTime, ':');
-				};
 			}
-			var event1 = new Event;
-			console.log(event1.createdDate());
-			console.log(event1.createdTime());
+			var event1 = new Event('event1');
+			console.log(`event1.name: ${event1.name}`);
+			// event1.name: undefined
+
+			event1.sayName();
+			// Event name: event1
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'privilegedCons': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var Event = function(name) {
+				// private data
+				var name = name;
+			}
+			// shared public method
+			Event.prototype.sayName = function(){
+				// no way to access Event.name outside the constructor!!!
+				console.log(`Event name: ${this.name}`);
+				console.log(`Event name: ${name}`);
+			}
+
+			var event1 = new Event('event1');
+			event1.sayName();
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'example1': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	}
 
-	examples.privileged();
+	examples.privilegedCons();
 </script>
 </body>
 </html>

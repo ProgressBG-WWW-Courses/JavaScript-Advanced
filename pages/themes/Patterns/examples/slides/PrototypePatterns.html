@@ -10,15 +10,12 @@
 	var examples = {
 		'prototypeInheritance': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
-			var ObjContrucotr = function(name){
-				console.log(`ObjContrucotr activated`);
-				this.name = name;
+			function CarConstructor(){
+				this.doors = 4;
+				this.seating = 4;
+				manifacturer = undefined;
 			}
-
-			var obj1 = new ObjContrucotr('obj1');
-
-			console.dir(ObjContrucotr);
-			console.dir(obj1);
+			var car = new CarConstructor();
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 

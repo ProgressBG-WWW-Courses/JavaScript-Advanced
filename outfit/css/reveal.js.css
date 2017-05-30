@@ -376,7 +376,16 @@ section.copyright>.license{
 .reveal section .advanced{
   font-size: .7em;
 }
-.advanced i{
+.reveal section .advanced:before{
+  /*fa style*/
+  content: "\f19d";
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*my style*/
   margin-right: .3em;
   color: rgba(250, 23,23, 0.3);
   font-size: .8em;

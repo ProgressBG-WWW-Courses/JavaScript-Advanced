@@ -292,11 +292,67 @@
 		// obj1.name: undefined
 	</code></pre>
 </section>
-<section><h3>The Factory Pattern - smartLogger implementation</h3>
-	<a href="examples/labs/smartLogger/index.html" target="_blank">smartLogger</a>
+<section><h3>The Factory Pattern - exercise (smartLogger)</h3>
+	<dl class="fa">
+		<dt>TASK: implement a <code>logger</code> object, whose methods <code>log()</code> and <code>dir()</code> works on top of the standard <code>console</code> methods, but log a message if the script is running under developers/test environment, and outputs nothing, if the script is started on production environment.
+		<dt>Tips: you can simulate a development or production environment by using the simple  <a href="https://www.npmjs.com/package/live-server">live-server</a>. Start it with two instances on different posts and test your logger on them </dt>
+	</dl>
 </section>
 
-<section><h3>Prototype Inheritance</h3>
+<section style="font-size: .8em"><h3>Object prototype</h3>
+	<dl class="fa">
+		<dt>In JavaScript every object is build on the top of a prototype object. I.e. every object has its prototype.</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {};
+		console.log('The car object: ');
+		console.dir(car);
+	</code></pre>
+	<a href="images/TheGodOfAllObjects.png"><img src="images/TheGodOfAllObjects.png"></a>
+	<p>The Object object does not have prototype. You can think of it as the God of all objects.</p>
+</section>
+<section><h3>Object prototype</h3>
+	<dl class="fa">
+		<dt>By ECMAScript standard, every object has the [[Prototype]] property, which points to its prototype.</dt>
+		<dt>Most JavaScript engines gives direct access to the [[Prototype]] property by the special property <code class="note">__proto__</code>.</dt>
+		<dt>From ES2015 the <code>__proto__</code> property is part of the standard!</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {};
+
+		console.dir(car.__proto__);
+		// Object
+
+		console.dir(car.__proto__.__proto__);
+		// null
+	</code></pre>
+</section>
+<section><h3>The prototype relationship between objects</h3>
+	<dl class="fa">
+		<dt>Every object inherits all of it's prototype properties!</dt>
+		<dt>This is the key to <span class="note">prototypal inheritance</span> in JavaScript</dt>
+	</dl>
+	<pre><code rel="JS" class="js">
+		var car = {
+			maxSpeed: 300,
+			currentSpeed: 0,
+		};
+		var ford = {
+			currentSpeed: 280,
+			__proto__: car, // set the ford prototype to car.
+					// this is not a good practice, but a clear example
+		};
+
+		console.log(`ford max speed: ${ford.maxSpeed}`);
+		console.log(`ford current speed: ${ford.currentSpeed}`);
+		// ford max speed: 300
+		// ford current speed: 280
+	</code></pre>
+</section>
+<section><h3>The Prototype Chain</h3>
+	<img src="images/PrototypeChain.png">
+</section>
+<section><h3>Prototypal Inheritance</h3>
 	<p>Lets look at simple objec constructing:</p>
 	<pre><code rel="JS" class="js">
 		var ObjContrucotr = function(name){
@@ -314,7 +370,7 @@
 		<dt>Each function has the <code class="note">prototype</code> property, which is an empty object by default.</dt>
 	</dl>
 </section>
-<section><h3>Prototype Inheritance - How it works?</h3>
+<section><h3>Prototypal Inheritance - How it works?</h3>
 	<img src="images/Prototype Inheritance.png">
 </section>
 
@@ -352,38 +408,40 @@
 <script src="../../../lib/reveal.js/js/reveal.js"></script>
 <!-- init reveal -->
 <script>
-				// Full list of configuration options available at:
-				// https://github.com/hakimel/reveal.js#configuration
-				Reveal.initialize({
-					controls: true,
-					progress: true,
-					slideNumber: 'c/t',
-					keyboard: true,
-					history: true,
-					center: true,
-					width: 1024,
-					height: 850,
-						// Bounds for smallest/largest possible scale to apply to content
-						// minScale: .5,
-						maxScale: 1,
-						// slide transition
-						transition: 'concave', // none/fade/slide/convex/concave/zoom
-						// Factor of the display size that should remain empty around the content
-						margin: 0.1,
-						// shift+maous click to zoom in/out element
-						zoomKey: 'ctrl',
-						// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-						// transition: Reveal.getQueryHash().transition || 'default'
-						// Optional reveal.js plugins
-						dependencies: [
-						{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-						{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-						{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
-						{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
-						]
-					});
-				</script>
-			</body>
-			</html>
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		slideNumber: 'c/t',
+		keyboard: true,
+		history: true,
+		center: true,
+		// width: 1024,
+		// width: '100%',
+		// height: 860,
+		height: '100%',
+		// Bounds for smallest/largest possible scale to apply to content
+		minScale: .5,
+		maxScale: 1,
+		// slide transition
+		transition: 'concave', // none/fade/slide/convex/concave/zoom
+		// Factor of the display size that should remain empty around the content
+		margin: 0.1,
+		// shift+maous click to zoom in/out element
+		zoomKey: 'ctrl',
+		// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+		// transition: Reveal.getQueryHash().transition || 'default'
+		// Optional reveal.js plugins
+		dependencies: [
+		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+		]
+	});
+</script>
+</body>
+</html>

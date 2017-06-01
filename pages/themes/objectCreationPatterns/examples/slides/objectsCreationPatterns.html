@@ -7,6 +7,7 @@
 <body>
 
 <script type="text/javascript">
+	"use strict";
 	var examples = {
 		'objectLiteralPattern': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
@@ -85,6 +86,33 @@
 			fabricatedCar.sayHello();
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
+		'factoryEncapsulation': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var carFactory = function(model, doors){
+				//private
+				var objCount = 0;
+				var couter = (count)=>{
+					return count++;
+				}
+
+				var sayModel = ()=>{
+					console.log(`I'm ${model}`);
+				}
+
+				// public
+				var obj = {};
+				obj.model = model // '';
+				obj.doors = doors // 5;
+				obj.sayModel = sayModel;
+
+				return obj;
+			}
+
+			var ford = carFactory("Ford", 3);
+			ford.sayModel();
+			console.dir(ford);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
 		'objectCreateMethod': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			var car = {
@@ -98,7 +126,7 @@
 		},
 	}
 
-	examples.theConstructorPattern();
+	examples.factoryEncapsulation();
 
 </script>
 </body>

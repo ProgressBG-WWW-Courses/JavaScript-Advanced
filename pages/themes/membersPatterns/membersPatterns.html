@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>JS Patterns</title>
+	<title>Members Patterns</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,7 +27,7 @@
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
 		<div class="top_links">
 			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
-			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<span class="help_link"><i class="fa fa-question"></i></span>
 			<div class="help_text">
 				<div><span>N/Спейс</span><span>следващ слайд</span></div>
 				<div><span>P</span><span>предишен слайд</span></div>
@@ -46,7 +46,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>JavaScript Patterns</h1></section>
+<section><h1>JavaScript MemberPatterns</h1></section>
 <section data-transition="zoom">
 	<div class="copyright">
 		<div class="note">
@@ -64,7 +64,33 @@
 	</div>
 </section>
 
-<section><h2>Public/Private fields in JavaScript</h2>
+<section><h2>Concept clarifications</h2>
+	<section style="font-size: .8em">
+		<dl class="fa">
+			<dt>Public/Private/Privileged Members are concepts coming from class-based languages (Java, C++, ...)</dt>
+			<dt>A <span class="note">public</span> object member is a member (i.e. object field) who is accessible outside the object itself.</dt>
+			<dt><span class="note">Private</span> members are those which are accessible only in the object itself and not from the outside.</dt>
+			<dt>By private members we can implement the principle of<a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">data encapsulation</a> and  <a href="https://en.wikipedia.org/wiki/Information_hiding">information hiding</a></dt>
+			<dt>A <span class="note">privileged</span> method is able to access the private variables and methods, and is itself accessible to the public methods and the outside.</dt>
+			<dt>In JavaScript Privileged Method is just a name for Public Method which access private data</dt>
+		</dl>
+	</section>
+	<section><h3>fake private data</h3>
+		<dl class="fa">
+			<dt>Often in JavaScript apps we use "private" data just to hide some module internals in order to give the users a clear interface.</dt>
+			<dt>In such case, the "privacy" can be accomplished by naming and docs convention. Common pattern is to not documenting the "private" members and to name private members by using <span class="note">underscore as prefix</span>. Like:</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			// private data?
+			var _createdOn = new Date();
+		</code></pre>
+	</section>
+	<section><h3>The JavaScript way</h3>
+		<p class="note">JavaScript does not provide syntax for specifying the visibility of object members. I.e. no <code>private</code> like keywords.</p>
+		<p>But JavaScript has IIFE and closures => we can simulate private and privileged members!</p>
+	</section>
+</section>
+<section><h2>Object Literal</h2>
 	<section><h3>Public Members</h3>
 		<dl class="fa">
 			<dt>The members of an object are <span class="note">all public members</span>.</dt>
@@ -81,118 +107,193 @@
 			// yep, event.name is public!
 		</code></pre>
 	</section>
-	<section><h3>Create Public members in Constructor</h3>
+	<section><h3>Private Members</h3>
+		<dl class="fa">
+			<dt>The only way to hide a variable from the outside is to wrap it in a function!</dt>
+		</dl>
 		<pre><code rel="JS">
-			var Event = function(name, date, time) {
-				// all this.properties are public
-				this.name   = name;
-				this.date   = date;
-				this.time   = time;
+			var event = {
+				// public
+				name: 'Mariinsky Theatre Orchestra with Gergiev',
+				date: '22.05.2017',
+				time: '19.30',
+				place: 'Bulgaria Hall',
+				timestamp: (function(){
+					//private
+					var ts = Date();
+					return  ts;
+				})()
 			}
-			var event1 = new Event(
-				'Mariinsky Theatre Orchestra with Gergiev',
-				'22.05.2017',
-				'19.30'
-			);
-			console.log(`Event name: ${event1.name}`);
-			// yep, event.name is public!
+
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000)
+
+			//event.timestamp: Thu Jun 01 2017 13:16:50 GMT+0300 (EEST)
+			//reported onThu Jun 01 2017 13:16:54 GMT+0300 (EEST)
 		</code></pre>
 	</section>
-	<section><h3>Create Public members in Prototype</h3>
+</section>
+<section><h2>Constructor Function</h2>
+	<section><h3>Public Members</h3>
+		<p>All <code class="note">this</code> properties are public!</p>
+		<pre><code rel="JS" class="js">
+			var Event = function() {
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
+				this.date = '22.05.2017';
+				this.time = '19.30';
+				this.place = 'Bulgaria Hall';
+			}
+
+			var event = new Event;
+		</code></pre>
+	</section>
+	<section><h3>Private Members</h3>
 		<dl class="fa">
-			<dt>Usually used for methods members:</dt>
+			<dt>All local variables and parameters are private members for the constructor function.</dt>
+		</dl>
+
+		<pre><code rel="JS">
+			var Event = function() {
+				//private data
+				var timestamp = Date();
+
+				// privileged method
+				this.timestamp = (function(){
+					return timestamp;
+				})();
+
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
+				this.date = '22.05.2017';
+				this.time = '19.30';
+				this.place = 'Bulgaria Hall';
+			}
+
+			var event = new Event;
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000);
+
+			//event.timestamp: Thu Jun 01 2017 13:18:10 GMT+0300 (EEST)
+			//reported onThu Jun 01 2017 13:18:14 GMT+0300 (EEST)
+		</code></pre>
+	</section>
+</section>
+<section><h2>Prototype</h2>
+	<section><h3>Public Members</h3>
+		<dl class="fa">
+			<dt>The members in prototype object are shared among all objects build from that prototype. They are all public members.</dt>
+			<dt>Usually, we put in the prototype only the shared functionality.</dt>
 		</dl>
 		<pre><code rel="JS">
 			Event.prototype.setReminder = function(minutesBefore) {
 				alert('Reminder set for '+  minutesBefore +' minutes before start!');
 			};
+
 			</code></pre>
 	</section>
-	<section><h3>Private Members (Encapsulation)</h3>
-		<dl class="fa">
-			<dt>By private members we can implement the principle of<a href="https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">data encapsulation</a> and  <a href="https://en.wikipedia.org/wiki/Information_hiding">information hiding</a></dt>
-			<dt>Private Members can be accessed only by the object itself</dt>
-			<dt>Ordinary vars and parameters of the constructor becomes the private members.</dt>
-			<dt>Some developers use the convention to name their private members by using <span class="note">underscore as prefix</span>. Like:</dt>
-			<pre><code rel="JS" class="js">
-				// private data
-				var _createdOn = new Date();
-			</code></pre>
-
-		</dl>
-	</section>
-	<section><h3>Private Members example</h3>
-		<pre><code rel="JS">
-			var Event = function(name) {
-				// private data
-				var name = name;
-
-				// private method
-				var sayName = function(){
-					console.log(`Event name: ${name}`);
-				}
-
+	<section><h3>Private Members in Prototype</h3>
+		<pre><code rel="JS" class="js">
+			var Event = function() {
+				// public
+				this.name = 'Mariinsky Theatre Orchestra with Gergiev';
 			}
+			Event.prototype = (function(){
+				// private
+				var date = Date();
 
-			var event1 = new Event('event1');
-			console.log(`event1.name: ${event1.name}`);
-			// event1.name: undefined
-			event1.sayName();
-			// Uncaught TypeError: event1.sayName is not a function
-		</code></pre>
-		<p>To make private members useful, we need to introduce a privileged method.</p>
-	</section>
-	<section><h3>Privileged methods</h3>
-		<dl class="fa">
-			<dt>Can access private members</dt>
-			<dt>Can be invoked as public methods</dt>
-			<dt>In JavaScript Privileged Method is just a name for Public Method which access private data.</dt>
-		</dl>
-	</section>
-	<section><h3>Privileged methods example</h3>
-		<pre><code rel="JS">
-			var Event = function(name) {
-				// private data
-				var name = name;
-
-				// public method
-				this.sayName = function(){
-					console.log(`Event name: ${name}`);
+				// this is the actual prototype
+				return {
+					//privileged
+					timestamp: date,
 				}
+			})();
+			var event = new Event;
 
-			}
-			var event1 = new Event('event1');
-			console.log(`event1.name: ${event1.name}`);
-			// event1.name: undefined
-
-			event1.sayName();
-			// Event name: event1
+			setTimeout( ()=>{
+				console.log(
+					'event.timestamp: ' + event.timestamp + '\n' +
+					'reported on' +Date()
+				);
+			}, 3000);
+			console.dir(event);
 		</code></pre>
 	</section>
-	<section><h3>Privileged methods cons</h3>
+	<section><h3>Private Members in Prototype: count instances example</h3>
+		<pre><code rel="JS" class="js">
+			var Event = function(name) {
+				// public
+				this.name = name // '';
+				this.id = Object.getPrototypeOf(this).countObj();
+			}
+			Event.prototype = (function(){
+				// private
+				var count = 1;
+
+				// this is the actual prototype
+				return {
+					//privileged
+					countObj: ()=>count++,
+
+				}
+			})();
+
+			var events = [];
+			for (var i = 0; i < 10; i++) {
+				events.push(new Event(`Event ${i}`));
+			}
+
+			console.log(`events[0].id:  ${events[0].id}`);
+			console.log(`events[4].id:  ${events[4].id}`);
+			console.log(`events[9].id:  ${events[9].id}`);
+		</code></pre>
+	</section>
+	<section><h3>Private Members in Prototype - do we need them?</h3>
 		<dl class="fa">
-			<dt>We can not define a privileged methods outside the constructor. I.e. we can not optimize the program to use shared methods between all objects</dt>
+			<dt>Remember, that private members is a class-based OOP paradigm, not a JavaScript!</dt>
+			<dt>Whenever possible try to not using them</dt>
 		</dl>
 		<pre><code rel="JS" class="js">
 			var Event = function(name) {
-				// private data
-				var name = name;
+				// public
+				this.name = name // '';
+				this.id = Event.count++;
+
 			}
-			// shared public method
-			Event.prototype.sayName = function(){
-				// no way to access Event.name outside the constructor!!!
-				console.log(`Event name: ${this.name}`);
-				console.log(`Event name: ${name}`);
+			Event.count = 1;
+
+			var events = [];
+			for (var i = 0; i < 10; i++) {
+				events.push(new Event(`Event ${i}`));
 			}
 
-			var event1 = new Event('event1');
-			event1.sayName();
+			console.log(`events[0].id:  ${events[0].id}`);
+			console.log(`events[4].id:  ${events[4].id}`);
+			console.log(`events[9].id:  ${events[9].id}`);
 		</code></pre>
 	</section>
-	<section><h3>More on Private Members</h3>
-	<a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Guides/Contributor_s_Guide/Private_Properties">MDN: Private Properties</a>
-	</section>
 </section>
+
+
+<section><h3>More on Private Members</h3>
+	<a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Guides/Contributor_s_Guide/Private_Properties">MDN: Private Properties</a>
+</section>
+
+
+
+
+
+
+
+
 
 
 
@@ -226,6 +327,7 @@
 <script>
 	// Full list of configuration options available at:
 	// https://github.com/hakimel/reveal.js#configuration
+	var highlightjsTabSize = '  ';
 	Reveal.initialize({
 		controls: true,
 		progress: true,
@@ -253,7 +355,10 @@
 		{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 		{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 		{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() {
+			hljs.configure({tabReplace: highlightjsTabSize});
+			hljs.initHighlightingOnLoad();
+			 } },
 		{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
 		{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
 		]

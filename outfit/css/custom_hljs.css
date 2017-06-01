@@ -1,3 +1,8 @@
+/* ********************************************************************** */
+/* Fonts  */
+/* ********************************************************************** */
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
 /* for highlight.js and my beautify_code_blocks {*/
 .reveal pre{
 	font-size: .6em;
@@ -8,14 +13,14 @@
 	white-space: -o-pre-wrap;    /* Opera 7 */
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
-.reveal pre code{
-	font-family: monospace;
-	font-weight: 100;
-	font-size: 0.8em;
+.reveal pre>code{
+	font-family: 'Inconsolata', monospace;
+	/*font-weight: bold;*/
+	/*font-size: 0.8em;*/
 	padding-left: .3em;
 	padding-bottom: .3em;
 	padding-right: 0;
-	line-height: 1.3em;
+	line-height: 1.1em;
 }
 code[rel]::before{
 	content: attr(rel);

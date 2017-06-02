@@ -27,7 +27,7 @@
 	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
 		<div class="top_links">
 			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
-			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<span class="help_link"><i class="fa fa-question"></i></span>
 			<div class="help_text">
 				<div><span>N/Спейс</span><span>следващ слайд</span></div>
 				<div><span>P</span><span>предишен слайд</span></div>
@@ -64,19 +64,149 @@
 	</div>
 </section>
 
-<section><h2>Classical (class-based) Inheritance</h2>
-<a href="images/classicalInheritance.png"><img src="images/classicalInheritance.png"></a>
+
+<section><h2>Classical (class-based) Inheritance vs. Prototypal Inheritance</h2>
+	<section><h3>Classical  (class-based) Inheritance</h3>
+		<p class="note">Classes inherits from classes!</p>
+		<a href="images/class-basedInheritance.png"><img src="images/class-basedInheritance.png"></a>
+	</section>
+	<section><h3>Prototypal Inheritance</h3>
+		<dl class="fa">
+			<dt>Objects inherits from objects!</dt>
+		</dl>
+		<p><a href="images/prototypalInheritance.png"><img src="images/prototypalInheritance.png"></a></p>
+	</section>
 </section>
 
-<section><h2>Prototypal Inheritance</h2>
-	<section><h3></h3>
-		<a href="images/PrototypalInheritance.png"><img src="images/PrototypalInheritance.png"></a>
+<section><h2>Classical (class-based) Inheritance in JavaScript</h2>
+	<section><h3>example</h3>
+		<pre><code rel="JS" class="js">
+			// create 'Car' constructor
+			var Car = function(manufacturer, speed){
+				this.manufacturer = manufacturer || undefined;
+				this.speed= speed || 100;
+			}
+			Car.prototype= {
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create 'Ford' constructor
+			var Ford = function( speed){
+				var manufacturer = 'Ford';
+				// use the parent constructor
+				Car.apply(this, [manufacturer, speed]);
+			}
+			// set the prototype chain
+			Ford.prototype.__proto__ = Car.prototype;
+
+			// create 'ford' object
+			var ford = new Ford(200);
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = new Ford(300);
+			theFordOfPesho.wings = 2;
+
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
 	</section>
-	<section><h3>The prototype relationship between objects</h3>
+	<section><h3>diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingConstructors.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingConstructors.png"></a>
+	</section>
+</section>
+
+<section><h2>Prototypal Inheritance in JavaScript</h2>
+	<section><h3>Prototypal Inheritance of Object Literals using '__proto__'  - example</h3>
+		<pre style="width: 100%"><code rel="JS" class="js">
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+
+			// create the 'ford' object
+			var ford = {
+				// make 'ford' to inherit from 'car'
+				__proto__ : car,
+				manufacturer: "Ford",
+				speed: 200,
+			}
+
+			// create 'theFordOfPesho' object
+			var theFordOfPesho = {
+				// make 'theFordOfPesho' to inherit from 'ford'
+				__proto__ : ford,
+				wings: 2,
+				speed: 300,
+			}
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
 		<dl class="fa">
-			<dt>Every object inherits all of it's prototype properties!</dt>
-			<dt>This is the key to <span class="note">prototypal inheritance</span> in JavaScript</dt>
+			<dt>Be careful when using <code>__proto__</code></dt>
+			<dd><a class="advanced" href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer#Prototype_mutation">Prototype_mutation on MDN</a></dd>
+			<dt>Do not use <code>__proto__</code> outside of object literals!</dt>
 		</dl>
+	</section>
+	<section><h3>Prototypal Inheritance of Object Literals using '__proto__'  - diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingDunderProto.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingDunderProto.png"></a>
+
+	</section>
+	<section><h3>Prototypal Inheritance of Object Literals using Object.create() - example</h3>
+		<pre><code rel="JS" class="js">
+			// create 'car' object
+			var car = {
+				manufacturer: undefined,
+				speed: 100,
+				drive: function(){
+					if (this.wings >= 2){
+						console.log(`Flying wiht ${this.speed} km/h`);
+					}else{
+						console.log(`Driving wiht ${this.speed} km/h`);
+					}
+				}
+			}
+			// create 'ford' and make it to inherit from 'car'
+			var ford = Object.create( car, {
+				manufacturer: {value: "Ford"},
+				speed: {value: 200},
+			})
+
+			// create 'theFordOfPesho' and make it to inherit from 'ford'
+			var theFordOfPesho = Object.create(ford, {
+				wings: {value: 2},
+				speed: {value: 300},
+			})
+
+			ford.drive();
+			theFordOfPesho.drive();
+		</code></pre>
+	</section>
+	<section><h3>Prototypal Inheritance of Object Literals using Object.create() - diagram</h3>
+		<a href="images/prototypalInheritanceOfObjectLiteralsUsingObjectCreate.png"><img src="images/prototypalInheritanceOfObjectLiteralsUsingObjectCreate.png"></a>
+		<dl class="fa">
+			<dt>Yes, the diagram is identical with the one with '<code>__proto__</code>'</dt>
+			<dt>It's better and safe to use <code>Object.create() </code> aproach, instead of '<code>__proto__</code>'</dt>
+		</dl>
+	</section>
+
+	<section><h3>The prototype relationship between objects</h3>
+
 		<pre><code rel="JS" class="js">
 			var car = {
 				maxSpeed: 300,
@@ -94,6 +224,7 @@
 			// ford current speed: 280
 		</code></pre>
 	</section>
+
 	<section><h3>The Prototype Chain</h3>
 		<img src="images/PrototypeChain.png">
 	</section>

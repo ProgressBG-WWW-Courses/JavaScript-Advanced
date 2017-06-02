@@ -65,7 +65,6 @@
 			console.dir(carFactory);
 			console.dir(ford);
 			console.dir(BMV);
-
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 		'factoryVSconstructor': function(){
@@ -113,20 +112,72 @@
 			console.dir(ford);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
-		'objectCreateMethod': function(){
+		'objectCreateMethodSimple': function(){
 		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
 			var car = {
-				sayHello:()=>console.log(`Hello, I'm car literal`),
-			};
-			var ford = Object.create(car);
-			ford.sayHello();
+				speed: 100,
+				drive: function(){
+					console.log(`Driving with ${speed} km/h`);
+				}
+			}
+			console.dir(car);
 
-			console.log(ford.__proto__ === car); // true
+			var ford = Object.create(car);
+			console.dir(ford);
+
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'objectCreateVsConstructor': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			var literalObj = {};
+
+			function ObjConstructor(){}
+			var constructedObj = new ObjConstructor();
+
+			var createdObj = Object.create(null);
+
+			console.dir(literalObj);
+			console.dir(ObjConstructor);
+			console.dir(constructedObj);
+			console.dir(createdObj);
+
+			console.log(`typeof literalObj: ${typeof literalObj}`);
+			console.log(`typeof constructedObj: ${typeof constructedObj}`);
+			console.log(`typeof createdObj: ${typeof createdObj}`);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
+		'traceObjectsChain': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			"use strict";
+			var arr = [];
+			var f = function(){};
+			var objLiteral = {};
+
+			var indent = "";
+			function traceProtoChain(obj){
+				// exit condition
+				if (obj.__proto__ == null){
+					console.log(`Tracing ${obj}`);
+					indent += '\t';
+					console.log(`${indent}obj.__proto: ${obj.__proto__}`);
+					return;
+				}
+
+				// action
+				console.log(`Tracing ${obj}`);
+				indent += '\t';
+				console.log(`${indent}obj.__proto: ${obj.__proto__}`);
+				traceProtoChain(obj.__proto__);
+			}
+
+			traceProtoChain(objLiteral);
+			// traceProtoChain(f);
+			// traceProtoChain(objLiteral);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
 	}
 
-	examples.factoryEncapsulation();
+	examples.traceObjectsChain();
 
 </script>
 </body>

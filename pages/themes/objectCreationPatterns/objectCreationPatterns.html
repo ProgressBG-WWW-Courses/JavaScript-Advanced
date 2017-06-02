@@ -232,9 +232,9 @@
 			Object.create( prototype_object [, propertiesObject] );
 		</code></pre>
 		<dl class="fa">
-			<dt><code>prototype_object</code> - the prototype for the new object. I.e. the object from which a new object will be created.</dt>
+			<dt><code>prototype_object</code> - the prototype for the new object.</dt>
 			<dt><code>propertiesObject</code> - an object, describing the properties for the newly created object.  The syntax is like the <code>props</code> object in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties">Object.defineProperties() method</a></dt>
-			<dt><code>return</code> - new object with the specified prototype object and properties.</dt>
+			<dt><code>return</code> - new object with the specified prototype object and properties (if given ).</dt>
 		</dl>
 	</section>
 	<section><h3>example</h3>
@@ -248,6 +248,28 @@
 
 			console.log(ford.__proto__ === car);
 			// true
+		</code></pre>
+	</section>
+	<section><h3>example</h3>
+		<pre><code rel="JS" class="js">
+			var car = {
+				drive : function(){
+					console.log(`Driving with ${this.speed} km/h`);
+				},
+				speed: 100, // a default value for all objects created by "car"
+			};
+
+			var ford = Object.create(car, {
+				speed: {
+					value: 200,
+					writable: false,
+				}
+			});
+			ford.drive();
+
+			// let's try to change the speed
+			ford.speed = 300;
+			console.log(`ford.speed: ${ford.speed}`);
 		</code></pre>
 	</section>
 </section>
@@ -295,6 +317,9 @@
 			//TypeError: fabricatedCar.sayHello is not a function
 		</code></pre>
 	</section>
+</section>
+<section><h3><a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29">More on __proto__, [[prototype]] and prototype</a></h3>
+	<a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29"><img src="images/theChickenOrTheEgg.jpeg"></a>
 </section>
 
 <!-- <section data-notes="20min"><h2>SectionTitle</h2>

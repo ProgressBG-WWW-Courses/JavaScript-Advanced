@@ -141,9 +141,30 @@
 			console.dir(obj2);
 		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
 		},
+		'objectCreateINneritance': function(){
+		//▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾▾//
+			function Shape(){
+				this.x = 0;
+				this.y = 0;
+				console.log(`Shape created`);
+			}
+			Shape.prototype.move = function(x, y){
+				this.x += x;
+				this.y += y;
+				console.log(`Shape moved`);
+			}
+
+			function Rectangle(){
+				Shape.call(this);
+			}
+
+			console.dir(Shape);
+			console.dir(Rectangle);
+		//▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴//
+		},
 	}
 
-	examples.settingProperties();
+	examples.objectCreateInheritance();
 </script>
 </body>
 </html>

@@ -70,11 +70,27 @@
 		<p class="note">Classes inherits from classes!</p>
 		<a href="images/class-basedInheritance.png"><img src="images/class-basedInheritance.png"></a>
 	</section>
+	<section><h3>Classical  (class-based) Inheritance</h3>
+		<dl class="fa">
+			<dt>The inheritance is based on copies! I.e. when a child class inherits its parents members, they are actually <span class="note">copied</span> to the child class.</dt>
+			<dt>The Cons?</dt>
+			<dd>Gorilla / Banana problem</dd>
+			<dd>Tight Coupling Problem</dd>
+			<dd>Duplication by Necessity Problem</dd>
+		</dl>
+	</section>
 	<section><h3>Prototypal Inheritance</h3>
 		<dl class="fa">
 			<dt>Objects inherits from objects!</dt>
 		</dl>
 		<p><a href="images/prototypalInheritance.png"><img src="images/prototypalInheritance.png"></a></p>
+	</section>
+	<section><h3>Prototypal Inheritance</h3>
+		<dl class="fa">
+			<dt>The inheritance is based on <span class="note"> a prototype chain</span>! As a result, each child will be able to access by reference its prototype.</dt>
+			<dt>Pros?</dt>
+			<dd>Changing prototype definitions dynamically!</dd>
+		</dl>
 	</section>
 </section>
 
@@ -123,6 +139,14 @@
 </section>
 
 <section><h2>Prototypal Inheritance in JavaScript</h2>
+	<section><h3>The Prototype Chain</h3>
+	<dl class="fa">
+		<dt>Each JavaScript object has a <span class="note">prototype object</span></dt>
+		<dt>An object "inherits" - i.e. has access to all members of its prototype.</dt>
+		<dt>An object prototype is just an object, so it can also have prototype from which to inherit from.</dt>
+		<dt>This is known as the <span class="note">prototype chain!</span></dt>
+	</dl>
+	</section>
 	<section><h3>Prototypal Inheritance of Object Literals using '__proto__'  - example</h3>
 		<pre style="width: 100%"><code rel="JS" class="js">
 			// create 'car' object
@@ -204,48 +228,31 @@
 			<dt>It's better and safe to use <code>Object.create() </code> aproach, instead of '<code>__proto__</code>'</dt>
 		</dl>
 	</section>
-
-	<section><h3>The prototype relationship between objects</h3>
-
+	<section><h3>Prototypal Inheritance of constructed objects</h3>
 		<pre><code rel="JS" class="js">
-			var car = {
-				maxSpeed: 300,
-				currentSpeed: 0,
-			};
-			var ford = {
-				currentSpeed: 280,
-				__proto__: car, // set the ford prototype to car.
-						// this is not a good practice, but a clear example
-			};
-
-			console.log(`ford max speed: ${ford.maxSpeed}`);
-			console.log(`ford current speed: ${ford.currentSpeed}`);
-			// ford max speed: 300
-			// ford current speed: 280
-		</code></pre>
-	</section>
-
-	<section><h3>The Prototype Chain</h3>
-		<img src="images/PrototypeChain.png">
-	</section>
-	<section><h3>example</h3>
-		<!-- <p>Lets look at simple objec constructing:</p>
-		<pre><code rel="JS" class="js">
-			var ObjContrucotr = function(name){
-				console.log(`ObjContrucotr activated`);
-				this.name = name;
+			// Animal constructor
+			var Animal = function(food){
+				this.food = food;
+			}
+			Animal.prototype.eat = function(){
+				console.log(`${this.name} is eating ${this.food}`);
 			}
 
-			var obj1 = new ObjContrucotr('obj1');
+			// Cat constructor
+			var Cat = function(name, food){
+				// reuse the Animal Constructor
+				Animal.call(this, food);
+				this.name = name || 'Tom';
+			}
+			// Cat objects will inherit from Animal.prototype
+			Cat.prototype = Object.create(Animal.prototype);
 
-			console.dir(ObjContrucotr);
-			console.dir(obj1);
+			// Cat instance
+			var tom = new Cat('Tom', 'cheese');
+			tom.eat();
 		</code></pre>
-		<dl class="fa">
-			<dt>The ObjContrucotr is just a function!</dt>
-			<dt>Each function has the <code class="note">prototype</code> property, which is an empty object by default.</dt>
-		</dl> -->
 	</section>
+
 	<!-- <section><h3>Prototypal Inheritance - How it works?</h3>
 		<img src="images/Prototype Inheritance.png">
 	</section> -->

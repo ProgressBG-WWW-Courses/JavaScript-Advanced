@@ -8,50 +8,30 @@
 
 </body>
 <script type="text/javascript">
-    var objectLiteralTest = function() {
-        var apple = {
-            color: "red",
-            prices: [23.5, 22, 25],
 
-            calcMinPrice: function(){
-                return  Math.min( ...this.price ); // from ES6
-            },
-            calcMaxPrice: function(){
-                return  Math.max( ...this.price ); // from ES6
-            }
-        };
+var Car = function(speed){
+	this.speed = speed ;
+}
+Car.prototype = {
+	drive: function(){
+		console.log(`I'm  driving with ${this.speed}`);
+	},
+}
+var car1 =  new Car();
 
-        console.log( "apple object", apple );
-        console.log( "apple min price", apple.calcMinPrice() );
-    };
+var Ford = function(batteryLevel, speed){
+	// TODO: example speed as object
+	Car.call(this, speed);
+	// this.speed  = speed;
 
-    var objectConstructorTest = function( ){
-        "use strict";
-        // the Constructor function:
-        console.log("THIS in objectConstructorTest: ", this);
-        var  AppleMaker= function( color, prices ){
-            console.log("THIS in AppleMaker: ", this);
-            // console.log("this.prices:", this.prices);
-            // this.color = color;
-            // this.prices = prices;
+	this.batteryLevel = batteryLevel || 100;
+}
+Ford.prototype=
 
-            // this.calcMinPrice = function(){
-            //     return  Math.min( ...this.prices ); // from ES6
-            // };
-            // this.calcMaxPrice = function(){
-            //     return  Math.max( ...this.prices ); // from ES6
-            // };
-        }
+var myFord = new Ford(50, 200);
+myFord.drive();
 
-        // objects constructing:
-        var apple1 = new AppleMaker("red", [3.5, 2, 2.5]);
-        var appleN = AppleMaker("green", [1.80, 2.10, 2.40]);
 
-        // objects usage:
-        console.log( "apple1 min price: ", apple1.calcMinPrice());
-    }
-
-    objectConstructorTest();
 
 </script>
 </html>

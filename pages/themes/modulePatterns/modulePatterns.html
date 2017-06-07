@@ -43,7 +43,7 @@
 		<div class="slides">
 <!--
 ########################################################
-##################### SLIDES START #####################
+#####################     SLIDES START    #####################
 ########################################################
 -->
 <section><h1>JavaScript Patterns</h1></section>
@@ -64,25 +64,45 @@
 	</div>
 </section>
 
-<section><h2>Module pattern</h2></section>
+<section><h2>Namespacing</h2>
+	<section><h3>by Object Literal</h3>
+		<dl class="fa">
+			<dt>Encapsulate all of your vars into an object literal</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			var myApp= {
+				userName: 'Ada',
+			}
+
+			console.log(`userName: ${userName}`);
+			// ReferenceError: userName is not defined
+		</code></pre>
+	</section>
+</section>
+<section><h2>Module pattern</h2>
+	<section><h3>Why?</h3>
+		<dl class="fa">
+			<dt>Prevents names collisions</dt>
+			<dt>Ensures that functionality developed by disparate parties works together seamlessly.</dt>
+			<dt>Only a public API is returned, keeping everything else private within a closure.</dt>
+		</dl>
+	</section>
+	<section></section>
+</section>
 <section><h2>Revealing module pattern</h2></section>
 <section><h2>Revealing prototype pattern</h2></section>
-<section><h2>Singleton pattern</h2></section>
+<section><h2>Singleton pattern</h2>
+<dl class="fa">
+	<dt>Singleton is used when a global variable is desirable</dt>
+</dl>
+</section>
 
-<!-- <section data-notes="20min"><h2>SectionTitle</h2>
-		<section>
-				<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-				</aside>
-		</section>
-	</section> -->
-
-	<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
-		<p>These slides are based on</p>
-		<p>customised version of </p>
-		<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
-		<p>framework</p>
-	</section>
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	<p>These slides are based on</p>
+	<p>customised version of </p>
+	<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	<p>framework</p>
+</section>
 <!--
 ########################################################
 ##################### SLIDES END   #####################

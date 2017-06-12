@@ -10,6 +10,8 @@ subl_*
 
 # all hidden files
 .*
+# shell files
+*.sh
 
 node_modules/
 .sass-cache

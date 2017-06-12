@@ -46,7 +46,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Object creation patterns</h1></section>
+<section><h1>Object creation and Patterns</h1></section>
 <section data-transition="zoom">
 	<div class="copyright">
 		<div class="note">
@@ -318,24 +318,208 @@
 		</code></pre>
 	</section>
 </section>
+
 <section><h3><a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29">More on __proto__, [[prototype]] and prototype</a></h3>
 	<a href="https://hackernoon.com/understand-nodejs-javascript-object-inheritance-proto-prototype-class-9bd951700b29"><img src="images/theChickenOrTheEgg.jpeg"></a>
 </section>
 
-<!-- <section data-notes="20min"><h2>SectionTitle</h2>
-		<section>
-				<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-				</aside>
-		</section>
-	</section> -->
-
-	<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
-		<p>These slides are based on</p>
-		<p>customised version of </p>
-		<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
-		<p>framework</p>
+<section id="creationalDesignPatterns"><h1>Creational Design Patterns</h1>
+	<dl class="fa">
+		<dt>Creational design patterns focus on object creation mechanisms</dt>
+		<dt>Summaries best practices for object creation suitable for different, common, situations</dt>
+		<dt>Removes the potential complexity in a project</dt>
+		<dt>Some of the patterns that fall under this category are: Factory, Abstract, Prototype, Singleton and Builder</dt>
+	</dl>
+</section>
+<section><h2>The Factory Pattern</h2>
+	<section><h3>The Factory Pattern</h3>
+		<dl class="fa">
+			<dt>"Factory" - a function which creates object instances! </dt>
+			<dt>Abstract the object creation:</dt>
+			<dd>Create different objects, depending on the input</dd>
+			<dd>Create objects as literal, by constructor, by <code>Object.create()</code></dd>
+			<dt>Great flexibility and implementation independence.</dt>
+		</dl>
 	</section>
+	<section><h3>Factory Pattern - simple example</h3>
+		<pre><code rel="JS" class="js">
+			"use strict";
+			var objFactory = function(name){
+				var obj = {};
+				obj.name = name;
+				obj.sayName = () =>console.log(`I'm object: ${obj.name}`);
+
+				return obj;
+			}
+
+			var obj1 = objFactory('Object 1');
+			var obj2 = objFactory('Object 2');
+			obj1.sayName();
+			obj2.sayName();
+			// I'm object: Object 1
+			// I'm object: Object 2
+		</code></pre>
+	</section>
+	<section><h3>Factory Pattern - flexibility example</h3>
+		<pre><code rel="JS" class="js">
+			"use strict";
+			// aux constructors
+			function AudioPlayer(name){
+				this.name = name;
+				this.play = ()=>{
+					console.log(`${this.name} is playing as Audio!`);
+				}
+			}
+			function VideoPlayer(name){
+				this.name = name;
+				this.play = ()=>{
+					console.log(`${this.name} is playing as Video!`);
+				}
+			}
+
+			// the factory
+			function mediaPlayerMaker(name) {
+				if(name.match(/\.(?:mp3|ogg|flack)$/i) ){
+					return new AudioPlayer(name);
+				}
+				if (name.match(/\.(?:mp4|avi|divx)$/i)) {
+					return new VideoPlayer(name);
+				}
+			}
+
+			// the instancies
+			const player1 = mediaPlayerMaker('time_lapse.mp3');
+			const player2 = mediaPlayerMaker('micahel_nyman_band_live.avi');
+
+			// the usage
+			player1.play();
+			player2.play();
+
+			// time_lapse.mp3 is playing as Audio!
+			// micahel_nyman_band_live.avi is playing as Video!
+		</code></pre>
+	</section>
+	<section><h3>The Factory as mechanism to enforce encapsulation</h3>
+		<dl class="fa">
+			<dt>As we saw, the only way to enforce encapsulation in JavaScript is by function scopes and closures </dt>
+			<dt>And Factory is just a function!</dt>
+		</dl>
+		<pre><code rel="JS" class="js">
+			"use strict";
+			var objFactory = function(name){
+				// private members
+				var name = name;
+				// public
+				var obj = {
+					sayName: () =>console.log(`I'm object: ${name}`),
+				};
+
+				return obj;
+			}
+
+			var obj1 = objFactory('Object 1');
+			obj1.sayName();
+			console.log(`obj1.name: ${obj1.name}`);
+			// I'm object: Object 1
+			// obj1.name: undefined
+		</code></pre>
+	</section>
+	<section><h3>The Factory Pattern - exercise (smartLogger)</h3>
+		<dl class="fa">
+			<dt>TASK: implement a <code>logger</code> object, whose methods <code>log()</code> and <code>dir()</code> works on top of the standard <code>console</code> methods, but log a message if the script is running under developers/test environment, and outputs nothing, if the script is started on production environment.
+			<dt>Tips: you can simulate a development or production environment by using the simple  <a href="https://www.npmjs.com/package/live-server">live-server</a>. Start it with two instances on different posts and test your logger on them </dt>
+		</dl>
+	</section>
+</section>
+<section data-notes="2h"><h2>The Singleton Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Perhaps the most overused pattern, though it has fallen out of favor in recent years.</dt>
+			<dt>Singleton provides protection against accidentally creating multiple copies of a complex object</dt>
+			<dt>Allows deferral of object instantiation until the first use</dt>
+			<dt class="note">In short, the main idea of the Singleton is to have only one instance of a specific class</dt>
+		</dl>
+	</section>
+	<section><h3>usage</h3>
+		<dl class="fa">
+			<dt>for namespacing, i.e. to reduces the number of global variables</dt>
+			<dt>used to organize the code in a consistent manner,</dt>
+		</dl>
+	</section>
+	<section><h3>caching the singular instance</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// check for existing instance
+				if (typeof Car.instance === "object"){
+					return Car.instance;
+				}
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// cache the instance
+				Car.instance = this;
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+	<section><h3>Instance in a Closure: rewrite the Constructor</h3>
+		<pre><code rel="JS" class="js">
+			function Car(name, speed) {
+				// cache the instance
+				var instance = this;
+
+				// set instance properties
+				this.name = name || 'Car';
+				this.speed = speed || 180;
+
+				// rewrite the constructor
+				Car = function(){
+					return instance;
+				};
+			}
+
+			// lets try to create 2 instances
+			var car1 = new Car('car1', 200);
+			var car2 = new Car('car2', 300);
+
+			// test if we have ONLY ONE instance:
+			console.log(car1 === car2);
+		</code></pre>
+	</section>
+</section>
+<section data-notes="2h"><h2>The Builder Pattern</h2>
+	<section><h3>about</h3>
+		<dl class="fa">
+			<dt>Avoids this issue by centralizing the logic necessary to build the object</dt>
+			<dt>Different concrete builders can be plugged into the builder to construct different complicated objects</dt>
+			<dt>The goal is to separate the object creation (or initialization) logic from the representation.</dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/Builder_UML_class_diagram.svg.png"><img src="images/Builder_UML_class_diagram.svg.png"></a>
+		<dl class="fa" style="font-size: .7em">
+			<dt><span class="note">Director</span>: controls the algorithm that generates the final product object.</dt>
+			<dt><span class="note">Builder</span>: defines the abstract steps that must be taken in order to create a product.In JavaScript the Builder is not separated clearly and in some cases can be omitted</dt>
+			<dt><span class="note">Concrete Builders</span>: implements the real object creation. Concrete Builders can use Factories for building parts of the final object</dt>
+			<dt><span class="note">Product</span>: the complex object that is to be generated by the builder pattern.</dt>
+		</dl>
+	</section>
+</section>
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	<p>These slides are based on</p>
+	<p>customised version of </p>
+	<p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	<p>framework</p>
+</section>
 <!--
 ########################################################
 ##################### SLIDES END   #####################

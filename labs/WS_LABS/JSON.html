@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>xml</title>
+
+</head>
+<body>
+	<div class="gitHubOut"></div>
+	<a href="https://api.github.com/users/Microsoft/repos">Microsoft/repos</a>
+</body>
+<script type="text/javascript">
+	var gitHubURL = 'https://ai.github.com/users/Microsoft/repos';
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET',gitHubURL,false);
+	xhr.send();
+
+	console.log(`RESPONSE: ${xhr.responseText}`);
+
+
+
+
+
+
+
+	var gitHubUserData = {
+	};
+
+	var gitHubProcessApp = {
+		nodes: {
+			gitHubOut: ()=>document.getElementsByName('gitHubOut'),
+		},
+		render:function(){
+			this.nodes.gitHubOut.innerHTML = `
+				<span>${gitHubUserData.login}</span>:
+				<span>${gitHubUserData.public_repos}</span>
+			`
+		}
+	};
+
+	gitHubProcessApp.render();
+
+
+
+</script>
+</html>

@@ -79,7 +79,6 @@
 		lyricText: document.querySelector('.lyrics>pre'),
 	};
 	var atachEvents = function() {
-		console.dir(nodes.PicturesOfYouImg);
 		nodes.PicturesOfYouImg.addEventListener('click',  showLyrics(1) )
 		nodes.HeyYouImg.addEventListener('click',  showLyrics(2) )
 		nodes.CharlotteSomethimesImg.addEventListener('click',  showLyrics(3) )
@@ -87,7 +86,6 @@
 
 	var showLyrics = function(id){
 		return function(){
-			console.log(`make AJAX`);
 			AJAX.getByXHR({
 				url: lyricsURLs[id-1],
 				callback: renderHTML,
@@ -96,9 +94,6 @@
 	};
 
 	var renderHTML = function(str){
-		console.log(`render HTML`);
-		// console.log(`str=${str}`);
-		console.dir(nodes.lyricText);
 		nodes.lyricText.innerHTML = str;
 	}
 

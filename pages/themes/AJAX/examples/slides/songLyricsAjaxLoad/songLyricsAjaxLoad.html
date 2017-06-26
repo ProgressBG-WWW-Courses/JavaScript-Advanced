@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>songLyricsAjaxLoad</title>
+	<style type="text/css">
+		html, body{
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+		main{
+			height: 100%;
+			background: #666;
+		}
+		.songSelectWrapper{
+			height: 20vh;
+			text-align: center;
+		}
+		.songSelectWrapper>img{
+			width: 20vh;
+			height: 20vh;
+			margin: 0 2vh 0 0;
+			box-sizing: border-box;
+		}
+		.songSelectWrapper>img:hover{
+			cursor: pointer;
+			border: 1px solid #ddd;
+		}
+		.lyricsWrapper{
+			min-height: 80vh;
+			font-size: 1.5em;
+			padding: 1em 0 0 0;
+			background:#CCC;
+			color: #6E008C;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<main>
+	<div class="songSelectWrapper">
+		<img src="images/theCure-PicturesOfYou.jpg">
+		<img src="images/floyd_HeyYou.jpg">
+		<img src="images/theCure-CharlotteSometimes.jpg">
+	</div>
+	<div class="lyricsWrapper">
+		<div class="song"></div>
+		<div class="artist"></div>
+		<div class="lyrics">
+			<pre></pre>
+		</div>
+	</div>
+</main>
+</body>
+<script type="text/javascript">
+	var AJAX = {
+		getByXHR: function(args){
+			var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
+							new ActiveXObject("Microsoft.XMLHTTP");
+
+			xhr.open("GET", args.url, true);
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					args.callback(this.responseText);
+				};
+			};
+
+			xhr.send();
+		},
+	};
+
+	var lyricsURLs = ['data/pictures_of_you.txt', 'data/hey_you.txt','data/charlotte_sometimes.txt' ];
+
+	var nodes =  {
+		PicturesOfYouImg:document.querySelector('img:nth-of-type(1)'),
+		HeyYouImg:document.querySelector('img:nth-of-type(2)'),
+		CharlotteSomethimesImg:document.querySelector('img:nth-of-type(3)'),
+		lyricText: document.querySelector('.lyrics>pre'),
+	};
+	var atachEvents = function() {
+		console.dir(nodes.PicturesOfYouImg);
+		nodes.PicturesOfYouImg.addEventListener('click',  showLyrics(1) )
+		nodes.HeyYouImg.addEventListener('click',  showLyrics(2) )
+		nodes.CharlotteSomethimesImg.addEventListener('click',  showLyrics(3) )
+	};
+
+	var showLyrics = function(id){
+		return function(){
+			console.log(`make AJAX`);
+			AJAX.getByXHR({
+				url: lyricsURLs[id-1],
+				callback: renderHTML,
+			} )
+		}
+	};
+
+	var renderHTML = function(str){
+		console.log(`render HTML`);
+		// console.log(`str=${str}`);
+		console.dir(nodes.lyricText);
+		nodes.lyricText.innerHTML = str;
+	}
+
+
+	atachEvents();
+</script>
+</html>

@@ -29,9 +29,9 @@ var events = {
 var myApp = {
 	TODOlist:(function(self={}){
 		var items = [
-			{content: 'item1', checked: false },
-			{content: 'item2', checked: true },
-			{content: 'item3', checked: false },
+			{content: 'TASK item1', checked: false },
+			{content: 'TASK item2', checked: true },
+			{content: 'TASK item3', checked: false },
 		];
 		var nodes = {};
 		var itemTemplate = `

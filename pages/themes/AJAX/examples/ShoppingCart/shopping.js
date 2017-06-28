@@ -4,7 +4,7 @@
 
 var myModule = (function () {
     var mainDiv = document.getElementById("mainDiv");
-    var firstDiv = document.getElementById("cartProduct");
+    var firstDiv = document.getElementById("cartProducts");
     var totalSum = document.getElementById("totalSum");
     var totalSumTax = document.getElementById("totalSumTax");
     var arr=[];

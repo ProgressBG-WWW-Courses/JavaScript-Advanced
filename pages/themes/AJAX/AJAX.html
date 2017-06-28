@@ -98,62 +98,169 @@
 			<dd>the use of JavaScript and HTML DOM (to display or use the data)</dd>
 		</dl>
 	</section>
-	<section><h3>example: songs lyrics</h3>
-		<a href="examples/slides/songLyricsAjaxLoad/songLyricsAjaxLoad.html">Load Song Lyrics By AJAX</a>
-	</section>
 </section>
 
-<section><h2>XMLHttpRequest object</h2>
+<section><h2>the XMLHttpRequest object</h2>
 	<section>
 		<a href="https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest">XMLHttpRequest at MDN</a>
 	</section>
-</section>
-<section><h2>Create HTTP request with XMLHttpRequest</h2>
-	<section><h3>fetch data by XHR</h3>
+	<section><h3>Simple example</h3>
+		<pre><code rel="HTML" class="html">
+			<button class="getDataBtn">Get data</button>
+			<div class="output"></div>
+		</code></pre>
+		<p>An empty DIV in which the data will be load, after the button click.</p>
+		<p>Note, that only the DIV content will be updated!</p>
+	</section>
+	<section><h3>Simple example</h3>
 		<pre><code rel="JS" class="js">
-			var fetchByXHR = {
-				get: function(url){
-					var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
-									new ActiveXObject("Microsoft.XMLHTTP");
-
-					xhr.open("GET", url, true);
-					xhr.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							renderHTML(this.responseText);
-						};
-					};
-
-					xhr.send();
-				},
+			var nodes={
+				output:  document.getElementsByClassName('output')[0],
+				getDataBtn: document.getElementsByClassName('getDataBtn')[0],
 			};
+
+			var dataURL = 'loremIpsum.txt';
+
+			var AJAXcall = function(){
+				// create a XMLHttpRequest object
+				var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
+								new ActiveXObject("Microsoft.XMLHTTP");
+
+				// initializes the request:
+				xhr.open("GET", dataURL, true);
+
+				// EventHandler, that will be fired each time when the xhr state changes
+				xhr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						// finally do something with content:
+						nodes.output.innerHTML = this.responseText;
+					};
+				};
+
+				// sends the request:
+				xhr.send();
+			};
+
+			nodes.getDataBtn.addEventListener('click', function(){
+				AJAXcall();
+			});
 		</code></pre>
 	</section>
 </section>
-<section><h2>Create HTTP request by the Fetch API</h2>
+
+<section><h2>the Fetch API</h2>
+	<section>
+		<dl class="fa">
+			<dt>The Fetch API provides an interface for fetching resources, similar to the XMLHttpRequest, but the new API provides a more powerful and flexible feature set.</dt>
+			<dt>Fetch APIs use the concept of <a href="https://www.sitepoint.com/overview-javascript-promises/">promises</a> in JavaScript</dt>
+			<dt>As Fetch APIs are "A modern replacement for XMLHttpRequest", do think about the browser compatibility: <a href="http://caniuse.com/#feat=fetch">caniuse.com: fetch</a></dt>
+		</dl>
+	</section>
 	<section>
 		<a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API">Fetch API at MDN</a>
 	</section>
 	<section><h3>fetch by <code>fetch</code></h3>
 		<pre><code rel="JS" class="js">
-			fetch(url).then(function (response) {
-				response.text().then(function (responseText) {
-					renderHTML(responseText);
-				});
-			});
+			fetch(url)
+				.then(function (response){
+					return response.text();
+				})
+				.then(function (responseText){
+					// do something with responseText
+					nodes.output.innerHTML = responseText;
+				})
 		</code></pre>
 		<p class="note">Async by promises!</p>
 	</section>
+	<section><h3>with error checks</h3>
+		<pre><code rel="JS" class="js">
+			fetch(url)
+				.then(function (response) {
+					if( response.text){
+						return response.text();
+					}else{
+						throw new Error("No response.text")
+					}
+				})
+				.then(function (responseText) {
+					// renderHTML(responseText);
+					nodes.output.innerHTML = responseText;
+				})
+				.catch( function(error){
+					console.error('Upss, an error occurred');
+					console.error(error.message);
+				});
+		</code></pre>
+	</section>
+	<section><h3>More on <code>response</code> interface</h3>
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">Response interface at MDN</a>
+	</section>
 </section>
+
 <section><h2>Create HTTP request with jQuery</h2>
 	<section>
 		<a href="https://www.w3schools.com/jquery/jquery_ajax_get_post.asp">jQuery - AJAX get() and post() Methods at w3schools</a>
 		<a href="https://www.w3schools.com/jquery/jquery_ref_ajax.asp">jQuery AJAX Methods Reference at w3schools</a>
 	</section>
+	<section><h3>simple get() example</h3>
+		<pre><code rel="HTML" class="html">
+			&lt;head&gt;
+					&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+				&lt;button class=&quot;getDataBtn&quot;&gt;Get data&lt;/button&gt;
+				&lt;div class=&quot;output&quot;&gt;&lt;/div&gt;
+			&lt;/body&gt;
+		</code></pre>
+		<pre><code rel="JS" class="js">
+			$(".getDataBtn").click(function(){
+				$.get(dataURL, function(data, status){
+					// do something with data:
+					$(".output").html(data);
+				});
+			});
+		</code></pre>
+	</section>
+	<section><h3>simple load() example</h3>
+		<pre><code rel="HTML" class="html">
+			&lt;head&gt;
+					&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+			&lt;/head&gt;
+			&lt;body&gt;
+				&lt;button class=&quot;getDataBtn&quot;&gt;Get data&lt;/button&gt;
+				&lt;div class=&quot;output&quot;&gt;&lt;/div&gt;
+			&lt;/body&gt;
+		</code></pre>
+		<pre><code rel="JS" class="js">
+			$(".getDataBtn").click(function(){
+				$(".output").load(dataURL);
+			});
+		</code></pre>
+	</section>
 </section>
 <section><h2>Examples</h2>
-	<section>
+	<section><h3>example: songs lyrics</h3>
+		<a href="examples/slides/songLyricsAjaxLoad/songLyricsAjaxLoad.html">Load Song Lyrics By AJAX</a>
+	</section>
+	<section><h3>Task: songs lyrics</h3>
+		<dl class="fa">
+			<dt>Create a similar page, with your favorite artists and songs</dt>
+			<dt>For getting the lyrics data, use the three approaches for making AJAX requests:</dt>
+			<dd>by XMLHttpRequest object</dd>
+			<dd>by Fetch APIs</dd>
+			<dd>by jQuery get() or load() methods</dd>
+		</dl>
+	</section>
+	<section><h3>example: simple Shopping Cart</h3>
 		<a href="examples/ShoppingCart/index.html">Shopping Cart</a>
-		<p>made by Martin Harsovski</p>
+		<p>* created by Martin Harsovski *</p>
+	</section>
+	<section><h3>task: simple Shopping Cart</h3>
+		<dl class="fa">
+			<dt>Create the simple Shopping Cart page by yourself, with the similar functionality, but <span class="note">fix the bug</span> of products disappearing from list after being added to shopping cart. Instead, fade them a little by css.</dt>
+			<dt>You can use the Martin's html and css (<a href="/downloads/ShoppingCartMartinBase.zip">ShoppingCartMartinBase.zip</a>), or create your own style.</dt>
+			<dt>The products are generated dynamically, using the information in <code><a href="">products.json</a> file</code></dt>
+		</dl>
 	</section>
 </section>
 

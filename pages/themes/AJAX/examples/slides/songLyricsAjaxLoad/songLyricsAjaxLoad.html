@@ -53,56 +53,5 @@
 	</div>
 </main>
 </body>
-<script type="text/javascript">
-	var AJAX = {
-		getByXHR: function(args){
-			var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
-							new ActiveXObject("Microsoft.XMLHTTP");
-
-			xhr.open("GET", args.url, true);
-			xhr.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					args.callback(this.responseText);
-				};
-			};
-
-			xhr.send();
-		},
-	};
-
-	var lyricsURLs = ['data/pictures_of_you.txt', 'data/hey_you.txt','data/charlotte_sometimes.txt' ];
-
-	var nodes =  {
-		PicturesOfYouImg:document.querySelector('img:nth-of-type(1)'),
-		HeyYouImg:document.querySelector('img:nth-of-type(2)'),
-		CharlotteSomethimesImg:document.querySelector('img:nth-of-type(3)'),
-		lyricText: document.querySelector('.lyrics>pre'),
-	};
-	var atachEvents = function() {
-		console.dir(nodes.PicturesOfYouImg);
-		nodes.PicturesOfYouImg.addEventListener('click',  showLyrics(1) )
-		nodes.HeyYouImg.addEventListener('click',  showLyrics(2) )
-		nodes.CharlotteSomethimesImg.addEventListener('click',  showLyrics(3) )
-	};
-
-	var showLyrics = function(id){
-		return function(){
-			console.log(`make AJAX`);
-			AJAX.getByXHR({
-				url: lyricsURLs[id-1],
-				callback: renderHTML,
-			} )
-		}
-	};
-
-	var renderHTML = function(str){
-		console.log(`render HTML`);
-		// console.log(`str=${str}`);
-		console.dir(nodes.lyricText);
-		nodes.lyricText.innerHTML = str;
-	}
-
-
-	atachEvents();
-</script>
+<script type="text/javascript" src="songLyricsAjaxLoad.js"></script>
 </html>

@@ -1,4 +1,3 @@
-// https://github.com/ProgressBG-JavelinGroup/SSJS()
 (function(){
 	var aux = {
 		attachQueryParams: function(params){
@@ -58,11 +57,13 @@
 		},
 	}
 	var fetchByFetch = function(url){
-  	fetch(url).then(function (response) {
-	      response.text().then(function (responseText) {
-	        renderHTML(responseText);
-	      });
-	    });
+	  	fetch(url)
+			.then(function (response) {
+				return response.text();
+			})
+			.then(function (responseText) {
+				renderHTML(responseText);
+			})
 	};
 	var gitHubAPI = {
 		gitApiUrl:'https://api.github.com',
@@ -86,7 +87,7 @@
 			fetchByXHR.get(encodeURI(URL));
 		},
 		searchUsers:function(params){
-			var URL = this.gitApiUrl+'search/users';
+			var URL = this.gitApiUrl+'/search/users';
 
 			// if (params){
 			// 	URL += aux.attachQueryParams(params);
@@ -116,8 +117,8 @@
 	}
 
 	var init = (function(){
-		var githubUser = 'ericdouglas';
+		var githubUser = 'Angular';
 		// gitHubAPI.listUserRepos(githubUser,{type:'owner', sort:'updated'});
-		gitHubAPI.searchUsers({q:'language:javascript location:russia'});
+		gitHubAPI.listUserRepos(githubUser,{type:'owner', sort:'updated'});
 	})();
 })();

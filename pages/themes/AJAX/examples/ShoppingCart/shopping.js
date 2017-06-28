@@ -72,7 +72,9 @@ var myModule = (function () {
 
     }
 
-    getXmlHttpRequest("products.json",createElement);
+    var productsURL = 'https://github.com/ProgressBG-WWW-Courses/JavaScript-Advanced/blob/gh-pages/downloads/products.json';
+
+    getXmlHttpRequest(productsURL,createElement);
     addAllListeners();
     return{
         getXmlHttpRequest:getXmlHttpRequest,

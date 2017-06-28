@@ -1,0 +1,1 @@
+http://api.chartlyrics.com/apiv1.asmx/SearchLyricText?lyricText=dark%20side%20of%20the%20moon

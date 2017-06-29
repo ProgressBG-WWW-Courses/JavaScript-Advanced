@@ -1,6 +1,6 @@
 var AJAX = {
 	getByXHR: function(args){
-		// create a XMLHttpRequest object
+		// create an XMLHttpRequest object
 		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() :
 						new ActiveXObject("Microsoft.XMLHTTP");
 
@@ -17,11 +17,26 @@ var AJAX = {
 		// sends the request:
 		xhr.send();
 	},
+	getByFetch: function(args){
+		fetch(args.url)
+			.then(function (response) {
+				if( response.text){
+					return response.text();
+				}else{
+					throw new Error("No response.text")
+				}
+			})
+			.then(function (responseText) {
+				// do something with response.text
+				args.fn(responseText);
+			})
+			.catch( function(error){
+	        		console.error(error.message);
+			});
+	},
 };
 
-
-var lyricsURLs = ['data/pictures_of_you.txt', 'data/hey_you.txt','data/charlotte_sometimes.txt' ];
-
+// in real app, these data should come as a JSON by some service
 var dataSourcesTriggers = [
 	{
 		url: 'data/charlotte_sometimes.txt',
@@ -37,7 +52,6 @@ var dataSourcesTriggers = [
 	}
 ];
 
-
 var lyricsOutputNode= document.querySelector('.lyricsWrapper pre');
 
 var atachEvents = function() {
@@ -50,7 +64,7 @@ var atachEvents = function() {
 
 var updateContentHandler  = function(url, node){
 	return function(){
-		AJAX.getByXHR( {
+		AJAX.getByFetch( {
 			url: url,
 			fn: function(content){
 				node.innerHTML = content;
@@ -58,8 +72,5 @@ var updateContentHandler  = function(url, node){
 		} );
 	}
 }
-
-// nodes.getDataBtn.addEventListener('click', updateContentHandler(url, nodes.output) );
-
 
 atachEvents();

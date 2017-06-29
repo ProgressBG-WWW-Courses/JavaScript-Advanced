@@ -46,7 +46,7 @@ var FetchCallStructures = function(url){
 			console.log(data);
 		}).
 		catch( function(error){
-			console.error('An error occured');
+			console.error('An error occurred');
         		console.error(error.message);
 		});
 }

@@ -51,6 +51,10 @@ code[rel="css"]::before{
 code[rel="JS"]::before{
 	background: rgba(240, 219, 79, .5);
 }
+code[rel="Terminal"]::before{
+	background: rgba(0,0,0, .6);
+	color: #FFF;
+}
 code:first-line{
 	line-height: 1em;
 }

@@ -30,6 +30,16 @@ var showPage = function(id){
 
 	// show page
 	nodes[id].style.display = "block";
+
+	// get content by AJAX
+	AJAX.getByFetch( {
+		url: pagesContent[id],
+		fn: function(content){
+			nodes[id].innerHTML = content;
+		}
+	} );
 }
+
+
 
 window.addEventListener("hashchange", hashChangeHandler, false);

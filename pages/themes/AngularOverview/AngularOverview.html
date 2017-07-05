@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>AngularIntro</title>
+	<title>Angular Overview</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -135,7 +135,10 @@
 	<section><h3>ng completions</h3>
 		<p>Auto-completions for ng commands. To install in Windows:</p>
 		<pre><code rel="Terminal" class="shell">
-			ng completion --bash >> ~/.bash_profile
+			# appends the completions at the end of bash-profile
+			ng completion --bash |cat >> ~/.bash_profile
+
+			# activate completions immediately, or just restart the terminal
 			source ~/.bash_profile
 		</code></pre>
 		<p>Now when you start typing ng something in you terminal, and hit tab, the command will be auto-completed</p>
@@ -204,8 +207,8 @@
 				├── styles.css*
 				├── tsconfig.app.json*
 				└── typings.d.ts*
-
 		</code></pre>
+		<p>will be discussed in next lectures</p>
 	</section>
 	<section><h3>Run it (ng serve)</h3>
 		<p>To run the Hello World app, open a GitBash into the HowdyWorld/ folder and type:</p>
@@ -221,6 +224,27 @@
 			# some debug messages,
 			# and finally:
 			webpack: Compiled successfully.
+		</code></pre>
+	</section>
+</section>
+<section><h2><b>ng new</b> options</h2>
+	<section>
+		<dl class="fa">
+		<dt>--dry-run (default: false) </dt>
+		<dd>Run through without making any changes. Will list all files that would have been created when running "ng new".</dd>
+		<dt>--skip-git (default: false) </dt>
+		<dd>Skip initializing a git repository.</dd>
+		<dt>--skip-tests (default: false)</dt>
+		<dd>Skip creating spec files.</dd>
+		<dt>--minimal (default: false) </dt>
+		<dd>Should create a minimal app.</dd>
+	</dl>
+	</section>
+	<section>
+		<p>All options: </p>
+		<pre><code rel="Terminal" class="shell">
+			# list all ng new options
+			ng help new
 		</code></pre>
 	</section>
 </section>

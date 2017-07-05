@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>SPA_intro</title>
+	<title>Angular Basics</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -44,7 +44,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>Introduction to SPA</h1></section>
+<section><h1>The basics of Angular Platform</h1></section>
 <section data-transition="zoom">
 	<div class="copyright">
 		<div class="note">
@@ -62,43 +62,157 @@
 	</div>
 </section>
 
-<section data-notes="20min"><h2>What is SPA</h2>
-	<section>
-		<p style="font-size: 1.7em;"><abbr>SPA</abbr><dfn id="SPA"><span>Single</span><span>Page</span><span>Application</span></dfn></p>
-		<p>SPA is a web application or web site  that load a single HTML page and dynamically update only needed part of the page as the user interacts with the app.</p>
-		<p>SPAs use JavaScript, AJAX and HTML5 to create fluid and responsive Web apps, without constant page reloads.</p>
-	</section>
-	<section>
-		<a href="images/SPAvsTraditionalPageLoad.png"><img src="images/SPAvsTraditionalPageLoad.png"></a>
+<section data-notes="20min"><h2>Angular Architecture</h2>
+	<section><h3>Overview</h3>
+		<a href="images/AngularArchitecture.png"><img src="images/AngularArchitecture.png"></a>
 	</section>
 </section>
-<!-- <section><h3>SPA: pros and cons</h3>
-<dl class="fa">
-	<dt>The goal is to provide a user experience similar to that of a desktop application.</dt>
-</dl>
-</section -->
-<section><h2>SPA frameworks</h2>
+<section><h2>The Building Blocks</h2>
 	<section>
 		<dl class="fa">
-			<dt>AngularJS/Angular</dt>
-			<dt>Ember.js</dt>
-			<dt>Meteor.js</dt>
-			<dt>Knockout.js</dt>
-			<dt>many others...</dt>
+			<dt>Module</dt>
+			<dt>Component</dt>
+			<dt>Metadata</dt>
+			<dt>Template</dt>
+			<dt>Data Binding</dt>
+			<dt>Directives</dt>
+			<dt>Services</dt>
 		</dl>
 	</section>
 </section>
-<section><h2>SPA Applications</h2>
+<section><h2>Modules</h2>
+	<section>
+		<a href="images/ModuleDiagram.png"><img src="images/ModuleDiagram.png"></a>
+	</section>
 	<section>
 		<dl class="fa">
-			<dt>Gmail</dt>
-			<dt>Google Maps</dt>
-			<dt>Facebook</dt>
-			<dt>GitHub</dt>
-			<dt>many others...</dt>
+			<dt>Angular apps are modular and Angular has its own modularity system called Angular modules or <span class="note">NgModules</span>.</dt>
+			<dt>Every Angular app has at least one Angular module class, the root module, conventionally named AppModule.</dt>
+			<dt>An NgModule is a class, decorated with the @NgModule decorator function <a href="../AngularConceptsAppendix/AngularConceptsAppendix.html#Decorators">*</a>.</dt>
+		</dl>
+	</section>
+	<section><h3>the AppModule - basic</h3>
+		<p>(src/app/app.module.ts)</p>
+		<pre><code rel="TypeScript" class="typescript	">
+			@NgModule({
+				declarations: [
+					AppComponent
+				],
+				imports: [
+					BrowserModule
+				],
+				providers: [],
+				bootstrap: [AppComponent]
+			})
+			export class AppModule { }
+		</code></pre>
+	</section>
+	<section>
+		<dl class="fa" style="font-size: .8em">
+			<dt><span class="note">declarations</span> - the view classes that belong to this module. Angular has three kinds of view classes: components, directives, and pipes.</dt>
+			<dt><span class="note">exports</span> - the subset of declarations that should be visible and usable in the component templates of other modules.</dt>
+			<dt><span class="note">imports</span> - other modules whose exported classes are needed by component templates declared in this module.</dt>
+			<dt><span class="note">providers</span> - creators of services that this module contributes to the global collection of services; they become accessible in all parts of the app.</dt>
+			<dt><span class="note">bootstrap</span> - the main application view, called the root component, that hosts all other app views. Only the root module should set this bootstrap property.</dt>
+		</dl>
+	</section>
+	<section><h3>the AppModule</h3>
+		<a href="images/ModuleCodeExample.png"><img src="images/ModuleCodeExample.png"></a>
+	</section>
+</section>
+<section><h2>Components</h2>
+	<section>
+		<dl class="fa">
+			<dt>An Angular App is conceptually divided into components</dt>
+			<dt>Each component controls a patch of screen called a <span class="note">view</span>.</dt>
+			<dt>If you have a background in AngularJS, Components  are the new version of directives.</dt>
+		</dl>
+	</section>
+	<section>
+		<a href="images/ComponentCodeExample.png"><img src="images/ModuleCodeExample.png"></a>
+	</section>
+	<section>
+		<a href="images/ComponentTODOStructure.png"><img src="images/ComponentTODOStructure.png"></a>
+	</section>
+	<section><h3>Create Components by CLI</h3>
+		<pre><code rel="Terminal" class="shell">
+			ng generate component todos
+
+			# output
+			installing component
+					create src/app/todos/todos.component.css
+					create src/app/todos/todos.component.html
+					create src/app/todos/todos.component.spec.ts
+					create src/app/todos/todos.component.ts
+					update src/app/app.module.ts
+		</code></pre>
+	</section>
+	<section>
+		<pre><code rel="Terminal" class="shell">
+			tree -F app/
+			app/
+			├── app.component.css
+			├── app.component.html
+			├── app.component.ts
+			├── app.module.ts
+			└── todos/
+				├── todos.component.css
+				├── todos.component.html
+				├── todos.component.spec.ts
+				└── todos.component.ts
+
+		</code></pre>
+	</section>
+	<section><h3>Loading the "todos" Component</h3>
+		<pre><code rel="JS" class="js">
+			@Component({
+				selector: 'app-todos', // this is what we need
+				templateUrl: './todos.component.html',
+				styleUrls: ['./todos.component.css']
+			})
+		</code></pre>
+		<p>put an <code>&lt;app-todos&gt;&lt;/app-todos&gt;</code> element in the parent component (app.component.html in our case)</p>
+	</section>
+	<section><h3>Adding Data to the Component</h3>
+		<pre><code rel="JS" class="js">
+			export class TodoItemComponent implements OnInit {
+				itemName: string; // <-- added itemName property
+								     // will be bound to {{itemName}} in template
+
+				constructor() {
+					this.itemName = 'This is my first TODO Item'
+				}
+
+				ngOnInit() {
+				}
+			}
+		</code></pre>
+	</section>
+</section>
+<section><h2>Templates</h2>
+	<section>
+		<dl class="fa">
+			<dt>Each <span class="note">component view</span> is defined in its companion <span class="note">template</span></dt>
+			<dt>In Angular, the component plays the part of the controller/viewmodel, and the template represents the view.</dt>
+			<dt>An angular template looks like HTML, but follows the <a href="https://angular.io/guide/template-syntax">Angular Template Syntax</a></dt>
 		</dl>
 	</section>
 </section>
+<section><h2>Metadata</h2>
+	<section>
+
+	</section>
+</section>
+<section><h2>Data Bindings</h2>
+	<section></section>
+</section>
+<section><h2>Directives</h2>
+	<section></section>
+</section>
+<section><h2>Services</h2>
+	<section></section>
+</section>
+
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>

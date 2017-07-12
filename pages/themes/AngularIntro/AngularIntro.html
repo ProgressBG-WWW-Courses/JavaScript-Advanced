@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Angular Overview</title>
+	<title>Angular Intro</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -80,21 +80,32 @@
 		<p><span class="note">AngularJS</span> is a front-end web application <span class="note">framework</span>!</p>
 		<p><span class="note">Angular</span> is a <span class="note">platform</span> that allows you to develop fast and scalable applications for web, mobile web, native mobile and even native desktop.</p>
 	</section>
-	<section>
-		<p  style="font-size: 2em" class="note">Angular + TypeScript = <3</p>
-		<p>TypeScript is an open-source language, backed up by Microsoft,  for application-scale JavaScript development. It is a typed superset of JavaScript that compiles to plain JavaScript.</p>
-		<p>You can use TypeScript for your angular apps.</p>
-		<p><a href="https://vsavkin.com/writing-angular-2-in-typescript-1fa77c78d8e8">Angular: Why TypeScript?</a></p>
-	</section>
 	<section><h3>Versions and time-line</h3>
 		<dl class="fa">
 			<dt><a href="https://angularjs.org/">AngularJS</a></dt>
 			<dd>Initial release: v1.0.0 / October 20, 2010. </dd>
 			<dd>Current release: v1.6.4 / March 31, 2017</dd>
 			<dt><a href="https://angular.io/">Angular</a></dt>
+			<dd>A complete rewrite of AngularJS!</dd>
 			<dd><a href="http://angularjs.blogspot.bg/2016/09/angular2-final.html">Initial release:  v.2.0.0</a> / September 14, 2016</dd>
 			<dd><a href="http://angularjs.blogspot.bg/2017/03/">v4.0.0 (no v3)</a> / 23.03.2017</dd>
 			<dd><a href="http://angularjs.blogspot.bg/2017/06/angular-42-now-available.html">Latest release:  v4.2.0 </a>/ June 12, 2017</dd>
+		</dl>
+	</section>
+	<section><h3>Angular + TypeScript</h3>
+		<dl class="fa">
+			<dt>Angular 2.0 is build entirely in <a href="https://www.typescriptlang.org/index.html">TypeScript</a>, and as a result, using TypeScript with Angular provides a seamless experience. </dt>
+			<dt>Though you can use plain JavaScript for your Angular App, the preferred way is to use TypeScript</dt>
+		</dl>
+		<p><a href="https://vsavkin.com/writing-angular-2-in-typescript-1fa77c78d8e8">Angular: Why TypeScript?</a></p>
+	</section>
+	<section><h3><a href="https://www.typescriptlang.org/index.html">TypeScript</a></h3>
+		<dl class="fa">
+			<dt>TypeScript is an open-source language, backed up by Microsoft</dt>
+			<dt>It is a typed superset of JavaScript that compiles to plain JavaScript.</dt>
+			<dt>TypeScript provides optional static typing, classes and interfaces - i.e. it provides class-based OOP for JavaScript.</dt>
+			<dt>TypeScript supports new ECMAScript standards and compiles them to older ECMAScript versions </dt>
+			<dt><a href="https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support">Enhanced IDE/Editor  support</a></dt>
 		</dl>
 	</section>
 </section>
@@ -144,7 +155,6 @@
 		<p>Now when you start typing ng something in you terminal, and hit tab, the command will be auto-completed</p>
 	</section>
 	<section><h3>typescript</h3>
-		<p>Though we can right Angular applications in pure JavaScript, it's recommended to use TypeScript.</p>
 		<pre><code rel="Terminal" class="shell">
 			npm install -g typescript
 		</code></pre>
@@ -300,7 +310,7 @@
 				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
 				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad()(); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
 				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
 				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
 			]

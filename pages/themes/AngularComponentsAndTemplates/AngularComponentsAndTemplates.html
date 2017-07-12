@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Angular Components And Templates</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Angular Components And Templates</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Създаден за</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+			<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2016-2017,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2>Components</h2>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>An Angular App is a tree of Components.</dt>
+			<dt>Each component controls a patch of screen called a <span class="note">view</span>.</dt>
+			<dt>The fundamental idea behind components: we will teach the browser new tags that have custom functionality.</dt>
+			<dt>If you have a background in AngularJS, Components  are the new version of directives.</dt>
+		</dl>
+	</section>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>The top level Component is the application itself. And that’s what the browser will render when "booting" (a.k.a bootstrapping) the app.</dt>
+			<dt>Components are composable, i.e. larger Components are build from smaller ones.</dt>
+			<dt>When each Component renders, it recursively renders its children Components.</dt>
+		</dl>
+	</section>
+	<section><h3>The Component Tree</h3>
+		<a href="images/AngularComponentTree.png"><img src="images/AngularComponentTree.png"></a>
+	</section>
+	<section><h3>Create Components by CLI</h3>
+		<pre><code rel="Terminal" class="shell">
+			ng generate component todos
+
+			# output
+			installing component
+					create src/app/todos/todos.component.css
+					create src/app/todos/todos.component.html
+					create src/app/todos/todos.component.spec.ts
+					create src/app/todos/todos.component.ts
+					update src/app/app.module.ts
+		</code></pre>
+	</section>
+	<section><h3>The Component files</h3>
+		<pre><code rel="Terminal" class="shell">
+			tree -F app/
+			app/
+			├── app.component.css
+			├── app.component.html
+			├── app.component.ts
+			├── app.module.ts
+			└── todos/
+				├── todos.component.css
+				├── todos.component.html
+				├── todos.component.spec.ts
+				└── todos.component.ts
+		</code></pre>
+	</section>
+	<section><h3>What's in a Component</h3>
+		<dl class="fa">
+			<dt>Component Decorator</dt>
+			<dt>A View</dt>
+			<dt>A Controller</dt>
+		</dl>
+	</section>
+	<section><h3> Component Class</h3>
+		<pre><code rel="JS" class="typescript">
+			import { Component } from '@angular/core';
+			// the Decorator
+			@Component({
+				selector: 'app-root',
+				// the View
+				template: `
+					<h1>
+						Welcome to {{title}}!!
+					</h1>
+				`,
+				styles: []
+			})
+			export class AppComponent {
+				// the Controler
+				title = 'app';
+			}
+		</code></pre>
+	</section>
+	<section><h3>@Component Decorator</h3>
+		<dl class="fa">
+			<dt>With @Component Decorator you mark a class as an Angular component</dt>
+			<dt>You can provide additional metadata that determines how the component should be processed, instantiated and used at runtime</dt>
+		</dl>
+	</section>
+	<section><h3>Using a Component</h3>
+		<dl class="fa">
+			<dt>A component must belong to an NgModule in order for it to be usable by another component or application.</dt>
+			<dt>To specify that a component is a member of an NgModule, you should <span class="note"> list it in the declarations field of that NgModule</span>.</dt>
+		</dl>
+		<pre><code rel="app.module.ts" class="shell">
+			// ...
+			import { TodosComponent } from './todos/todos.component';
+
+			@NgModule({
+				declarations: [
+					AppComponent,
+					TodosComponent // declare our Component as member of NgModule
+				],
+		</code></pre>
+	</section>
+	<section><h3>Component Metadata Properties</h3>
+		<dl class="fa">
+			<dt>animations - list of animations of this component</dt>
+			<dt>changeDetection - change detection strategy used by this component</dt>
+			<dt>encapsulation - style encapsulation strategy used by this component</dt>
+			<dt>entryComponents - list of components that are dynamically inserted into the view of this component</dt>
+		</dl>
+	</section>
+	<section><h3>Component Metadata Properties</h3>
+		<dl class="fa">
+			<dt><span class="note">exportAs</span> - name under which the component instance is exported in a template</dt>
+			<dt><span class="note">host</span> - map of class property to host element bindings for events, properties and attributes</dt>
+			<dt><span class="note">inputs</span> - list of class property names to data-bind as component inputs</dt>
+			<dt><span class="note">interpolation</span> - custom interpolation markers used in this component's template</dt>
+			<dt><span class="note">moduleId</span> - ES/CommonJS module id of the file in which this component is defined</dt>
+		</dl>
+	</section>
+	<section><h3>Component Metadata Properties</h3>
+		<dl class="fa">
+			<dt><span class="note">outputs</span> - list of class property names that expose output events that others can subscribe to</dt>
+			<dt><span class="note">providers</span> - list of providers available to this component and its children</dt>
+			<dt><span class="note">queries</span> - configure queries that can be injected into the component</dt>
+			<dt><span class="note">selector</span> - css selector that identifies this component in a template</dt>
+		</dl>
+	</section>
+	<section><h3>Component Metadata Properties</h3>
+		<dl class="fa">
+			<dt><span class="note">styleUrls</span> - list of urls to stylesheets to be applied to this component's view</dt>
+			<dt><span class="note">styles</span> - inline-defined styles to be applied to this component's view</dt>
+			<dt><span class="note">template</span> - inline-defined template for the view</dt>
+			<dt><span class="note">templateUrl</span> - url to an external file containing a template for the view</dt>
+			<dt><span class="note">viewProviders</span> - list of providers available to this component and its view children</dt>
+		</dl>
+	</section>
+	<section><h3>Component selector</h3>
+		<dl class="fa">
+			<dt>With the selector key, you indicate how your component will be recognized when rendering HTML templates</dt>
+			<dt>The selector is a way to define what elements in the HTML will match this component.</dt>
+			<dt>I.e. this is how you "teach" the browser how to handle new HTML elements!</dt>
+		</dl>
+	</section>
+	<section><h3>Loading the "todos" Component</h3>
+		<pre><code rel="JS" class="js">
+			@Component({
+				selector: 'app-todos', // this is our new HTML element
+				templateUrl: './todos.component.html',
+				styleUrls: ['./todos.component.css']
+			})
+		</code></pre>
+		<p>put an <span class="note">&lt;app-todos&gt;&lt;/app-todos&gt;</span> element in the parent component (app.component.html in our case)</p>
+		<pre><code rel="app.component.html " class="html">
+			<h1>Welcome to {{title}}!</h1>
+			<app-todos></app-todos>
+		</code></pre>
+	</section>
+	<section><h3>Creating sub-components</h3>
+		<p>Let's generate a <span class="note">todos-header</span> component, which should be a child of our <span class="note">todos</span> component</p>
+		<pre><code rel="Terminal" class="shell">
+			# make sure you are somewhere in you App folder
+			pwd
+			# {path}/TODOapp/src/app
+			ng g component todos/header
+
+			# installing component
+			#	create src/app/todos/header/header.component.ts
+		</code></pre>
+	</section>
+	<section><h3>Creating sub-components</h3>
+		<p>Make sure you use your new Component</p>
+		<pre><code rel="header.component.ts" class="shell">
+			@Component({
+				selector: 'todos-header',
+				templateUrl:"header.component.html",
+				styleUrls: ["header.component.css"]
+			})
+		</code></pre>
+
+		<pre><code rel="todos.component.html" class="shell">
+			<section>
+				<h1>The {{title}} section</h1>
+				<todos-header></todos-header>
+			</section>
+		</code></pre>
+		<p class="note">You can freely change the pre-generated selector name - just make sure you use the same tag in the parent template</p>
+	</section>
+	<section><h3>Styling Components</h3>
+		<dl class="fa">
+			<dt>Angular applications are styled with standard CSS</dt>
+			<dt>Additionally, Angular can bundle component styles with components</dt>
+			<dt class="note">The selectors you put into a component's styles apply only within the template of that component! </dt>
+		</dl>
+	</section>
+	<section><h3>Loading component styles</h3>
+		<dl class="fa">
+			<dt>By setting styles or styleUrls metadata.</dt>
+			<dt>Inline in the template HTML.</dt>
+			<dt>With CSS imports.</dt>
+		</dl>
+	</section>
+	<section><h3>Loading component styles by <code>styles</code></h3>
+		<p><code>styles</code> value is an array of strings, each consisting of CSS you want to use with this Component</p>
+		<pre><code rel="todos.component.ts" class="shell">
+			@Component({
+				selector: 'app-todos',
+				templateUrl: "./todos.component.html",
+				// styleUrls: ["todos.component.css"]
+				styles: [`
+					section{
+						width: 80%;
+						height: 80vh;
+						background: #999;
+						border: 1px solid red;
+						box-sizing: border-box;
+					}`]
+			})
+		</code></pre>
+	</section>
+	<section><h3>Loading component styles by <code>styleUrls</code></h3>
+		<p><code>styleUrls</code> value is an array of URLs to the css files you want to include in this Component</p>
+		<pre><code rel="todos.component.ts" class="shell">
+			@Component({
+				selector: 'app-todos',
+				templateUrl: "./todos.component.html",
+				styleUrls: ["todos.component.css"]
+			})
+		</code></pre>
+		<pre><code rel="todos.component.css" class="js">
+			section{
+				width: 80%;
+				height: 80vh;
+				background: #999;
+				border: 1px solid red;
+				box-sizing: border-box;
+			}
+		</code></pre>
+	</section>
+	<section><h3>Adding Data to the Component</h3>
+		<pre><code rel="JS" class="js">
+			export class TodoItemComponent implements OnInit {
+				itemName: string; // <-- added itemName property
+										 // will be bound to {{itemName}} in template
+
+				constructor() {
+					this.itemName = 'This is my first TODO Item'
+				}
+
+				ngOnInit() {
+				}
+			}
+		</code></pre>
+		<p>will be discussed deeply in next sections</p>
+	</section>
+</section>
+<section><h2>Templates</h2>
+	<section>
+		<dl class="fa">
+			<dt>Each <span class="note">component view</span> is defined in its companion <span class="note">template</span></dt>
+			<dt>In Angular, the component plays the part of the controller/viewmodel, and the template represents the view.</dt>
+			<dt>An angular template looks like HTML, but follows the <a href="https://angular.io/guide/template-syntax">Angular Template Syntax</a></dt>
+		</dl>
+	</section>
+</section>
+<section><h2>Data Bindings</h2>
+	<section><h3>Flows</h3>
+		<a href="images/DataBindingFlows.png"><img src="images/DataBindingFlows.png"></a>
+	</section>
+	<section><h3>Two-way data binding</h3>
+		<dl class="fa">
+			<dt>In Angular 1, the default option was two-way data binding.</dt>
+			<dt>Thought, it 's easy to implement it cause a lots of problems (cascading effects, coupling of "data layout tree" and  "dom view tree", etc.)</dt>
+			<dt>The recommended way in Angular 2, and in many modern web frameworks (such as React), is to adopt a pattern of <span class="note">one-way data binding</span></dt>
+		</dl>
+	</section>
+	<section><h3>One-way data binding</h3></section>
+	<section><h3>Types</h3>
+		<a href="images/DataBindingTypes.png"><img src="images/DataBindingTypes.png"></a>
+	</section>
+</section>
+
+<!-- <section id="TODOAPPWithAngularAndMaterial"><h2>TODOAPP with Angular and Material</h2>
+	<section><h3>Get Angular Material Design</h3>
+		<pre><code rel="Terminal" class="shell">
+			npm install --save angular/material2-builds angular/cdk-builds
+		</code></pre>
+	</section>
+	<section><h3>Create new Angular App</h3>
+	<pre><code rel="Terminal" class="shell">
+		ng new --skip-tests TODO
+	</code></pre>
+	</section>
+	<section><h3>Add the MaterialModule in TODO app</h3>
+		<pre><code rel="src/app/app.module.ts" class="js">
+			import { BrowserModule } from '@angular/platform-browser';
+			import { NgModule } from '@angular/core';
+			import { MaterialModule } from '@angular/material'
+
+			import { AppComponent } from './app.component';
+
+			@NgModule({
+				declarations: [
+					AppComponent
+				],
+				imports: [
+					BrowserModule,MaterialModule
+				],
+				providers: [],
+				bootstrap: [AppComponent]
+			})
+			export class AppModule { }
+		</code></pre>
+	</section>
+	<section><h3>Add the Material Theme</h3>
+		<pre><code rel="src/styles.css" class="js">
+			@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+		</code></pre>
+	</section>
+	<section><h3>Load Material Fonts</h3>
+		<pre><code rel="src/index.html" class="js">
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		</code></pre>
+	</section>
+	<section><h3>Adding DialogComponent</h3>
+		<pre><code rel="Terminal" class="js">
+			cd src/app
+
+		</code></pre>
+	</section>
+	<section><h3></h3>
+		<pre><code rel="JS" class="js">
+
+		</code></pre>
+	</section>
+</section> -->
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script> -->
+
+	<script src="../../../outfit/js/slides.js"></script>
+
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	 <!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: 1024,
+			height: 850,
+			// Bounds for smallest/largest possible scale to apply to content
+			// minScale: .5,
+			maxScale: 1,
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+</body>
+</html>

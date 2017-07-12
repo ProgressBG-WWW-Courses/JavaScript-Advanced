@@ -67,7 +67,7 @@
 		<a href="images/AngularArchitecture.png"><img src="images/AngularArchitecture.png"></a>
 	</section>
 </section>
-<section><h2>The Building Blocks</h2>
+<section><h2>The Concepts</h2>
 	<section>
 		<dl class="fa">
 			<dt>Module</dt>
@@ -79,21 +79,33 @@
 			<dt>Services</dt>
 		</dl>
 	</section>
-</section>
-<section><h2>Modules</h2>
 	<section>
-		<a href="images/ModuleDiagram.png"><img src="images/ModuleDiagram.png"></a>
-	</section>
-	<section>
+		<p>An Angular App consists of:</p>
 		<dl class="fa">
-			<dt>Angular apps are modular and Angular has its own modularity system called Angular modules or <span class="note">NgModules</span>.</dt>
-			<dt>Every Angular app has at least one Angular module class, the root module, conventionally named AppModule.</dt>
-			<dt>An NgModule is a class, decorated with the @NgModule decorator function <a href="../AngularConceptsAppendix/AngularConceptsAppendix.html#Decorators">*</a>.</dt>
+			<dt>HTML <span class="note">templates</span> with Angularized markup</dt>
+			<dt><span class="note">Component classes</span>  to manage those templates</dt>
+			<dt><span class="note">Services</span> which implements the application logic</dt>
+			<dt><span class="note">Modules</span>, which box components and services</dt>
 		</dl>
 	</section>
-	<section><h3>the AppModule - basic</h3>
-		<p>(src/app/app.module.ts)</p>
-		<pre><code rel="TypeScript" class="typescript	">
+</section>
+<section><h2>Modules</h2>
+	<section><h3>Diagram</h3>
+		<a href="images/ModuleDiagram.png"><img src="images/ModuleDiagram.png"></a>
+	</section>
+	<section><h3>Overview</h3>
+		<dl class="fa" style="font-size: .9em">
+			<dt>Angular Modulae = a class decorated with @NgModule</dt>
+			<dt>Angular apps are modular and Angular has its own modularity system called Angular modules or <span class="note">NgModules</span>.</dt>
+			<dt>An Angular module class describes how the application parts fit together</dt>
+			<dt>Every application has at least one Angular module, the root module,  that tells Angular how to assemble the application</dt>
+			<dt>Many features of Angular itself are organized as Angular modules (HttpModule, RouterModule, etc. )</dt>
+			<dt>Eventually you may create a feature module.</dt>
+			<dt>An Angular module, whether a root or feature, is a class with an @NgModule <a href="../AngularConceptsAppendix/AngularConceptsAppendix.html#Decorators">decorator</a></dt>
+		</dl>
+	</section>
+	<section><h3>the Root Module (AppModule)</h3>
+		<pre><code rel="src/app/app.module.ts" class="typescript">
 			@NgModule({
 				declarations: [
 					AppComponent
@@ -107,7 +119,7 @@
 			export class AppModule { }
 		</code></pre>
 	</section>
-	<section>
+	<section><h3>NgModule decorator metadata</h3>
 		<dl class="fa" style="font-size: .8em">
 			<dt><span class="note">declarations</span> - the view classes that belong to this module. Angular has three kinds of view classes: components, directives, and pipes.</dt>
 			<dt><span class="note">exports</span> - the subset of declarations that should be visible and usable in the component templates of other modules.</dt>
@@ -116,20 +128,22 @@
 			<dt><span class="note">bootstrap</span> - the main application view, called the root component, that hosts all other app views. Only the root module should set this bootstrap property.</dt>
 		</dl>
 	</section>
-	<section><h3>the AppModule</h3>
-		<a href="images/ModuleCodeExample.png"><img src="images/ModuleCodeExample.png"></a>
-	</section>
 </section>
 <section><h2>Components</h2>
-	<section>
+	<section><h3>Overview</h3>
 		<dl class="fa">
-			<dt>An Angular App is conceptually divided into components</dt>
+			<dt>An Angular App is a tree of Components.</dt>
 			<dt>Each component controls a patch of screen called a <span class="note">view</span>.</dt>
+			<dt>The fundamental idea behind components: we will teach the browser new tags that have custom functionality.</dt>
 			<dt>If you have a background in AngularJS, Components  are the new version of directives.</dt>
 		</dl>
 	</section>
-	<section>
-		<a href="images/ComponentCodeExample.png"><img src="images/ModuleCodeExample.png"></a>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>The top level Component is the application itself. And that’s what the browser will render when “booting” (a.k.a bootstrapping) the app.</dt>
+			<dt>Components are composable, i.e. larger Components are build from smaller ones.</dt>
+			<dt>When each Component renders, it recursively renders its children Components.</dt>
+		</dl>
 	</section>
 	<section>
 		<a href="images/ComponentTODOStructure.png"><img src="images/ComponentTODOStructure.png"></a>
@@ -162,6 +176,13 @@
 				└── todos.component.ts
 
 		</code></pre>
+	</section>
+	<section><h3>What's in a Component</h3>
+		<dl class="fa">
+			<dt>A basic Component has two parts</dt>
+			<dd>A Component annotation</dd>
+			<dd>A component definition class</dd>
+		</dl>
 	</section>
 	<section><h3>Loading the "todos" Component</h3>
 		<pre><code rel="JS" class="js">
@@ -198,9 +219,24 @@
 		</dl>
 	</section>
 </section>
-<section><h2>Metadata</h2>
+<section><h2>Decorators</h2>
 	<section>
-
+		<p>A class in Angular can be  decorated with extra information using the @ syntax</p>
+		<pre><code rel="JS" class="js">
+			@Component({
+				selector: "todos",
+				template: `todos`
+			})
+			class MyComponent {
+			}
+		</code></pre>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>With decorators we can configure and customise our classes at design time.</dt>
+			<dt>They are just functions that can be used to add meta-data, properties or functions to the thing they are attached to.</dt>
+			<dt>This is a new feature that will probably make it into the ES7 version of JavaScript, it’s not available right now however even in the ES6 version. However the functionality is available in TypeScrip.</dt>
+		</dl>
 	</section>
 </section>
 <section><h2>Data Bindings</h2>
@@ -212,6 +248,61 @@
 <section><h2>Services</h2>
 	<section></section>
 </section>
+
+<!-- <section id="TODOAPPWithAngularAndMaterial"><h2>TODOAPP with Angular and Material</h2>
+	<section><h3>Get Angular Material Design</h3>
+		<pre><code rel="Terminal" class="shell">
+			npm install --save angular/material2-builds angular/cdk-builds
+		</code></pre>
+	</section>
+	<section><h3>Create new Angular App</h3>
+	<pre><code rel="Terminal" class="shell">
+		ng new --skip-tests TODO
+	</code></pre>
+	</section>
+	<section><h3>Add the MaterialModule in TODO app</h3>
+		<pre><code rel="src/app/app.module.ts" class="js">
+			import { BrowserModule } from '@angular/platform-browser';
+			import { NgModule } from '@angular/core';
+			import { MaterialModule } from '@angular/material'
+
+			import { AppComponent } from './app.component';
+
+			@NgModule({
+			  declarations: [
+			    AppComponent
+			  ],
+			  imports: [
+			    BrowserModule,MaterialModule
+			  ],
+			  providers: [],
+			  bootstrap: [AppComponent]
+			})
+			export class AppModule { }
+		</code></pre>
+	</section>
+	<section><h3>Add the Material Theme</h3>
+		<pre><code rel="src/styles.css" class="js">
+			@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+		</code></pre>
+	</section>
+	<section><h3>Load Material Fonts</h3>
+		<pre><code rel="src/index.html" class="js">
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		</code></pre>
+	</section>
+	<section><h3>Adding DialogComponent</h3>
+		<pre><code rel="Terminal" class="js">
+			cd src/app
+
+		</code></pre>
+	</section>
+	<section><h3></h3>
+		<pre><code rel="JS" class="js">
+
+		</code></pre>
+	</section>
+</section> -->
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>
@@ -227,7 +318,13 @@
 		</div>
 	</div>
 	<!-- Custom processing -->
+
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script> -->
+
 	<script src="../../../outfit/js/slides.js"></script>
+
 	<!-- external scripts -->
 	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
 	<script src="../../../lib/reveal.js/js/reveal.js"></script>
@@ -259,9 +356,9 @@
 			// Optional reveal.js plugins
 			dependencies: [
 				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad()(); } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
 				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
 				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
 			]

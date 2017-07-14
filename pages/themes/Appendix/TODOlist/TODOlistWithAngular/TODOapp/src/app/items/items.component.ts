@@ -1,18 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
 @Component({
-	selector: '[items]',
+	selector: 'items',
 	templateUrl: "./items.component.html",
 	styleUrls: ["items.component.css"],
 	encapsulation: ViewEncapsulation.Native,
 })
 export class ItemsComponent  {
 	title = 'ItemsComponent';
-	items =  [
-		{content: 'Item1', checked: false },
-		{content: 'Item2', checked: true },
-		{content: 'Item3', checked: false },
-	];
+
+	@Input() items;
 
 	itemClasses = {
 		'red': true,

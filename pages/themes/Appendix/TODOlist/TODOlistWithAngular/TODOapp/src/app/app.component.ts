@@ -9,4 +9,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
 	title = 'TODO app';
+	items =  [
+		{content: 'Item1', checked: false },
+		{content: 'Item2', checked: true },
+		{content: 'Item3', checked: false },
+	];
 }

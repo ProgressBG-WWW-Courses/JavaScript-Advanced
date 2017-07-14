@@ -1,22 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { TodosComponent } from './todos/todos.component';
+import { ItemsComponent } from './items/items.component';
 import { StatsComponent } from './stats/stats.component';
 import { HeaderComponent } from './header/header.component';
-import { TodoComponent } from './todos/todo/todo.component';
+// TODO: check why insists on './'
+import { itemComponent } from './items/item/item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent,
+    ItemsComponent,
     StatsComponent,
     HeaderComponent,
-    TodoComponent
+    itemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

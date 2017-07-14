@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Angular Directives</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Angular Directives</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Създаден за</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+			<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2016-2017,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2><a href="https://angular.io/guide/template-syntax#built-in-directives">Built-in directives Overview</a></h2>
+	<a href="https://angular.io/guide/template-syntax#built-in-directives">angular.io built-in-directives</a>
+</section>
+
+<section><h2><a href="https://angular.io/guide/template-syntax#built-in-attribute-directives">Built-in attribute directives</a></h2>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>An Attribute directive changes the appearance or behavior of a DOM element.</dt>
+			<dt>Attribute directives are used as attributes of elements.</dt>
+			<dt>The built-in NgStyle directive in the Template Syntax guide, for example, can change several element styles at the same time.</dt>
+		</dl>
+	</section>
+	<section><h3>NgClass</h3>
+		<dl class="fa">
+			<dt>Appropriate to change many CSS classes at the same time</dt>
+			<dt>Works by binding ngClass to a <code>key:value</code> object.</dt>
+			<dd>key :  a CSS class name;</dd>
+			<dd>value:  true if the class should be added, false if it should be removed.</dd>
+		</dl>
+	</section>
+	<section><h3>NgClass example</h3>
+		<pre><code rel="CSS" class="css">
+			.red{background: red;}
+			.f2{font-size: 2em;}
+		</code></pre>
+		<pre><code rel="TS" class="js">
+			itemStyles = {
+				'red': true,
+				'f2': true,
+			}
+		</code></pre>
+		<pre><code rel="HTML" class="html">
+			<ul>
+				<li [ngClass]="itemStyles">Test 1</li>
+				<li>Test 2</li>
+			</ul>
+		</code></pre>
+	</section>
+	<section><h3><a href="https://angular.io/guide/template-syntax#ngstyle">NgStyle</a></h3>
+		<dl class="fa">
+			<dt>You can set inline styles dynamically, based on the state of the component.</dt>
+			<dt>With NgStyle you can set many inline styles simultaneously.</dt>
+			<dt>Used as binding ngStyle to a key:value control object</dt>
+			<dd>key: is a style name</dd>
+			<dd>value: a style value</dd>
+		</dl>
+	</section>
+	<section><h3>NgStyle example</h3>
+		<pre><code rel="TS" class="js">
+			itemStyles = {
+				'background': 'yellow',
+				'color': "brown",
+			}
+		</code></pre>
+		<pre><code rel="HTML" class="html">
+			<ul>
+				<li [ngStyle]="itemStyles">Test 2</li>
+			</ul>
+		</code></pre>
+	</section>
+	<section><h3><a href="https://angular.io/guide/template-syntax#ngmodel---two-way-binding-to-form-elements-with-ngmodel">NgModel</a></h3></section>
+</section>
+
+<section><h2><a href="https://angular.io/guide/template-syntax#built-in-structural-directives">Built-in structural directives</a></h2>
+	<section><h3>Overview</h3>
+		<dl class="fa">
+			<dt>Structural directives change the DOM's structure</dt>
+			<dt>With them we can add, remove, or manipulate elements.</dt>
+			<dt>An asterisk (*) always precedes the directive attribute.</dt>
+		</dl>
+	</section>
+	<section><h3><a href="https://angular.io/guide/template-syntax#ngIf">NgIf</a></h3>
+		<dl class="fa">
+			<dt>Add or remove an element from the DOM by applying an NgIf directive to that element (called the host element)</dt>
+		</dl>
+		<pre><code rel="Syntax" class="html">
+			<tag *ngIf="expression which evaluates to true/false"></tag>
+
+			<!-- if expression = true the element would exists in DOM -->
+			<!-- if expression = false the element would NOT exists in DOM -->
+		</code></pre>
+	</section>
+	<section><h3>NgIf example</h3>
+		<pre><code rel="HTML" class="html">
+			<li *ngIf="0">Item 1</li> <!-- do not exists in DOM -->
+			<li *ngIf="1">Item 2</li> <!-- exists in DOM -->
+		</code></pre>
+	</section>
+	<section><h3>NgIf as guard against null values</h3>
+		<pre><code rel="JS" class="js">
+			<!-- what will happens if items[0] did not exists? -->
+			<li  *ngIf="items[0].content">{{items[0].content}}</li>
+
+			<!-- next element want be rendered and no error would be thrown if items[5] did not exists -->
+			<li  *ngIf="items[5]">{{items[5].content}}</li>
+		</code></pre>
+	</section>
+	<section><h3><a href="https://angular.io/guide/template-syntax#ngfor">NgFor</a></h3>
+		<pre><code rel="TS" class="js">
+			items =  [
+				{content: 'Item1', checked: false },
+				{content: 'Item2', checked: true },
+				{content: 'Item3', checked: false },
+			];
+		</code></pre>
+		<pre><code rel="HTML" class="html">
+			<div *ngFor="let item of items">
+				<li>{{item.content}} : {{item.checked}}</li>
+			</div>
+		</code></pre>
+	</section>
+	<section><h3><a href="https://angular.io/guide/template-syntax#the-ngswitch-directives">NgSwitch</a></h3>
+		<p>Self-learning section: <a href="https://angular.io/guide/template-syntax#the-ngswitch-directives">NgSwitch</a></p>
+	</section>
+</section>
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script> -->
+
+	<script src="../../../outfit/js/slides.js"></script>
+
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	 <!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: 1024,
+			height: 850,
+			// Bounds for smallest/largest possible scale to apply to content
+			// minScale: .5,
+			maxScale: 1,
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+</body>
+</html>

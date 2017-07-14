@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Angular Data Binding</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<!-- css & themes include -->
+	<link rel="stylesheet" href="../../../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../outfit/css/themes/projector.css" id="theme">
+	<!-- Printing and PDF exports -->    <script>        var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? '../../../lib/reveal.js/css/print/pdf.css' : '../../../lib/reveal.js/css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+	<!-- CUSTOM -->
+	<base target="_blank">
+</head>
+<body>
+	<div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+		<div class="top_links">
+			<a class="home_link" href="/index.html#Course_Intro" target="_top"><i class="fa fa-home"></i></a>
+			<span class="help_link" href="#"><i class="fa fa-question"></i></span>
+			<div class="help_text">
+				<div><span>N/Space</span><span>Next Slide</span></div>
+				<div><span>P</span><span>Previous Slide</span></div>
+				<div><span>O</span><span>Slides Overview</span></div>
+				<div><span>ctrl+left click</span><span>Zoom Element</span></div>
+			</div>
+		</div>
+		<div class="footer theme_switch">
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/dark.css'); return false;">Dark</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/light.css'); return false;">Light</a>
+			<a href="#" onclick="document.getElementById('theme').setAttribute('href','../../../outfit/css/themes/projector.css'); return false;">Projector</a>
+		</div>
+		<div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>Angular Data Binding</h1></section>
+<section data-transition="zoom">
+	<div class="copyright">
+		<div class="note">
+			<p>Създаден за</p>
+		</div>
+		<div class="company">
+			<a href="http://progressbg.net/kurs-po-web-design/">
+			<img style="height:80%" src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
+			</a>
+		</div>
+		<div class="author">
+			<span>Iva E. Popova, 2016-2017,</span>
+			<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+		</div>
+	</div>
+</section>
+
+<section><h2>Flows</h2>
+	<a href="images/DataBindingFlows.png"><img src="images/DataBindingFlows.png"></a>
+</section>
+<section><h2>Types</h2>
+	<section>
+		<a href="images/DataBindingTypes.png"><img src="images/DataBindingTypes.png"></a>
+	</section>
+	<section>
+	<dl class="fa">
+		<dt>One-way Data Binding</dt>
+		<dd>Interpolation <code class="note">{{value}}</code></dd>
+		<dd>Property binding <code class="note">[property]="value"</code></dd>
+		<dd>Event binding <code class="note">(event)="event handler"</code></dd>
+		<dt>Two-way Data Binding</dt>
+		<dd><code class="note">[(ngModel)]</code></dd>
+	</dl>
+</section>
+</section>
+<section><h2>Two-way data binding</h2>
+	<dl class="fa">
+		<dt>In Angular 1, the default option was two-way data binding.</dt>
+		<dt>Thought, it 's easy to implement it cause a lots of problems (cascading effects, coupling of "data layout tree" and  "dom view tree", etc.)</dt>
+		<dt>The recommended way in Angular 2, and in many modern web frameworks (such as React), is to adopt a pattern of <span class="note">one-way data binding</span></dt>
+	</dl>
+</section>
+<section><h2>Interpolation</h2>
+	<section>
+		<pre><code rel="JS" class="js">
+		import { Component, OnInit } from '@angular/core';
+
+		@Component({
+			selector: 'item',
+			template: `<li>{{title}}</li>`,
+			styles: []
+		})
+		export class itemComponent implements OnInit {
+			title = "Item 1";
+			constructor() { }
+
+			ngOnInit() {
+			}
+		}
+
+		</code></pre>
+	</section>
+	<section>
+		<pre><code rel="Syntax" class="text">
+			{{&lt;expression&gt;}}
+		</code></pre>
+		<dl class="fa">
+			<dt>&lt;expression&gt; is evaluated and its value is placed instead of the {{&lt;expression&gt;}}</dt>
+			<dt>The expression value is always converted to <b>string</b> value</dt>
+		</dl>
+	</section>
+</section>
+<section><h2>Property binding</h2>
+	<section>
+		<p>Sets the <span class="note">DOM property</span> of the element to the value of the template expression.</p>
+		<pre><code rel="JS" class="js">
+			<img [src]="logoPNG">
+			<button [disabled]="allowAddNewItems">Add</button>
+		</code></pre>
+	</section>
+	<section>
+		<p>There are 3 ways to define a property binding in Angular:</p>
+		<pre><code rel="JS" class="js">
+			// method 1
+			<img src="{{ logoPNG }}">
+			// method 2
+			<img [src]="logoPNG">
+			// method 3
+			<img bind-src="logoPNG">
+		</code></pre>
+		<dl class="fa">
+			<dt class="note">Use "interpolation" to define the value, only if the value is a <b>string</b>. If it's not, you must use one of the other methods.</dt>
+		</dl>
+	</section>
+	<section><h3>The preferred way</h3>
+		<p>Method 2 - Define property binding is by wrapping brackets around an element property and binding it to a component property.</p>
+		<p>Method 3 - Adding bind- before the element property also achieves the same thing.</p>
+	</section>
+	<section><h3>Property binding vs. Interpolation Common mistake</h3>
+		<pre><code rel="HTML" class="HTML">
+			<!-- button will be enabled: -->
+			<button [disabled]="false">{{addNewItems}}</button>
+
+			<!-- button will be enabled: -->
+			<button bind-disabled="false">{{addNewItems}}</button>
+
+			<!-- button will be disabled, as "false" is interpreted as string, not boolean: -->
+			<button disabled="{{false}}">Add</button>
+		</code></pre>
+	</section>
+</section>
+<section><h2>Event binding</h2>
+	<section>
+		<dl class="fa">
+			<dt>Allows to react to user interactions</dt>
+			<dt>We can send information <span class="note">from the view to the component class</span>.</dt>
+		</dl>
+		<pre><code rel="Syntax" class="ascii">
+			<button (target_event)="event_handler">Add</button>
+		</code></pre>
+		<dl class="fa">
+			<dt><span class="note">target_event</span> - usually, a native DOM element event, but you can also use a custom events.</dt>
+			<dt><span class="note">event_handler</span> - the Component Method to handle the event.</dt>
+		</dl>
+	</section>
+	<section><h3>Event Target</h3>
+		<dl class="fa">
+			<dt>To capture the event object, pass $event as parameter in the event_handler</dt>
+		</dl>
+		<pre><code rel="HTML" class="html">
+			<input type="text" placeholder="New item..."  (input)="onInput($event)">
+		</code></pre>
+		<pre><code rel="TS" class="js">
+			inputEcho:string;
+			// ...
+			onInput(e){
+				this.inputEcho = e.target.value;
+			}
+		</code></pre>
+	</section>
+</section>
+<section><h2>Two-way Data Binding</h2>
+	<section>
+		<dl class="fa">
+			<dt>Both display a data property and update that property when the user makes changes.</dt>
+			<dt>The two-way binding syntax is just <span class="note">syntactic sugar</span> for a <span class="note">property binding</span> and an <span class="note">event binding</span></dt>
+		</dl>
+	</section>
+	<section>
+		<dl class="fa">
+			<dt>When using Two-way Data Binding for form controls is easier to use the [(ngModel)] attribute directive</dt>
+			<dt>Note, FormsModule is required to use ngModel</dt>
+		</dl>
+		<pre><code rel="src/app/app.module.ts" class="js">
+			import { FormsModule } from '@angular/forms';
+
+			@NgModule({
+				imports: [
+					BrowserModule,
+					FormsModule
+				]
+			})
+		</code></pre>
+	</section>
+	<section>
+		<pre><code rel="HTML" class="js">
+			<input [(ngModel)]="item.content">
+			<li>{{item.content}}</li>
+		</code></pre>
+		<p>is equivalent to </p>
+		<pre><code rel="JS" class="js">
+			<input [value]="item.content" (input)="onInput($event)">
+			<li>{{item.content}}</li>
+		</code></pre>
+	</section>
+</section>
+<section><h2>Input and output properties ( @Input and @Output )</h2></section>
+
+<section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
+	 <p>These slides are based on</p>
+	 <p>customised version of </p>
+	 <p><a href="http://hakim.se/">Hakimel</a>'s <a href="http://lab.hakim.se/reveal-js">reveal.js</a></p>
+	 <p>framework</p>
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+		</div>
+	</div>
+	<!-- Custom processing -->
+
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script> -->
+
+	<script src="../../../outfit/js/slides.js"></script>
+
+	<!-- external scripts -->
+	<script src="../../../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../../../lib/reveal.js/js/reveal.js"></script>
+	 <!-- init reveal -->
+	<script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		var highlightjsTabSize = '  ';
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			slideNumber: 'c/t',
+			keyboard: true,
+			history: true,
+			center: true,
+			width: 1024,
+			height: 850,
+			// Bounds for smallest/largest possible scale to apply to content
+			// minScale: .5,
+			maxScale: 1,
+			// slide transition
+			transition: 'concave', // none/fade/slide/convex/concave/zoom
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+			// shift+maous click to zoom in/out element
+			zoomKey: 'ctrl',
+			// theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			// transition: Reveal.getQueryHash().transition || 'default'
+			// Optional reveal.js plugins
+			dependencies: [
+				{ src: '../../../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				// { src: '../../../lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: '../../../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({tabReplace: highlightjsTabSize}); hljs.initHighlightingOnLoad(); } },
+				{ src: '../../../lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+				{ src: '../../../lib/reveal.js/plugin/notes/notes.js', async: true }
+			]
+		});
+	</script>
+</body>
+</html>

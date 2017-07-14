@@ -5,15 +5,15 @@ body{
 header{
 	/*margin-top: -1em;*/
 	display: block;
-	height: 10vh;
+	height: 20vh;
 	background: #990000;
 }
-todos{
+[items]{
 	display: block;
-	height: 80vh;
+	height: 70vh;
 	background: #009900;
 }
-stats{
+[stats]{
 	display: block;
 	height: 10vh;
 	background: #000099;

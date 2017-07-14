@@ -85,6 +85,9 @@
 		<pre><code rel="Terminal" class="shell">
 			ng generate component todos
 
+			# or the shorthand version:
+			ng g c todos
+
 			# output
 			installing component
 					create src/app/todos/todos.component.css
@@ -145,7 +148,7 @@
 	<section><h3>Using a Component</h3>
 		<dl class="fa">
 			<dt>A component must belong to an NgModule in order for it to be usable by another component or application.</dt>
-			<dt>To specify that a component is a member of an NgModule, you should <span class="note"> list it in the declarations field of that NgModule</span>.</dt>
+			<dt>To specify that a component is a member of an NgModule, you should <span class="note"> import it and list it in the declarations field of that NgModule</span>.</dt>
 		</dl>
 		<pre><code rel="app.module.ts" class="shell">
 			// ...
@@ -160,10 +163,10 @@
 	</section>
 	<section><h3>Component Metadata Properties</h3>
 		<dl class="fa">
-			<dt>animations - list of animations of this component</dt>
-			<dt>changeDetection - change detection strategy used by this component</dt>
-			<dt>encapsulation - style encapsulation strategy used by this component</dt>
-			<dt>entryComponents - list of components that are dynamically inserted into the view of this component</dt>
+			<dt><span class="note">animations</span> - list of animations of this component</dt>
+			<dt><span class="note">changeDetection</span> - change detection strategy used by this component</dt>
+			<dt><span class="note">encapsulation</span> - style encapsulation strategy used by this component</dt>
+			<dt><span class="note">entryComponents</span> - list of components that are dynamically inserted into the view of this component</dt>
 		</dl>
 	</section>
 	<section><h3>Component Metadata Properties</h3>
@@ -318,22 +321,6 @@
 			<dt>In Angular, the component plays the part of the controller/viewmodel, and the template represents the view.</dt>
 			<dt>An angular template looks like HTML, but follows the <a href="https://angular.io/guide/template-syntax">Angular Template Syntax</a></dt>
 		</dl>
-	</section>
-</section>
-<section><h2>Data Bindings</h2>
-	<section><h3>Flows</h3>
-		<a href="images/DataBindingFlows.png"><img src="images/DataBindingFlows.png"></a>
-	</section>
-	<section><h3>Two-way data binding</h3>
-		<dl class="fa">
-			<dt>In Angular 1, the default option was two-way data binding.</dt>
-			<dt>Thought, it 's easy to implement it cause a lots of problems (cascading effects, coupling of "data layout tree" and  "dom view tree", etc.)</dt>
-			<dt>The recommended way in Angular 2, and in many modern web frameworks (such as React), is to adopt a pattern of <span class="note">one-way data binding</span></dt>
-		</dl>
-	</section>
-	<section><h3>One-way data binding</h3></section>
-	<section><h3>Types</h3>
-		<a href="images/DataBindingTypes.png"><img src="images/DataBindingTypes.png"></a>
 	</section>
 </section>
 
